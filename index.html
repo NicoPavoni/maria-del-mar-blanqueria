@@ -191,7 +191,15 @@
     <span class="cart-fab-count" id="cartFabCount">0</span>
   </button>
 
+  <!-- MODAL DE PRODUCTO -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+  <div class="product-modal" id="productModal">
+    <button class="modal-close" onclick="closeModal()">&#10005;</button>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+
   <script src="js/main.js"></script>
   <script src="js/cart.js"></script>
+  <script src="js/modal.js"></script>
 </body>
 </html>
