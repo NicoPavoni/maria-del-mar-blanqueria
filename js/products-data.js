@@ -1,6 +1,6 @@
 /* =============================================
    María del Mar Blanquería — Datos compartidos
-   Usado por: index.html y todas las páginas de categoría
+   ÚNICO lugar para editar productos, precios e imágenes
    ============================================= */
 
 const WA_NUMBER = '91173607330';
@@ -106,9 +106,14 @@ const PRODUCTS = [
     cat: 'cocina',
     name: 'Delantal de cocina',
     desc: 'Delantal de cocina resistente y lavable. Varios diseños y colores disponibles.',
-    price: 'Consultar',
+    price: '19.000',
     emoji: '👨‍🍳',
-    images: [],
+    images: [
+      'assets/products/delantal-cocina.jpg',
+      'assets/products/delantal-cocina-2.jpg',
+      'assets/products/delantal-cocina-3.jpg',
+      'assets/products/delantal-cocina-4.jpg',
+    ],
   },
   {
     id: 10,
@@ -125,18 +130,27 @@ const PRODUCTS = [
     cat: 'lineainfantil',
     name: 'Sábanas infantiles en mochila — Línea Disney',
     desc: 'Juego de sábanas infantiles en mochila. Diseños Disney. Ideal para regalo.',
-    price: 'Consultar',
+    price: '30.000',
     emoji: '🧸',
     badge: 'new',
-    images: [],
+    images: [
+      'assets/products/sabanas-infantiles.jpg',
+      'assets/products/sabanas-infantiles-2.jpg',
+    ],
   },
   {
     id: 12,
     cat: 'lineainfantil',
     name: 'Frazadas Flannel infantiles',
     desc: 'Frazadas de flannel suaves y abrigadas. Varios diseños y colores para los más chiquitos.',
-    price: 'Consultar',
+    price: '22.000',
     emoji: '🌟',
-    images: [],
+    images: [
+      'assets/products/sabanas-infantiles-flannel.jpg',
+      'assets/products/sabanas-infantiles-flannel-2.jpg',
+      'assets/products/sabanas-infantiles-flannel-3.jpg',
+      'assets/products/sabanas-infantiles-flannel-4.jpg',
+      'assets/products/sabanas-infantiles-flannel-5.jpg',
+    ],
   },
 ];
