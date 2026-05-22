@@ -97,6 +97,12 @@ const favorites     = new Set();
 
 // ---------- WhatsApp ----------
 function goWA(name, price) {
+  // Analytics: click en consulta individual por WhatsApp
+  gtag('event', 'click_whatsapp_consulta', {
+    product_name:  name,
+    product_price: price,
+  });
+
   const msg = encodeURIComponent(`Hola! Me interesa: ${name} $${price}`);
   window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
 }

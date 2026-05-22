@@ -29,7 +29,6 @@ function closeCart() {
 
 // ---------- Agregar producto ----------
 function addToCart(productId) {
-  // Buscar el producto en el array global definido en main.js
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
 
@@ -38,6 +37,13 @@ function addToCart(productId) {
   } else {
     cart[productId] = { product, quantity: 1 };
   }
+
+  // Analytics: producto agregado al carrito
+  gtag('event', 'add_to_cart', {
+    product_name:     product.name,
+    product_category: product.cat,
+    product_price:    product.price,
+  });
 
   updateFabCount();
   showToast(`🛒 ${product.name} agregado`);
@@ -131,6 +137,13 @@ function renderCart() {
 function buyViaWA() {
   const items = Object.values(cart);
   if (items.length === 0) return;
+
+  // Analytics: pedido iniciado por WhatsApp
+  gtag('event', 'begin_checkout_whatsapp', {
+    total:    getCartTotal(),
+    products: items.map(i => i.product.name).join(', '),
+    quantity: items.reduce((acc, i) => acc + i.quantity, 0),
+  });
 
   // Armar el mensaje con el detalle del pedido
   let msg = '¡Hola! Quisiera hacer el siguiente pedido:\n\n';
