@@ -104,9 +104,13 @@ const PRODUCTS = [
     cat: 'cocina',
     name: 'Delantal de cocina',
     desc: 'Delantal de cocina resistente y lavable. Varios diseños y colores disponibles.',
-    price: 'Consultar',
+    price: '19.000',
     emoji: '👨‍🍳',
-    images: [],
+    images: [
+      'assets/products/delantal-cocina.jpg',
+      'assets/products/delantal-cocina-2.jpg',
+      'assets/products/delantal-cocina-3.jpg',
+    ],
   },
   {
     id: 10,
@@ -115,7 +119,10 @@ const PRODUCTS = [
     desc: 'Disponibles por unidad o docena. Alta absorción. Varios diseños.',
     price: 'Consultar',
     emoji: '🧺',
-    images: [],
+    images: [
+      'assets/products/repasadores-cocina.jpg',
+      'assets/products/repasadores-cocina-2.jpg',
+    ],
   },
 
   // ---------- Línea Infantil ----------
