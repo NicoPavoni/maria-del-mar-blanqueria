@@ -1,0 +1,149 @@
+/* =============================================
+   María del Mar Blanquería — Página de categoría
+   ============================================= */
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 1.2rem 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-soft);
+}
+
+.breadcrumb a {
+  color: var(--terra);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.breadcrumb a:hover { opacity: 0.7; }
+.breadcrumb-sep { opacity: 0.4; }
+
+/* ---------- Hero de categoría ---------- */
+.cat-hero {
+  background: rgba(245, 237, 224, 0.5);
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+
+.cat-hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 0.5rem;
+}
+
+.cat-hero h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  color: var(--terra-dk);
+  margin-bottom: 0.5rem;
+}
+
+.cat-hero p {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-soft);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ---------- Sección grilla ---------- */
+.grid-section {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 5rem;
+}
+
+.grid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.8rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.grid-count {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-soft);
+  letter-spacing: 0.08em;
+}
+
+/* ---------- GRILLA ---------- */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .grid-section { padding: 2rem 1rem 4rem; }
+  .breadcrumb   { padding: 1rem 1rem 0; }
+}
+
+/* ---------- Cards en grilla ---------- */
+.products-grid .pcard {
+  height: auto !important;
+  width: 100%;
+}
+
+.products-grid .cimg {
+  height: 220px;
+  aspect-ratio: unset;
+}
+
+.products-grid .cbody {
+  flex: 1;
+}
+
+.products-grid .cdesc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+/* ---------- Empty state ---------- */
+.grid-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 5rem 2rem;
+  color: var(--text-soft);
+}
+
+.grid-empty-icon {
+  font-size: 52px;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.grid-empty p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.9;
+}
