@@ -126,33 +126,6 @@ Total estimado: $46.800
 
 ---
 
-## ⚙️ Configuración
-
-Las dos variables principales están al inicio de sus archivos correspondientes:
-
-**`js/main.js`** — número de WhatsApp
-```js
-const WA_NUMBER = '91173607330';
-```
-
-**`js/main.js`** — lista de productos
-```js
-const PRODUCTS = [
-  {
-    id: 1,
-    cat: 'cama',           // cama | baño | almohadas | accesorios
-    name: 'Nombre del producto',
-    desc: 'Descripción breve.',
-    price: '18.500',       // string con punto de miles
-    emoji: '🛏️',
-    badge: 'new',          // opcional: 'new' | 'promo'
-  },
-  // ...
-];
-```
-
----
-
 ## 🗺️ Roadmap
 
 - [x] Catálogo con carrusel y filtros
