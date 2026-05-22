@@ -146,8 +146,8 @@ function cardHTML(product) {
         <p class="cdesc">${desc}</p>
         <div class="cfoot">
           <span class="cprice"><sup>$</sup>${price}</span>
-          <button class="bconsultar" onclick="goWA('${name.replace(/'/g, "\\'")}', '${price}')">
-            ${WA_SVG} Consultar
+          <button class="bconsultar" onclick="addToCart(${id})">
+            🛒 Agregar
           </button>
         </div>
       </div>
