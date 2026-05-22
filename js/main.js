@@ -11,16 +11,18 @@ const WA_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentCol
 
 // ---------- Productos ----------
 // Para agregar o editar productos, modificá este array.
-// Campos: id, cat, name, desc, price, emoji, badge (opcional: 'new' | 'promo')
+// Campos: id, cat, name, desc, price, emoji, image (opcional), badge (opcional: 'new' | 'promo')
+// Si el producto tiene 'image', se muestra la foto. Si no, se muestra el 'emoji'.
 const PRODUCTS = [
   {
     id: 1,
     cat: 'cama',
-    name: 'Juego de sábanas bordado',
-    desc: '100% algodón percal. Bajera, encimera y 2 fundas. Disponible en 1, 2 plazas y king.',
-    price: '18.500',
+    name: 'Juego de sábanas 2 1/2 plazas de algodón',
+    desc: '100% algodón. Bajera, encimera y 2 fundas. Disponibles en color Verde Agua, Rosa Dior y Blancas.',
+    price: '33.000',
     emoji: '🛏️',
     badge: 'new',
+    image: 'assets/products/sabanas-4-piezas.jpeg',
   },
   {
     id: 2,
@@ -90,19 +92,17 @@ const CAT_LABELS = {
 };
 
 // ---------- Estado ----------
-let currentPage     = 0;
-let autoTimer       = null;
+let currentPage      = 0;
+let autoTimer        = null;
 let filteredProducts = [...PRODUCTS];
-const favorites     = new Set();
+const favorites      = new Set();
 
 // ---------- WhatsApp ----------
 function goWA(name, price) {
-  // Analytics: click en consulta individual por WhatsApp
   gtag('event', 'click_whatsapp_consulta', {
     product_name:  name,
     product_price: price,
   });
-
   const msg = encodeURIComponent(`Hola! Me interesa: ${name} $${price}`);
   window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
 }
@@ -130,7 +130,7 @@ function toggleFav(id, btn) {
 
 // ---------- Generar HTML de una card ----------
 function cardHTML(product) {
-  const { id, cat, name, desc, price, emoji, badge } = product;
+  const { id, cat, name, desc, price, emoji, badge, image } = product;
   const isFav = favorites.has(id);
 
   const badgeHTML = badge === 'new'
@@ -139,10 +139,15 @@ function cardHTML(product) {
     ? '<span class="cbadge bpromo">Oferta</span>'
     : '';
 
+  // Si tiene imagen se muestra la foto, si no el emoji
+  const mediaHTML = image
+    ? `<img src="${image}" alt="${name}">`
+    : `<span>${emoji}</span>`;
+
   return `
-    <div class="pcard">
+    <div class="pcard" onclick="openModal(${id})" style="cursor:pointer">
       <div class="cimg">
-        <div class="cimg-inner">${emoji}</div>
+        <div class="cimg-inner">${mediaHTML}</div>
         ${badgeHTML}
         <button class="cfav" onclick="toggleFav(${id}, this)">${isFav ? '❤️' : '🤍'}</button>
       </div>
@@ -168,14 +173,13 @@ function getPerPage() {
 }
 
 function renderCarousel() {
-  const perPage  = getPerPage();
-  const track    = document.getElementById('track');
-  const dotsEl   = document.getElementById('dots');
-  const total    = Math.ceil(filteredProducts.length / perPage);
+  const perPage = getPerPage();
+  const track   = document.getElementById('track');
+  const dotsEl  = document.getElementById('dots');
+  const total   = Math.ceil(filteredProducts.length / perPage);
 
   if (currentPage >= total) currentPage = 0;
 
-  // Construir páginas
   let html = '';
   for (let i = 0; i < total; i++) {
     const slice = filteredProducts.slice(i * perPage, (i + 1) * perPage);
@@ -187,7 +191,6 @@ function renderCarousel() {
   track.innerHTML = html;
   track.style.transform = `translateX(calc(-${currentPage} * 100%))`;
 
-  // Dots
   let dotsHTML = '';
   for (let i = 0; i < total; i++) {
     dotsHTML += `<div class="cdot${i === currentPage ? ' active' : ''}" onclick="goToPage(${i})"></div>`;
@@ -237,7 +240,6 @@ function filterProducts(cat) {
     ? [...PRODUCTS]
     : PRODUCTS.filter(p => p.cat === cat);
 
-  // Actualizar botones activos
   document.querySelectorAll('.filt').forEach(btn => {
     btn.classList.remove('active');
     const txt = btn.textContent.toLowerCase();
@@ -260,15 +262,14 @@ function filterProducts(cat) {
   }
 }
 
-// ---------- Scroll suave al hero ----------
+// ---------- Scroll suave a productos ----------
 function scrollToProducts() {
   document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
 }
 
-// ---------- Init — esperamos que el DOM esté listo ----------
+// ---------- Init ----------
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Botones de filtro
   document.querySelectorAll('.filt').forEach(btn => {
     btn.addEventListener('click', () => {
       const txt = btn.textContent.toLowerCase().trim();
@@ -280,7 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Links de categorías (usan data-cat en el HTML)
   document.querySelectorAll('.cat-link').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
@@ -289,15 +289,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Header sombra al hacer scroll
   window.addEventListener('scroll', () => {
     document.getElementById('hdr').classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  // Re-render al cambiar tamaño de pantalla
   window.addEventListener('resize', () => renderCarousel());
 
-  // Render inicial
   renderCarousel();
   resetAutoPlay();
 });
