@@ -10,9 +10,8 @@ const WA_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentCol
 </svg>`;
 
 // ---------- Productos ----------
-// Para agregar o editar productos, modificá este array.
-// Campos: id, cat, name, desc, price, emoji, image (opcional), badge (opcional: 'new' | 'promo')
-// Si el producto tiene 'image', se muestra la foto. Si no, se muestra el 'emoji'.
+// Campos: id, cat, name, desc, price, emoji, badge (opcional: 'new' | 'promo')
+// images: array de rutas. Si tiene fotos se muestran, si no se muestra el emoji.
 const PRODUCTS = [
   {
     id: 1,
@@ -22,49 +21,64 @@ const PRODUCTS = [
     price: '33.000',
     emoji: '🛏️',
     badge: 'new',
-    image: 'assets/products/sabanas-4-piezas.jpeg',
+    images: ['assets/products/sabanas-4-piezas.jpeg'],
   },
   {
     id: 2,
     cat: 'baño',
-    name: 'Juego de toallas premium',
-    desc: 'Set x4 (2 cuerpo + 2 mano). Algodón egipcio 600 gr/m². Ultra absorbentes.',
-    price: '12.900',
+    name: 'Juego de Toallón y Toallas',
+    desc: 'Set x3. 1 Toallón de 140x70cm + 2 Toallas de 76x46cm. Ultra absorbentes y de secado rápido.',
+    price: '26.000',
     emoji: '🛁',
+    images: ['assets/products/juego-toallon-toallas.jpg'],
   },
   {
     id: 3,
-    cat: 'almohadas',
-    name: 'Almohada viscoelástica',
-    desc: 'Memoria de forma, hipoalergénica. Funda removible lavable.',
-    price: '9.800',
-    emoji: '😴',
+    cat: 'cama',
+    name: 'Sabanas ajustables de algodón con elástico',
+    desc: 'Estuche x4 unidades. 100% algodón.',
+    price: '45.000',
+    emoji: '🛏️',
     badge: 'promo',
+    images: [
+      'assets/products/sabanas-ajustables.jpg',
+      'assets/products/sabanas-ajustables-2.jpg',
+    ],
   },
   {
     id: 4,
     cat: 'cama',
-    name: 'Acolchado pluma de ganso',
-    desc: '90% pluma / 10% plumón. Carcasa 100% algodón percal. 2 plazas.',
-    price: '32.000',
-    emoji: '🌸',
+    name: 'Sabanas hoteleras bordadas',
+    desc: 'Descripción pendiente.',
+    price: '47.000',
+    emoji: '🛏️',
+    images: [
+      'assets/products/sabanas-hoteleras-bordadas.jpg',
+      'assets/products/sabanas-hoteleras-bordadas-2.jpg',
+    ],
   },
   {
     id: 5,
     cat: 'baño',
-    name: 'Alfombra de baño',
-    desc: 'Microfibra extra suave, antideslizante. Lavable en lavarropas. Varios colores.',
-    price: '4.200',
-    emoji: '✨',
+    name: 'Alfombra de baño de silicona antideslizante',
+    desc: 'Silicona antideslizante. Varios colores.',
+    price: '6.500',
+    emoji: '🛁',
     badge: 'new',
+    images: ['assets/products/alfombra-bano.jpg'],
   },
   {
     id: 6,
-    cat: 'accesorios',
-    name: 'Cojín decorativo',
-    desc: 'Funda algodón estampado + relleno incluido. Diseños exclusivos.',
-    price: '3.500',
-    emoji: '🎁',
+    cat: 'baño',
+    name: 'Cortina de baño teflonada con ganchos',
+    desc: 'Cortina de baño teflonada en bolsa de tela + Ganchos. Diseños exclusivos.',
+    price: '24.000',
+    emoji: '🛁',
+    images: [
+      'assets/products/cortina-bano.jpg',
+      'assets/products/cortina-bano-2.jpg',
+      'assets/products/cortina-bano-3.jpg',
+    ],
   },
   {
     id: 7,
@@ -73,6 +87,7 @@ const PRODUCTS = [
     desc: 'Juego x2. Algodón peinado, terminación bordada a mano. Varios colores.',
     price: '5.800',
     emoji: '🌼',
+    images: [],
   },
   {
     id: 8,
@@ -81,14 +96,66 @@ const PRODUCTS = [
     desc: 'Pack x2 toallones extra grandes. 100% algodón turco. Súper absorbentes.',
     price: '8.400',
     emoji: '🏖️',
+    images: [],
+  },
+  // ---------- Cocina ----------
+  {
+    id: 9,
+    cat: 'cocina',
+    name: 'Delantal de cocina',
+    desc: 'Delantal de cocina resistente y lavable. Varios diseños y colores disponibles.',
+    price: 'Consultar',
+    emoji: '👨‍🍳',
+    images: [],
+  },
+  {
+    id: 10,
+    cat: 'cocina',
+    name: 'Repasadores',
+    desc: 'Disponibles por unidad o docena. Alta absorción. Varios diseños.',
+    price: 'Consultar',
+    emoji: '🧺',
+    images: [],
+  },
+
+  // ---------- Línea Infantil ----------
+  {
+    id: 11,
+    cat: 'lineainfantil',
+    name: 'Sábanas infantiles en mochila — Línea Disney',
+    desc: 'Juego de sábanas infantiles en mochila. Algodon de 7 mil hilos. Excelente calidad.',
+    price: '30.000',
+    emoji: '🧸',
+    badge: 'new',
+    images: [
+      'assets/products/sabanas-infantiles.jpg',
+      'assets/products/sabanas-infantiles-2.jpg',
+    ],
+  },
+  {
+    id: 12,
+    cat: 'lineainfantil',
+    name: 'Frazadas Flannel infantiles',
+    desc: 'Frazadas de flannel suaves y abrigadas. Varios diseños y colores para los más chiquitos.',
+    price: '22.000',
+    emoji: '🌟',
+    images: [
+      'assets/products/sabanas-infantiles-flannel.jpg',
+      'assets/products/sabanas-infantiles-flannel-2.jpg',
+      'assets/products/sabanas-infantiles-flannel-3.jpg',
+      'assets/products/sabanas-infantiles-flannel-4.jpg',
+      'assets/products/sabanas-infantiles-flannel-5.jpg',
+    ],
   },
 ];
 
 const CAT_LABELS = {
-  cama:       'Ropa de cama',
-  baño:       'Baño',
-  almohadas:  'Almohadas',
-  accesorios: 'Accesorios',
+  cama:          'Ropa de cama',
+  baño:          'Baño',
+  almohadas:     'Almohadas',
+  accesorios:    'Accesorios',
+  lineainfantil: 'Línea Infantil',
+  cocina:        'Cocina',
 };
 
 // ---------- Estado ----------
@@ -130,8 +197,9 @@ function toggleFav(id, btn) {
 
 // ---------- Generar HTML de una card ----------
 function cardHTML(product) {
-  const { id, cat, name, desc, price, emoji, badge, image } = product;
-  const isFav = favorites.has(id);
+  const { id, cat, name, desc, price, emoji, badge, images } = product;
+  const isFav      = favorites.has(id);
+  const firstImage = images && images.length > 0 ? images[0] : null;
 
   const badgeHTML = badge === 'new'
     ? '<span class="cbadge bnew">Nuevo</span>'
@@ -139,27 +207,33 @@ function cardHTML(product) {
     ? '<span class="cbadge bpromo">Oferta</span>'
     : '';
 
-  // Si tiene imagen se muestra la foto, si no el emoji
-  const mediaHTML = image
-    ? `<img src="${image}" alt="${name}">`
+  const mediaHTML = firstImage
+    ? `<img src="${firstImage}" alt="${name}">`
     : `<span>${emoji}</span>`;
+
+  // Si el precio es "Consultar" no mostramos el $ ni el botón de carrito
+  const isConsultar = price === 'Consultar';
+  const priceHTML   = isConsultar
+    ? `<span class="cprice cprice-consultar">Consultar precio</span>`
+    : `<span class="cprice"><sup>$</sup>${price}</span>`;
+  const actionHTML  = isConsultar
+    ? `<button class="bconsultar" onclick="event.stopPropagation(); goWA('${name.replace(/'/g, "\'")}', 'precio')">💬 Consultar</button>`
+    : `<button class="bconsultar" onclick="event.stopPropagation(); addToCart(${id})">🛒 Agregar</button>`;
 
   return `
     <div class="pcard" onclick="openModal(${id})" style="cursor:pointer">
       <div class="cimg">
         <div class="cimg-inner">${mediaHTML}</div>
         ${badgeHTML}
-        <button class="cfav" onclick="toggleFav(${id}, this)">${isFav ? '❤️' : '🤍'}</button>
+        <button class="cfav" onclick="event.stopPropagation(); toggleFav(${id}, this)">${isFav ? '❤️' : '🤍'}</button>
       </div>
       <div class="cbody">
         <span class="ccat">${CAT_LABELS[cat] || cat}</span>
         <h3 class="cname">${name}</h3>
         <p class="cdesc">${desc}</p>
         <div class="cfoot">
-          <span class="cprice"><sup>$</sup>${price}</span>
-          <button class="bconsultar" onclick="addToCart(${id})">
-            🛒 Agregar
-          </button>
+          ${priceHTML}
+          ${actionHTML}
         </div>
       </div>
     </div>`;
@@ -244,11 +318,13 @@ function filterProducts(cat) {
     btn.classList.remove('active');
     const txt = btn.textContent.toLowerCase();
     if (
-      (cat === 'todos'      && txt === 'todos')      ||
-      (cat === 'cama'       && txt.includes('cama')) ||
-      (cat === 'baño'       && txt.includes('baño')) ||
-      (cat === 'almohadas'  && txt.includes('almo')) ||
-      (cat === 'accesorios' && txt.includes('acce'))
+      (cat === 'todos'          && txt === 'todos')         ||
+      (cat === 'cama'           && txt.includes('cama'))    ||
+      (cat === 'baño'           && txt.includes('baño'))    ||
+      (cat === 'almohadas'      && txt.includes('almo'))    ||
+      (cat === 'accesorios'     && txt.includes('acce'))    ||
+      (cat === 'lineainfantil'  && txt.includes('infan'))   ||
+      (cat === 'cocina'         && txt.includes('cocina'))
     ) {
       btn.classList.add('active');
     }
@@ -273,11 +349,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.filt').forEach(btn => {
     btn.addEventListener('click', () => {
       const txt = btn.textContent.toLowerCase().trim();
-      if      (txt === 'todos')           filterProducts('todos');
-      else if (txt.includes('cama'))      filterProducts('cama');
-      else if (txt.includes('baño'))      filterProducts('baño');
-      else if (txt.includes('almo'))      filterProducts('almohadas');
-      else if (txt.includes('acce'))      filterProducts('accesorios');
+      if      (txt === 'todos')            filterProducts('todos');
+      else if (txt.includes('cama'))       filterProducts('cama');
+      else if (txt.includes('baño'))       filterProducts('baño');
+      else if (txt.includes('almo'))       filterProducts('almohadas');
+      else if (txt.includes('acce'))       filterProducts('accesorios');
+      else if (txt.includes('infan'))      filterProducts('lineainfantil');
+      else if (txt.includes('cocina'))     filterProducts('cocina');
     });
   });
 

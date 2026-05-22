@@ -32,7 +32,35 @@
     </a>
     <nav>
       <a href="#">Inicio</a>
-      <a href="#productos">Productos</a>
+      <div class="nav-dropdown">
+        <a href="#productos" class="nav-dropdown-trigger">
+          Productos
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          <a href="#productos" class="nav-dropdown-item" onclick="filterProducts('cama')">
+            <span class="nav-dropdown-icon">🛏️</span> Ropa de cama
+          </a>
+          <a href="#productos" class="nav-dropdown-item" onclick="filterProducts('baño')">
+            <span class="nav-dropdown-icon">🛁</span> Baño
+          </a>
+          <a href="#productos" class="nav-dropdown-item" data-cat="lineainfantil" onclick="filterProducts('lineainfantil')">
+            <span class="nav-dropdown-icon">🧸</span> Línea Infantil
+          </a>
+          <a href="#productos" class="nav-dropdown-item" data-cat="cocina" onclick="filterProducts('cocina')">
+            <span class="nav-dropdown-icon">🍽️</span> Cocina
+          </a>
+          <div class="nav-dropdown-divider"></div>
+          <div class="nav-dropdown-item nav-dropdown-soon">
+            <span class="nav-dropdown-icon">😴</span> Almohadas
+            <span class="nav-soon-badge">Próximamente</span>
+          </div>
+          <div class="nav-dropdown-item nav-dropdown-soon">
+            <span class="nav-dropdown-icon">🎁</span> Accesorios
+            <span class="nav-soon-badge">Próximamente</span>
+          </div>
+        </div>
+      </div>
       <a href="#">Nosotros</a>
       <a href="#">Contacto</a>
     </nav>
@@ -112,8 +140,10 @@
         <button class="filt active">Todos</button>
         <button class="filt">Ropa de cama</button>
         <button class="filt">Baño</button>
-        <button class="filt">Almohadas</button>
-        <button class="filt">Accesorios</button>
+        <button class="filt">Línea Infantil</button>
+        <button class="filt">Cocina</button>
+        <button class="filt filt-soon" disabled>Almohadas <span class="filt-soon-badge">Próximamente</span></button>
+        <button class="filt filt-soon" disabled>Accesorios <span class="filt-soon-badge">Próximamente</span></button>
       </div>
       <div class="carousel-outer">
         <div class="carousel-viewport">

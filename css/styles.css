@@ -1396,3 +1396,310 @@ footer p { font-size: 12px; font-weight: 300; letter-spacing: 0.06em; }
     padding: 1.4rem;
   }
 }
+
+/* =============================================
+   Slider de imágenes dentro del modal
+   ============================================= */
+
+.slider-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  overflow: hidden;
+  background: var(--cream2);
+}
+
+.slider-track {
+  width: 100%;
+  height: 100%;
+}
+
+.slider-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.slider-slide.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.slider-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: zoom-in;
+  transition: transform 0.4s ease;
+  position: absolute;
+  inset: 0;
+}
+
+.slider-slide img.zoomed {
+  transform: scale(1.8);
+  cursor: zoom-out;
+}
+
+/* Flechas del slider */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(6px);
+  color: var(--terra-dk);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.slider-arrow.left  { left: 10px; }
+.slider-arrow.right { right: 10px; }
+.slider-arrow:hover { background: var(--terra-dk); color: #fff; }
+
+/* Dots del slider */
+.slider-dots {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+}
+
+.slider-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.slider-dot.active {
+  background: #fff;
+  width: 20px;
+  border-radius: 50px;
+}
+
+/* =============================================
+   Dropdown de navegación
+   ============================================= */
+
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.nav-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  text-decoration: none;
+  padding-bottom: 3px;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.2s;
+  margin-left: 0;
+}
+
+.nav-dropdown-trigger::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--terra);
+  transition: width 0.3s;
+}
+
+.nav-dropdown-trigger svg {
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+
+.nav-dropdown:hover .nav-dropdown-trigger {
+  color: var(--terra);
+}
+
+.nav-dropdown:hover .nav-dropdown-trigger::after {
+  width: 100%;
+}
+
+.nav-dropdown:hover .nav-dropdown-trigger svg {
+  transform: rotate(180deg);
+}
+
+/* Menú desplegable */
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 8px;
+  min-width: 220px;
+  box-shadow: 0 16px 40px rgba(122, 80, 48, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 300;
+}
+
+/* Puente invisible que rellena el gap entre trigger y menú */
+.nav-dropdown-menu::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+}
+
+/* Puente invisible que rellena el gap entre trigger y menú */
+.nav-dropdown-menu::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+}
+
+/* Triángulo arriba del menú */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 6px;
+  background: var(--white);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  border-top: none;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Items del menú */
+.nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text);
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.nav-dropdown-item:hover {
+  background: var(--cream2);
+  color: var(--terra-dk);
+}
+
+.nav-dropdown-icon {
+  font-size: 16px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Separador */
+.nav-dropdown-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 6px 8px;
+}
+
+/* Items "Próximamente" */
+.nav-dropdown-soon {
+  opacity: 0.6;
+  cursor: default;
+  pointer-events: none;
+}
+
+.nav-soon-badge {
+  margin-left: auto;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--cream3);
+  color: var(--terra);
+  padding: 2px 8px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+/* Filtro "Próximamente" */
+.filt-soon {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.filt-soon-badge {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--cream3);
+  color: var(--terra);
+  padding: 2px 7px;
+  border-radius: 50px;
+}
+
+/* Precio "Consultar" */
+.cprice-consultar {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--terra);
+  letter-spacing: 0.04em;
+}
+
+.modal-price-consultar {
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--terra);
+  letter-spacing: 0.04em;
+}
