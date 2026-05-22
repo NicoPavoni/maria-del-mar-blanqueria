@@ -447,6 +447,17 @@ nav a:hover::after { width: 100%; }
   transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
+/* Fila de cards: misma altura para todas */
+.carousel-track > div {
+  display: flex;
+  align-items: stretch;
+}
+
+.carousel-track > div > div {
+  display: flex;
+  flex-direction: column;
+}
+
 /* ---------- Product card ---------- */
 .pcard {
   background: rgba(255, 255, 255, 0.88);
@@ -470,9 +481,10 @@ nav a:hover::after { width: 100%; }
 
 .cimg {
   position: relative;
-  aspect-ratio: 4 / 3;
+  height: 220px;
   overflow: hidden;
   background: var(--cream2);
+  flex-shrink: 0;
 }
 
 .cimg-inner {
@@ -483,6 +495,7 @@ nav a:hover::after { width: 100%; }
   justify-content: center;
   font-size: 54px;
   transition: transform 0.5s ease;
+  position: relative;
 }
 
 .cbadge {
@@ -550,6 +563,10 @@ nav a:hover::after { width: 100%; }
   color: var(--text-soft);
   line-height: 1.65;
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cfoot {
@@ -1581,16 +1598,6 @@ footer p { font-size: 12px; font-weight: 300; letter-spacing: 0.06em; }
   height: 20px;
 }
 
-/* Puente invisible que rellena el gap entre trigger y menú */
-.nav-dropdown-menu::after {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: 0;
-  right: 0;
-  height: 20px;
-}
-
 /* Triángulo arriba del menú */
 .nav-dropdown-menu::before {
   content: '';
@@ -1702,4 +1709,21 @@ footer p { font-size: 12px; font-weight: 300; letter-spacing: 0.06em; }
   font-weight: 400;
   color: var(--terra);
   letter-spacing: 0.04em;
+}
+
+/* Fix altura uniforme de cards en el carrusel */
+.pcard {
+  height: auto !important;
+}
+
+.cbody {
+  flex: 0 0 auto !important;
+}
+
+.cdesc {
+  flex: 0 0 auto !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

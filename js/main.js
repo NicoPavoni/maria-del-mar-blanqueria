@@ -123,29 +123,20 @@ const PRODUCTS = [
     id: 11,
     cat: 'lineainfantil',
     name: 'Sábanas infantiles en mochila — Línea Disney',
-    desc: 'Juego de sábanas infantiles en mochila. Algodon de 7 mil hilos. Excelente calidad.',
-    price: '30.000',
+    desc: 'Juego de sábanas infantiles en mochila. Diseños Disney. Ideal para regalo.',
+    price: 'Consultar',
     emoji: '🧸',
     badge: 'new',
-    images: [
-      'assets/products/sabanas-infantiles.jpg',
-      'assets/products/sabanas-infantiles-2.jpg',
-    ],
+    images: [],
   },
   {
     id: 12,
     cat: 'lineainfantil',
     name: 'Frazadas Flannel infantiles',
     desc: 'Frazadas de flannel suaves y abrigadas. Varios diseños y colores para los más chiquitos.',
-    price: '22.000',
+    price: 'Consultar',
     emoji: '🌟',
-    images: [
-      'assets/products/sabanas-infantiles-flannel.jpg',
-      'assets/products/sabanas-infantiles-flannel-2.jpg',
-      'assets/products/sabanas-infantiles-flannel-3.jpg',
-      'assets/products/sabanas-infantiles-flannel-4.jpg',
-      'assets/products/sabanas-infantiles-flannel-5.jpg',
-    ],
+    images: [],
   },
 ];
 
@@ -257,8 +248,8 @@ function renderCarousel() {
   let html = '';
   for (let i = 0; i < total; i++) {
     const slice = filteredProducts.slice(i * perPage, (i + 1) * perPage);
-    html += `<div style="display:flex;gap:20px;flex:0 0 100%;min-width:0">`;
-    slice.forEach(p => { html += `<div style="flex:1;min-width:0">${cardHTML(p)}</div>`; });
+    html += `<div style="display:flex;gap:20px;flex:0 0 100%;min-width:0;align-items:stretch">`;
+    slice.forEach(p => { html += `<div style="flex:1;min-width:0;display:flex;flex-direction:column">${cardHTML(p)}</div>`; });
     html += '</div>';
   }
 
