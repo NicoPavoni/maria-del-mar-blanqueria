@@ -34,7 +34,7 @@ function goWA(name, price) {
 
 // ---------- Card HTML ----------
 function cardHTML(product) {
-  const { id, cat, name, desc, price, emoji, badge, images } = product;
+  const { id, cat, name, desc, price, emoji,indications, badge, images } = product;
   const isFav      = favorites.has(id);
   const firstImage = images && images.length > 0 ? images[0] : null;
 

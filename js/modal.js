@@ -10,7 +10,7 @@ function openModal(productId) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
 
-  const { name, cat, desc, price, emoji, images, badge } = product;
+  const { name, cat, desc, price, emoji,indications, images, badge } = product;
 
   // Normalizar imágenes
   modalImages  = images && images.length > 0 ? images : [];
@@ -49,6 +49,10 @@ function openModal(productId) {
       <div class="modal-section">
         <h4 class="modal-section-title">Características</h4>
         <ul class="modal-features">${featuresHTML}</ul>
+      </div>
+      <div class="modal-section">
+        <h4 class="modal-section-title">Indicaciones</h4>
+        <p class="modal-desc">${indications || 'Consultar indicaciones de lavado.'}</p>
       </div>
       <div class="modal-actions">
         ${price === 'Consultar'
