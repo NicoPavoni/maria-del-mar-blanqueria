@@ -1,6 +1,7 @@
 /* =============================================
    María del Mar Blanquería — Lógica del home
-   Depende de: products-data.js (cargado antes)
+   Depende de: products-data.js (cargado antes en el HTML)
+   PRODUCTS, CAT_LABELS y WA_NUMBER vienen de products-data.js
    ============================================= */
 
 const WA_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -35,7 +36,8 @@ function clearSearch() {
   const input = document.getElementById('searchInput');
   if (input) input.value = '';
   searchQuery = '';
-  document.getElementById('searchClear').style.display = 'none';
+  const clear = document.getElementById('searchClear');
+  if (clear) clear.style.display = 'none';
   applyFilters();
 }
 
@@ -72,7 +74,7 @@ function toggleFav(id, btn) {
 
 // ---------- Card HTML ----------
 function cardHTML(product) {
-  const { id, cat, name, desc, price, emoji, badge, images } = product;
+  const { id, cat, name, desc, price, emoji, indications, badge, images } = product;
   const isFav      = favorites.has(id);
   const firstImage = images && images.length > 0 ? images[0] : null;
 
@@ -235,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (searchInput) {
     searchInput.addEventListener('input', () => {
       searchQuery = searchInput.value;
-      searchClear.style.display = searchQuery ? 'flex' : 'none';
+      if (searchClear) searchClear.style.display = searchQuery ? 'flex' : 'none';
       applyFilters();
     });
   }
