@@ -23,7 +23,8 @@ const PRODUCTS = [
     price: '33.000',
     emoji: '🛏️',
     badge: 'new',
-    indications:'',
+    indications: '',
+    colors: ['Verde Agua', 'Rosa Dior', 'Blanco'],
     images: [
       'assets/products/sabanas-4-piezas.jpeg',
       'assets/products/sabanas-4-piezas.jpg',
@@ -39,7 +40,8 @@ const PRODUCTS = [
     price: '18.000',
     emoji: '🛏️',
     badge: 'promo',
-    indications:'',
+    indications: '',
+    colors: ['Azul marino', 'Beige', 'Blanco','Bordo','Gris','Celeste'],
     images: [
       'assets/products/sabanas-ajustables-hoteleras.jpg',
       'assets/products/sabanas-ajustables-hoteleras-2.jpg',
@@ -54,7 +56,8 @@ const PRODUCTS = [
     price: '45.000',
     emoji: '🛏️',
     badge: 'new',
-    indications:'',
+    indications: '',
+    colors: ['Blanco', 'Gris', 'Rosa', 'Azul'],
     images: [
       'assets/products/frazadas-goldsun.jpg',
       'assets/products/frazadas-goldsun-2.jpg',
@@ -68,7 +71,8 @@ const PRODUCTS = [
     price: '26.000',
     emoji: '🛁',
     badge: 'new',
-    indications:'',
+    indications: '',
+    colors: ['Rosa', 'Beige', 'Gris', 'Blanco'],
     images: ['assets/products/juego-toallon-toallas.jpg'],
   },
   {
@@ -79,7 +83,8 @@ const PRODUCTS = [
     price: '45.000',
     emoji: '🛏️',
     badge: 'new',
-    indications:'',
+    indications: '',
+    colors: ['Azul','Blanco', 'Rosa', 'Gris', 'Verde Agua', 'Beige'],
     images: [
       'assets/products/sabanas-ajustables.jpg',
       'assets/products/sabanas-ajustables-2.jpg',
@@ -93,7 +98,8 @@ const PRODUCTS = [
     price: '28.000',
     emoji: '🛏️',
     badge: 'new',
-    indications:'',
+    indications: '',
+    colors: ['Verde Agua', 'Rosa Dior', 'Blanco'],
     images: [
       'assets/products/cover-verano-goldsun.jpg',
       'assets/products/cover-verano-goldsun-2.jpg',
@@ -109,7 +115,8 @@ const PRODUCTS = [
     price: '47.000',
     emoji: '🛏️',
     badge: 'promo',
-    indications:'',
+    indications: '',
+    colors: [],
     images: [
       'assets/products/sabanas-hoteleras-bordadas.jpg',
       'assets/products/sabanas-hoteleras-bordadas-2.jpg',
@@ -123,7 +130,8 @@ const PRODUCTS = [
     price: '6.500',
     emoji: '🛁',
     badge: 'new',
-    indications:'',
+    indications: '',
+    colors: [],
     images: ['assets/products/alfombra-bano.jpg'],
   },
   {
@@ -134,7 +142,8 @@ const PRODUCTS = [
     price: '24.000',
     emoji: '🛁',
     badge: 'promo',
-    indications:'',
+    indications: '',
+    colors: [],
     images: [
       'assets/products/cortina-bano.jpg',
       'assets/products/cortina-bano-2.jpg',
@@ -148,11 +157,26 @@ const PRODUCTS = [
     desc: 'Fundas de algodón rayadas, varios colores disponibles.',
     price: '6.500',
     emoji: '🌼',
-    badges: 'promo',
-    indications:'',
+    badge: 'promo',
+    indications: '',
+    colors: ['Blanco', 'Gris', 'Rosa', 'Azul', 'Negro'],
     images: [
       'assets/products/fundas-almohadas-rayadas.jpg',
       'assets/products/fundas-almohadas-rayadas-2.jpg',
+    ],
+  },
+  {
+    id: 17,
+    cat: 'cama',
+    name: 'Sabanas hoteleras bordado Inglés 2 1/2 plazas',
+    desc: 'Sabanas bordadas con diseño inglés de algodón, 3800 hilos, varios colores disponibles.',
+    price: '45.000',
+    emoji: '🛏️',
+    badge: 'new',
+    indications: '',
+    colors: ['Blanco', 'Gris', 'Rosa', 'Beige'],
+    images: [
+      'assets/products/sabanas-bordado-ingles.jpg',
     ],
   },
   {
@@ -162,13 +186,13 @@ const PRODUCTS = [
     desc: 'Cortina de baño de tela bambú + Ganchos metálicos. Diseños exclusivos.',
     price: '27.000',
     emoji: '🏖️',
+    badge: 'new',
     indications: 'Lavar con agua tibia a menos de 30° con detergente sin iones, secar con maquina a menos de 30°',
-    badges: 'new',
-    indications:'',
+    colors: ['Beige claro', 'Negro', 'Beige tostado' ],
     images: [
       'assets/products/cortina-bano-bambu.jpg',
       'assets/products/cortina-bano-bambu-2.jpg',
-      'assets/products/cortina-bano-bambu-3.jpg', 
+      'assets/products/cortina-bano-bambu-3.jpg',
     ],
   },
   // ---------- Cocina ----------
@@ -180,7 +204,8 @@ const PRODUCTS = [
     price: '19.000',
     emoji: '👨‍🍳',
     badge: 'new',
-    indications:'',
+    indications: '',
+    colors: [],
     images: [
       'assets/products/delantal-cocina.jpg',
       'assets/products/delantal-cocina-2.jpg',
@@ -196,14 +221,15 @@ const PRODUCTS = [
     price: '20.000',
     emoji: '🧺',
     badge: 'new',
-    indications:'',
+    indications: '',
+    colors: [],
     images: [
       'assets/products/mantel-antimanchas.jpg',
       'assets/products/mantel-antimanchas-2.jpg',
-      'assets/products/mantel-antimanchas-3.jpg', 
+      'assets/products/mantel-antimanchas-3.jpg',
     ],
   },
-    {
+  {
     id: 16,
     cat: 'cocina',
     name: 'Repasadores de cocina colgantes',
@@ -211,11 +237,12 @@ const PRODUCTS = [
     price: '6.000',
     emoji: '🧺',
     badge: 'new',
-    indications:'',
+    indications: '',
+    colors: [],
     images: [
       'assets/products/repasadores-frutas.jpg',
       'assets/products/repasadores-frutas-2.jpg',
-      'assets/products/repasadores-frutas-3.jpg', 
+      'assets/products/repasadores-frutas-3.jpg',
       'assets/products/repasadores-frutas-4.jpg',
     ],
   },
@@ -228,7 +255,8 @@ const PRODUCTS = [
     price: '30.000',
     emoji: '🧸',
     badge: 'new',
-    indications:'', 
+    indications: '',
+    colors: [],
     images: [
       'assets/products/sabanas-infantiles.jpg',
       'assets/products/sabanas-infantiles-2.jpg',
@@ -242,7 +270,8 @@ const PRODUCTS = [
     price: '22.000',
     emoji: '🌟',
     badge: 'new',
-    indications:'',
+    indications: '',
+    colors: [],
     images: [
       'assets/products/sabanas-infantiles-flannel.jpg',
       'assets/products/sabanas-infantiles-flannel-2.jpg',
@@ -252,3 +281,5 @@ const PRODUCTS = [
     ],
   },
 ];
+
+// ⚠️ Último ID usado: 16 — el próximo producto debe ser id: 17
