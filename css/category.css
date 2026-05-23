@@ -147,3 +147,40 @@
   font-weight: 300;
   line-height: 1.9;
 }
+
+/* ---------- Coming soon state ---------- */
+.grid-coming-soon {
+  padding: 6rem 2rem;
+}
+
+.grid-coming-soon h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--terra-dk);
+  margin: 0.5rem 0 0.8rem;
+}
+
+.grid-coming-soon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1.5rem;
+  background: #25D366;
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+}
+
+.grid-coming-soon-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}

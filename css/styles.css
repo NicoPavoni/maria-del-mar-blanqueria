@@ -1114,8 +1114,10 @@ footer p { font-size: 12px; font-weight: 300; letter-spacing: 0.06em; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   position: absolute;
   inset: 0;
+  cursor: pointer;
 }
 
 /* =============================================
@@ -1209,6 +1211,7 @@ footer p { font-size: 12px; font-weight: 300; letter-spacing: 0.06em; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   cursor: zoom-in;
   transition: transform 0.4s ease;
   position: absolute;
@@ -1449,6 +1452,7 @@ footer p { font-size: 12px; font-weight: 300; letter-spacing: 0.06em; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   cursor: zoom-in;
   transition: transform 0.4s ease;
   position: absolute;
@@ -1804,4 +1808,57 @@ footer p { font-size: 12px; font-weight: 300; letter-spacing: 0.06em; }
 /* En la página de categoría el buscador tiene más margen */
 .grid-section .search-wrap {
   margin-bottom: 1.5rem;
+}
+
+/* =============================================
+   Selector de color en el modal
+   ============================================= */
+
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.color-option {
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 7px 16px;
+  border-radius: 50px;
+  border: 1.5px solid var(--cream3);
+  background: var(--white);
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+}
+
+.color-option:hover {
+  border-color: var(--terra-lt);
+  color: var(--terra-dk);
+}
+
+.color-option.active {
+  background: var(--terra-dk);
+  color: #fff;
+  border-color: var(--terra-dk);
+  box-shadow: 0 2px 8px rgba(122, 80, 48, 0.25);
+}
+
+.color-required-msg {
+  font-size: 12px;
+  color: #c0392b;
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+/* Color en el item del carrito */
+.cart-item-color {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--terra);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
 }

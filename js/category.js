@@ -34,7 +34,7 @@ function goWA(name, price) {
 
 // ---------- Card HTML ----------
 function cardHTML(product) {
-  const { id, cat, name, desc, price, emoji,indications, badge, images } = product;
+  const { id, cat, name, desc, price, emoji, badge, images } = product;
   const isFav      = favorites.has(id);
   const firstImage = images && images.length > 0 ? images[0] : null;
 
@@ -45,16 +45,14 @@ function cardHTML(product) {
     : '';
 
   const mediaHTML = firstImage
-    ? `<img src="${firstImage}" alt="${name}">`
+    ? `<img src="${firstImage}" alt="${name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">`
     : `<span>${emoji}</span>`;
 
   const isConsultar = price === 'Consultar';
   const priceHTML   = isConsultar
     ? `<span class="cprice cprice-consultar">Consultar precio</span>`
     : `<span class="cprice"><sup>$</sup>${price}</span>`;
-  const actionHTML  = isConsultar
-    ? `<button class="bconsultar" onclick="event.stopPropagation(); goWA('${name.replace(/'/g, "\\'")}', 'precio')">💬 Consultar</button>`
-    : `<button class="bconsultar" onclick="event.stopPropagation(); addToCart(${id})">🛒 Agregar</button>`;
+  const actionHTML  = `<button class="bconsultar" onclick="event.stopPropagation(); openModal(${id})">Ver producto</button>`;
 
   return `
     <div class="pcard" onclick="openModal(${id})" style="cursor:pointer">
@@ -85,10 +83,28 @@ function renderGrid(cat) {
   applyGridFilters();
 }
 
+// Categorías en modo "próximamente" — los productos existen pero no se muestran
+const COMING_SOON_CATS = ['lineainfantil'];
+
 function applyGridFilters() {
   const q      = searchQuery.trim().toLowerCase();
   const grid   = document.getElementById('productsGrid');
   const count  = document.getElementById('gridCount');
+
+  // Si la categoría está en modo próximamente, mostrar mensaje especial
+  if (COMING_SOON_CATS.includes(currentCat)) {
+    if (count) count.textContent = '';
+    grid.innerHTML = `
+      <div class="grid-empty grid-coming-soon">
+        <span class="grid-empty-icon">🌿</span>
+        <h3>¡Próximamente!</h3>
+        <p>Estamos preparando esta sección con mucho amor.<br>Muy pronto vas a encontrar productos especiales acá.</p>
+        <a href="https://wa.me/91173607330" class="grid-coming-soon-btn" target="_blank">
+          💬 Consultanos por WhatsApp
+        </a>
+      </div>`;
+    return;
+  }
 
   const filtered = PRODUCTS.filter(p => {
     const matchCat   = !currentCat || p.cat === currentCat;
