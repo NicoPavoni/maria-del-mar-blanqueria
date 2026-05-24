@@ -360,4 +360,4 @@ const PRODUCTS = [
   },
 ];
 
-// ⚠️ Último ID usado: 18 — el próximo producto debe ser id: 19
+// ⚠️ Último ID usado: 19 — el próximo producto debe ser id: 20
