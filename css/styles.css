@@ -1600,7 +1600,12 @@ footer p { font-size: 12px; font-weight: 300; letter-spacing: 0.06em; }
   left: 0;
   right: 0;
   height: 20px;
-  pointer-events: none;
+}
+
+/* Fix: nav links tienen z-index mayor que el puente del dropdown */
+nav > a {
+  position: relative;
+  z-index: 1;
 }
 
 /* Triángulo arriba del menú */
