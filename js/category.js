@@ -112,7 +112,7 @@ function applyGridFilters() {
       p.name.toLowerCase().includes(q) ||
       p.desc.toLowerCase().includes(q) ||
       (CAT_LABELS[p.cat] || '').toLowerCase().includes(q);
-    return matchCat && matchQuery;
+    return matchCat && matchQuery && !p.hidden;
   });
 
   if (count) {

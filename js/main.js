@@ -14,7 +14,7 @@ const COMING_SOON_CATS = ['lineainfantil'];
 // ---------- Estado ----------
 let currentPage      = 0;
 let autoTimer        = null;
-let filteredProducts = PRODUCTS.filter(p => !COMING_SOON_CATS.includes(p.cat));
+let filteredProducts = PRODUCTS.filter(p => !COMING_SOON_CATS.includes(p.cat) && !p.hidden);
 let currentCat       = 'todos';
 let searchQuery      = '';
 const favorites      = new Set();
@@ -28,7 +28,7 @@ function applyFilters() {
       p.name.toLowerCase().includes(q) ||
       p.desc.toLowerCase().includes(q) ||
       (CAT_LABELS[p.cat] || '').toLowerCase().includes(q);
-    const notHidden    = !COMING_SOON_CATS.includes(p.cat);
+    const notHidden    = !COMING_SOON_CATS.includes(p.cat) && !p.hidden;
     return matchCat && matchQuery && notHidden;
   });
   currentPage = 0;

@@ -11,7 +11,7 @@ function openModal(productId) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
 
-  const { name, cat, desc, price, emoji, indications, images, badge, colors } = product;
+  const { name, cat, desc, price, emoji, indications, images, badge, colors, features } = product;
 
   modalImages   = images && images.length > 0 ? images : [];
   currentSlide  = 0;
@@ -28,8 +28,10 @@ function openModal(productId) {
     ? buildSlider(badgeHTML)
     : `<div class="modal-emoji">${emoji}</div>${badgeHTML}`;
 
-  const features     = desc.split('.').map(s => s.trim()).filter(s => s.length > 3);
-  const featuresHTML = features.map(f => `<li>${f}.</li>`).join('');
+  // Características: solo si el producto tiene el campo 'features' definido
+  const featuresHTML = features && features.length > 0
+    ? features.map(f => `<li>${f}</li>`).join('')
+    : '';
 
   // Selector de color (solo si el producto tiene colores)
   const colorsHTML = colors && colors.length > 0
@@ -66,10 +68,11 @@ function openModal(productId) {
         <h4 class="modal-section-title">Descripción</h4>
         <p class="modal-desc">${desc}</p>
       </div>
+      ${featuresHTML ? `
       <div class="modal-section">
         <h4 class="modal-section-title">Características</h4>
         <ul class="modal-features">${featuresHTML}</ul>
-      </div>
+      </div>` : ''}
       ${indications ? `
       <div class="modal-section">
         <h4 class="modal-section-title">Indicaciones de lavado</h4>

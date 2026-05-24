@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros — María del Mar Blanquería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Dancing+Script:wght@500;600&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ---- Nosotros page styles ---- */
+    .nos-hero {
+      background: rgba(245, 237, 224, 0.5);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nos-hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 0.6rem;
+    }
+
+    .nos-hero h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 600;
+      color: var(--terra-dk);
+      margin-bottom: 0.8rem;
+    }
+
+    .nos-hero p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-soft);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.9;
+    }
+
+    /* ---- Historia ---- */
+    .nos-section {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .nos-historia {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .nos-historia-text h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 600;
+      color: var(--terra-dk);
+      margin-bottom: 1.2rem;
+    }
+
+    .nos-historia-text p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-soft);
+      line-height: 2;
+      margin-bottom: 1rem;
+    }
+
+    .nos-historia-visual {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nos-badge {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem 2.5rem;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 32px var(--shadow);
+      width: 100%;
+    }
+
+    .nos-badge-icon { font-size: 36px; margin-bottom: 0.5rem; display: block; }
+    .nos-badge-num {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--terra-dk);
+      line-height: 1;
+    }
+    .nos-badge-label {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-soft);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ---- Personas ---- */
+    .nos-personas {
+      background: rgba(245, 237, 224, 0.4);
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nos-personas-inner {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .nos-personas-inner h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 600;
+      color: var(--terra-dk);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .nos-personas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .nos-persona-card {
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .nos-persona-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px var(--shadow);
+    }
+
+    .nos-persona-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--terra-lt), var(--terra));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 14px rgba(176, 120, 72, 0.25);
+    }
+
+    .nos-persona-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--terra-dk);
+      margin-bottom: 0.3rem;
+    }
+
+    .nos-persona-role {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 1rem;
+    }
+
+    .nos-persona-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-soft);
+      line-height: 1.9;
+    }
+
+    /* ---- Valores ---- */
+    .nos-valores {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .nos-valores h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 600;
+      color: var(--terra-dk);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .nos-valores-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .nos-valor {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.7);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .nos-valor:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px var(--shadow);
+    }
+
+    .nos-valor-icon { font-size: 32px; margin-bottom: 0.8rem; display: block; }
+
+    .nos-valor h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--terra-dk);
+      margin-bottom: 0.5rem;
+    }
+
+    .nos-valor p {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    /* ---- CTA ---- */
+    .nos-cta {
+      background: linear-gradient(135deg, var(--terra-dk), var(--terra));
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nos-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/logo.png');
+      background-repeat: repeat;
+      background-size: 100px 100px;
+      opacity: 0.04;
+      filter: brightness(10);
+    }
+
+    .nos-cta-inner { position: relative; z-index: 1; }
+
+    .nos-cta h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+
+    .nos-cta p {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 2rem;
+      line-height: 1.9;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 700px) {
+      .nos-historia { grid-template-columns: 1fr; gap: 3rem; }
+      .nos-personas-grid { grid-template-columns: 1fr; }
+      .nos-valores-grid { grid-template-columns: 1fr; }
+      .nos-section { padding: 3rem 1rem; }
+    }
+  </style>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E49BHCSVK5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-E49BHCSVK5');
+  </script>
+</head>
+<body>
+
+  <div class="ann">Envíos a La Plata y alrededores &nbsp;·&nbsp; Consultá por WhatsApp</div>
+
+  <header id="hdr">
+    <a class="logo-area" href="index.html">
+      <img src="assets/logo-transparent.png" alt="Logo María del Mar">
+      <div>
+        <div class="logo-name">María del Mar</div>
+        <div class="logo-sub">Blanquería</div>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <div class="nav-dropdown">
+        <a href="index.html#productos" class="nav-dropdown-trigger">
+          Productos
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          <a href="ropa-de-cama.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-icon">🛏️</span> Ropa de cama
+          </a>
+          <a href="bano.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-icon">🛁</span> Baño
+          </a>
+          <a href="linea-infantil.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-icon">🧸</span> Línea Infantil
+          </a>
+          <a href="cocina.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-icon">🍽️</span> Cocina
+          </a>
+          <div class="nav-dropdown-divider"></div>
+          <div class="nav-dropdown-item nav-dropdown-soon">
+            <span class="nav-dropdown-icon">😴</span> Almohadas
+            <span class="nav-soon-badge">Próximamente</span>
+          </div>
+          <div class="nav-dropdown-item nav-dropdown-soon">
+            <span class="nav-dropdown-icon">🎁</span> Accesorios
+            <span class="nav-soon-badge">Próximamente</span>
+          </div>
+        </div>
+      </div>
+      <a href="nosotros.html" style="color: var(--terra);">Nosotros</a>
+      <a href="https://wa.me/91173607330" target="_blank">Contacto</a>
+    </nav>
+    <a href="https://wa.me/91173607330" class="btn-wa" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Consultar
+    </a>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="nos-hero">
+      <p class="nos-hero-eyebrow">Conocenos</p>
+      <h1>Nuestra historia</h1>
+      <p>Un emprendimiento familiar nacido del amor por el hogar y la dedicación de vestirlo con lo mejor.</p>
+    </section>
+
+    <!-- HISTORIA -->
+    <section class="nos-section">
+      <div class="nos-historia">
+        <div class="nos-historia-text">
+          <h2>¿Quiénes somos?</h2>
+          <p>
+            María del Mar Blanquería nació en 2024 de la mano de <strong style="color:var(--terra-dk)">María Laura y Alejandro</strong>, una pareja que compartía el mismo sueño: llevar calidad y calidez a los hogares de La Plata y alrededores.
+          </p>
+          <p>
+            Lo que empezó como un proyecto familiar entre conversaciones y mucho café, se convirtió en un emprendimiento con identidad propia: productos seleccionados con criterio, atención personalizada y el trato cercano que solo puede dar alguien que ama lo que hace.
+          </p>
+          <p>
+            Cada sábana, cada toalla, cada rincón de nuestro catálogo fue elegido pensando en vos — en que llegues a tu casa y sientas que el lugar donde descansás merece lo mejor.
+          </p>
+        </div>
+        <div class="nos-historia-visual">
+          <div class="nos-badge">
+            <span class="nos-badge-icon">🌿</span>
+            <div class="nos-badge-num">2024</div>
+            <div class="nos-badge-label">Año de inicio</div>
+          </div>
+          <div class="nos-badge">
+            <span class="nos-badge-icon">📦</span>
+            <div class="nos-badge-num">100%</div>
+            <div class="nos-badge-label">Productos seleccionados</div>
+          </div>
+          <div class="nos-badge">
+            <span class="nos-badge-icon">❤️</span>
+            <div class="nos-badge-num">Familia</div>
+            <div class="nos-badge-label">La Plata, Buenos Aires</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONAS -->
+    <div class="nos-personas">
+      <div class="nos-personas-inner">
+        <h2>Las personas detrás</h2>
+        <div class="nos-personas-grid">
+          <div class="nos-persona-card">
+            <div class="nos-persona-avatar">🌸</div>
+            <div class="nos-persona-name">María Laura</div>
+            <div class="nos-persona-role">Corazón del emprendimiento</div>
+            <p class="nos-persona-desc">
+              Con ojo para los detalles y pasión por el buen gusto, María Laura es quien elige cada producto del catálogo. Su criterio es simple: si no lo pondría en su propia casa, no lo vende. Atiende cada consulta con la calidez de alguien que realmente quiere ayudarte a encontrar lo que buscás.
+            </p>
+          </div>
+          <div class="nos-persona-card">
+            <div class="nos-persona-avatar">🌿</div>
+            <div class="nos-persona-name">Alejandro</div>
+            <div class="nos-persona-role">El que hace que todo funcione</div>
+            <p class="nos-persona-desc">
+              Alejandro es la energía que mantiene el emprendimiento en movimiento. Logística, entregas, relación con proveedores — se encarga de que cada pedido llegue a tiempo y en perfectas condiciones. Su compromiso con la calidad es tan grande como el de María Laura.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VALORES -->
+    <section class="nos-valores">
+      <h2>Lo que nos mueve</h2>
+      <div class="nos-valores-grid">
+        <div class="nos-valor">
+          <span class="nos-valor-icon">🏠</span>
+          <h4>El hogar importa</h4>
+          <p>Creemos que el lugar donde vivís merece productos que duren, que se sientan bien y que hagan la diferencia en el día a día.</p>
+        </div>
+        <div class="nos-valor">
+          <span class="nos-valor-icon">🤝</span>
+          <h4>Trato cercano</h4>
+          <p>No somos un local anónimo. Cada cliente es una persona real con necesidades reales. Respondemos siempre y con gusto.</p>
+        </div>
+        <div class="nos-valor">
+          <span class="nos-valor-icon">✨</span>
+          <h4>Calidad sin vueltas</h4>
+          <p>Elegimos proveedores confiables y productos que conocemos bien. Si hay algún problema, lo resolvemos. Así de simple.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="nos-cta">
+      <div class="nos-cta-inner">
+        <h3>¿Querés conocernos mejor?</h3>
+        <p>Escribinos por WhatsApp, con gusto te contamos más sobre lo que hacemos.</p>
+        <a href="https://wa.me/91173607330" class="btn-wa" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Hablar con nosotros
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="ft-inner">
+      <img class="ft-logo" src="assets/logo-transparent.png" alt="Logo María del Mar">
+      <p class="ft-name">María del Mar Blanquería</p>
+      <p>Hecho con amor · La Plata, Buenos Aires</p>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('hdr').classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
+
+</body>
+</html>
