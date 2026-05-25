@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dormitorio — María del Mar Blanquería</title>
+  <title>Deco — María del Mar Blanquería</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Dancing+Script:wght@500;600&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/category.css">
@@ -36,7 +36,7 @@
           Productos
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </a>
-        <div class="nav-dropdown-menu">
+                <div class="nav-dropdown-menu">
           <a href="ropa-de-cama.html" class="nav-dropdown-item">
             <span class="nav-dropdown-icon">🛏️</span> Dormitorio
           </a>
@@ -73,14 +73,14 @@
     <div class="breadcrumb">
       <a href="index.html">Inicio</a>
       <span class="breadcrumb-sep">›</span>
-      <span>Dormitorio</span>
+      <span>Deco</span>
     </div>
 
     <!-- HERO DE CATEGORÍA -->
     <section class="cat-hero">
       <p class="cat-hero-eyebrow">Nuestra colección</p>
-      <h1>🛏️ Dormitorio</h1>
-      <p>Sábanas, frazadas, almohadas y todo lo que necesitás para vestir tu cama con calidad y estilo.</p>
+      <h1>🎁 Deco</h1>
+      <p>Accesorios y artículos de decoración para darle vida y personalidad a cada rincón de tu hogar.</p>
     </section>
 
     <!-- GRILLA DE PRODUCTOS -->
@@ -92,15 +92,6 @@
           <input type="text" id="searchInput" class="search-input" placeholder="Buscar productos..." autocomplete="off">
           <button class="search-clear" id="searchClear" onclick="clearSearch()">&#10005;</button>
         </div>
-      </div>
-
-      <!-- FILTRO DE SUBCATEGORÍAS -->
-      <div class="subcat-bar">
-        <button class="subcat-btn active" onclick="filterSubcat('', this)">Todos</button>
-        <button class="subcat-btn" onclick="filterSubcat('sabanas', this)">🛏️ Sábanas</button>
-        <button class="subcat-btn" onclick="filterSubcat('frazadas', this)">🧣 Frazadas</button>
-        <button class="subcat-btn" onclick="filterSubcat('almohadas', this)">😴 Almohadas</button>
-        <button class="subcat-btn" onclick="filterSubcat('acolchados', this)">🌿 Acolchados</button>
       </div>
 
       <div class="grid-header">
@@ -166,7 +157,7 @@
   <script src="js/modal.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      renderGrid('cama');
+      renderGrid('deco');
     });
   </script>
 
@@ -203,6 +194,7 @@
         <a href="bano.html">🛁 &nbsp;Baño</a>
         <a href="cocina.html">🍽️ &nbsp;Cocina</a>
         <a href="linea-infantil.html">🧸 &nbsp;Línea Infantil</a>
+        <a href="deco.html">🎁 &nbsp;Deco</a>
       </div>
 
       <a href="nosotros.html" class="mobile-nav-link">

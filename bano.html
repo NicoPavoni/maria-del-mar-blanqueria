@@ -38,7 +38,7 @@
         </a>
         <div class="nav-dropdown-menu">
           <a href="ropa-de-cama.html" class="nav-dropdown-item">
-            <span class="nav-dropdown-icon">🛏️</span> Ropa de cama
+            <span class="nav-dropdown-icon">🛏️</span> Dormitorio
           </a>
           <a href="bano.html" class="nav-dropdown-item">
             <span class="nav-dropdown-icon">🛁</span> Baño
@@ -50,14 +50,9 @@
             <span class="nav-dropdown-icon">🍽️</span> Cocina
           </a>
           <div class="nav-dropdown-divider"></div>
-          <div class="nav-dropdown-item nav-dropdown-soon">
-            <span class="nav-dropdown-icon">😴</span> Almohadas
-            <span class="nav-soon-badge">Próximamente</span>
-          </div>
-          <div class="nav-dropdown-item nav-dropdown-soon">
-            <span class="nav-dropdown-icon">🎁</span> Accesorios
-            <span class="nav-soon-badge">Próximamente</span>
-          </div>
+          <a href="deco.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-icon">🎁</span> Deco
+          </a>
         </div>
       </div>
       <a href="nosotros.html">Nosotros</a>
@@ -112,7 +107,7 @@
     <div class="ft-inner">
       <img class="ft-logo" src="assets/logo-transparent.png" alt="Logo María del Mar">
       <p class="ft-name">María del Mar Blanquería</p>
-      <p>Hecho con amor · La Plata, Buenos Aires</p>
+      <p>Pensado con amor · La Plata, Buenos Aires</p>
     </div>
   </footer>
 
@@ -124,7 +119,12 @@
   <div class="cart-drawer" id="cartDrawer">
     <div class="cart-header">
       <h3 class="cart-title">Tu carrito</h3>
-      <button class="cart-close" onclick="closeCart()">&#10005;</button>
+      <div class="cart-header-actions">
+        <button class="cart-clear-btn" id="cartClearBtn" onclick="clearCart()" style="display:none" title="Vaciar carrito">
+          🗑️ Vaciar
+        </button>
+        <button class="cart-close" onclick="closeCart()">&#10005;</button>
+      </div>
     </div>
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-footer" id="cartFooter">

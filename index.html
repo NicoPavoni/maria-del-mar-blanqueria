@@ -37,7 +37,7 @@
           Productos
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </a>
-        <div class="nav-dropdown-menu">
+                <div class="nav-dropdown-menu">
           <a href="ropa-de-cama.html" class="nav-dropdown-item">
             <span class="nav-dropdown-icon">🛏️</span> Dormitorio
           </a>
@@ -51,10 +51,9 @@
             <span class="nav-dropdown-icon">🍽️</span> Cocina
           </a>
           <div class="nav-dropdown-divider"></div>
-          <div class="nav-dropdown-item nav-dropdown-soon">
-            <span class="nav-dropdown-icon">🎁</span> Accesorios
-            <span class="nav-soon-badge">Próximamente</span>
-          </div>
+          <a href="deco.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-icon">🎁</span> Deco
+          </a>
         </div>
       </div>
       <a href="nosotros.html">Nosotros</a>
@@ -79,7 +78,7 @@
         </div>
         <div class="hero-text">
           <p class="eyebrow">Calidad y calidez en cada detalle</p>
-          <h1>Dormitorio,<br>baño y hogar</h1>
+          <h1>Ropa de cama,<br>baño y hogar</h1>
           <div class="hero-div">
             <span></span>
             <span>🌿</span>
@@ -104,7 +103,7 @@
         <a href="ropa-de-cama.html" class="cat-link">
           <span class="cat-icon">🛏️</span>
           <span class="cat-name">Dormitorio</span>
-          <span class="cat-desde">Desde $5.800</span>
+          <span class="cat-desde">Desde $6.500</span>
         </a>
         <a href="bano.html" class="cat-link">
           <span class="cat-icon">🛁</span>
@@ -141,11 +140,11 @@
 
       <div class="filter-bar">
         <button class="filt active">Todos</button>
-        <button class="filt">Dormitorio</button>
+        <button class="filt">Ropa de cama</button>
         <button class="filt">Baño</button>
         <button class="filt">Cocina</button>
-        <button class="filt filt-soon" disabled>Línea Infantil <span class="filt-soon-badge">Próximamente</span></button>
-        <button class="filt filt-soon" disabled>Accesorios <span class="filt-soon-badge">Próximamente</span></button>
+        <button class="filt">Línea Infantil</button>
+        <button class="filt">Deco</button>
       </div>
       <div class="carousel-outer">
         <div class="carousel-viewport">
@@ -186,7 +185,7 @@
     <div class="ft-inner">
       <img class="ft-logo" src="assets/logo-transparent.png" alt="Logo María del Mar">
       <p class="ft-name">María del Mar Blanquería</p>
-      <p>Hecho con amor · La Plata, Buenos Aires</p>
+      <p>Pensado con amor · La Plata, Buenos Aires</p>
     </div>
   </footer>
 
@@ -199,7 +198,12 @@
   <div class="cart-drawer" id="cartDrawer">
     <div class="cart-header">
       <h3 class="cart-title">Tu carrito</h3>
-      <button class="cart-close" onclick="closeCart()">&#10005;</button>
+      <div class="cart-header-actions">
+        <button class="cart-clear-btn" id="cartClearBtn" onclick="clearCart()" style="display:none" title="Vaciar carrito">
+          🗑️ Vaciar
+        </button>
+        <button class="cart-close" onclick="closeCart()">&#10005;</button>
+      </div>
     </div>
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-footer" id="cartFooter">
@@ -268,6 +272,7 @@
         <a href="bano.html">🛁 &nbsp;Baño</a>
         <a href="cocina.html">🍽️ &nbsp;Cocina</a>
         <a href="linea-infantil.html">🧸 &nbsp;Línea Infantil</a>
+        <a href="deco.html">🎁 &nbsp;Deco</a>
       </div>
 
       <a href="nosotros.html" class="mobile-nav-link">

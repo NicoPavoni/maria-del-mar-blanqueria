@@ -9,7 +9,7 @@ const WA_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentCol
 </svg>`;
 
 // Categorías ocultas del carrusel — misma lista que category.js
-const COMING_SOON_CATS = ['lineainfantil'];
+const COMING_SOON_CATS = [];
 
 // ---------- Estado ----------
 let currentPage      = 0;
@@ -197,7 +197,7 @@ function filterProducts(cat) {
       (cat === 'cama'          && (txt.includes('cama') || txt.includes('dormitorio')))  ||
       (cat === 'baño'          && txt.includes('baño'))  ||
       (cat === 'almohadas'     && txt.includes('almo'))  ||
-      (cat === 'accesorios'    && txt.includes('acce'))  ||
+      (cat === 'accesorios'    && (txt.includes('acce') || txt.includes('deco')))  ||
       (cat === 'lineainfantil' && txt.includes('infan')) ||
       (cat === 'cocina'        && txt.includes('cocina'))
     ) {
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (txt.includes('cama') || txt.includes('dormitorio')) filterProducts('cama');
       else if (txt.includes('baño'))   filterProducts('baño');
       else if (txt.includes('almo'))   filterProducts('almohadas');
-      else if (txt.includes('acce'))   filterProducts('accesorios');
+      else if (txt.includes('acce') || txt.includes('deco')) filterProducts('deco');
       else if (txt.includes('infan'))  filterProducts('lineainfantil');
       else if (txt.includes('cocina')) filterProducts('cocina');
     });

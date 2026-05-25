@@ -77,12 +77,64 @@ function cardHTML(product) {
 let currentCat    = '';
 let currentSubcat = '';
 let searchQuery   = '';
+let currentSort   = 'default';
+
+// ---------- Ordenar ----------
+function sortProducts(products) {
+  const arr = [...products];
+  if (currentSort === 'price-asc') {
+    return arr.sort((a, b) => {
+      const pa = parseFloat(a.price.replace(/\./g, '')) || Infinity;
+      const pb = parseFloat(b.price.replace(/\./g, '')) || Infinity;
+      return pa - pb;
+    });
+  }
+  if (currentSort === 'price-desc') {
+    return arr.sort((a, b) => {
+      const pa = parseFloat(a.price.replace(/\./g, '')) || 0;
+      const pb = parseFloat(b.price.replace(/\./g, '')) || 0;
+      return pb - pa;
+    });
+  }
+  if (currentSort === 'alpha-asc') {
+    return arr.sort((a, b) => a.name.localeCompare(b.name, 'es'));
+  }
+  if (currentSort === 'alpha-desc') {
+    return arr.sort((a, b) => b.name.localeCompare(a.name, 'es'));
+  }
+  return arr;
+}
+
+function injectSortSelect() {
+  if (document.getElementById('sortSelect')) return;
+  const wrap = document.querySelector('.search-wrap');
+  if (!wrap) return;
+  const div = document.createElement('div');
+  div.className = 'sort-wrap';
+  div.innerHTML = `
+    <select id="sortSelect" class="sort-select" onchange="applySort(this.value)">
+      <option value="default">Ordenar por</option>
+      <option value="price-asc">Precio: menor a mayor</option>
+      <option value="price-desc">Precio: mayor a menor</option>
+      <option value="alpha-asc">Nombre: A → Z</option>
+      <option value="alpha-desc">Nombre: Z → A</option>
+    </select>`;
+  wrap.parentNode.insertBefore(div, wrap.nextSibling);
+}
+
+function applySort(val) {
+  currentSort = val;
+  applyGridFilters();
+}
 
 // ---------- Render grilla ----------
 function renderGrid(cat) {
   currentCat    = cat;
   currentSubcat = '';
+  currentSort   = 'default';
   applyGridFilters();
+  document.addEventListener('DOMContentLoaded', injectSortSelect);
+  if (document.readyState !== 'loading') injectSortSelect();
 }
 
 function filterSubcat(subcat, btn) {
@@ -94,7 +146,7 @@ function filterSubcat(subcat, btn) {
 }
 
 // Categorías en modo "próximamente" — los productos existen pero no se muestran
-const COMING_SOON_CATS = ['lineainfantil'];
+const COMING_SOON_CATS = [];
 
 function applyGridFilters() {
   const q      = searchQuery.trim().toLowerCase();
@@ -139,7 +191,8 @@ function applyGridFilters() {
     return;
   }
 
-  grid.innerHTML = filtered.map(p => cardHTML(p)).join('');
+  const sorted = sortProducts(filtered);
+  grid.innerHTML = sorted.map(p => cardHTML(p)).join('');
 }
 
 function clearSearch() {

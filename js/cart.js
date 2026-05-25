@@ -2,8 +2,37 @@
    María del Mar Blanquería — Carrito de compras
    ============================================= */
 
-// { "id_color": { product, quantity, color } }
+// { "id_color": { productId, quantity, color } }
+// Persiste entre páginas usando localStorage
+const CART_KEY = 'mdm_cart';
+
+function loadCart() {
+  try {
+    const saved = localStorage.getItem(CART_KEY);
+    return saved ? JSON.parse(saved) : {};
+  } catch { return {}; }
+}
+
+function saveCart() {
+  try {
+    // Solo guardamos productId, quantity y color (no el objeto product entero)
+    const toSave = {};
+    Object.entries(cart).forEach(([key, val]) => {
+      toSave[key] = { productId: val.product.id, quantity: val.quantity, color: val.color };
+    });
+    localStorage.setItem(CART_KEY, JSON.stringify(toSave));
+  } catch {}
+}
+
+function hydrateCart(saved) {
+  Object.entries(saved).forEach(([key, val]) => {
+    const product = PRODUCTS.find(p => p.id === val.productId);
+    if (product) cart[key] = { product, quantity: val.quantity, color: val.color };
+  });
+}
+
 const cart = {};
+hydrateCart(loadCart());
 
 function cartKey(productId, color) {
   return color ? `${productId}_${color}` : `${productId}`;
@@ -35,6 +64,7 @@ function addToCart(productId, color) {
   } else {
     cart[key] = { product, quantity: 1, color: color || null };
   }
+  saveCart();
 
   gtag('event', 'add_to_cart', {
     product_name:     product.name,
@@ -47,11 +77,21 @@ function addToCart(productId, color) {
   renderCart();
 }
 
+// ---------- Vaciar carrito ----------
+function clearCart() {
+  if (!confirm('¿Vaciar el carrito? Se eliminarán todos los productos.')) return;
+  Object.keys(cart).forEach(k => delete cart[k]);
+  saveCart();
+  updateFabCount();
+  renderCart();
+}
+
 // ---------- Quitar una unidad ----------
 function removeOneFromCart(key) {
   if (!cart[key]) return;
   cart[key].quantity -= 1;
   if (cart[key].quantity <= 0) delete cart[key];
+  saveCart();
   updateFabCount();
   renderCart();
 }
@@ -59,6 +99,7 @@ function removeOneFromCart(key) {
 // ---------- Eliminar producto completo ----------
 function removeFromCart(key) {
   delete cart[key];
+  saveCart();
   updateFabCount();
   renderCart();
 }
@@ -91,6 +132,8 @@ function renderCart() {
   const footerEl = document.getElementById('cartFooter');
   const items    = Object.entries(cart);
 
+  const clearBtn = document.getElementById('cartClearBtn');
+
   if (items.length === 0) {
     itemsEl.innerHTML = `
       <div class="cart-empty">
@@ -99,8 +142,11 @@ function renderCart() {
         <p>Agregá productos desde la colección</p>
       </div>`;
     footerEl.style.display = 'none';
+    if (clearBtn) clearBtn.style.display = 'none';
     return;
   }
+
+  if (clearBtn) clearBtn.style.display = 'inline-flex';
 
   footerEl.style.display = 'flex';
 
