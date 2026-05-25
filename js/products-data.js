@@ -6,7 +6,7 @@
 const WA_NUMBER = '91173607330';
 
 const CAT_LABELS = {
-  cama:          'Ropa de cama',
+  cama:          'Dormitorio',
   baño:          'Baño',
   almohadas:     'Almohadas',
   accesorios:    'Accesorios',
@@ -14,10 +14,18 @@ const CAT_LABELS = {
   cocina:        'Cocina',
 };
 
+const SUBCAT_LABELS = {
+  sabanas:    'Sábanas',
+  frazadas:   'Frazadas',
+  almohadas:  'Almohadas',
+  acolchados: 'Acolchados',
+};
+
 const PRODUCTS = [
   {
     id: 1,
     cat: 'cama',
+    subcat: 'sabanas',
     name: 'Juego de sábanas 2 1/2 plazas de algodón',
     desc: '100% algodón. Bajera, encimera y 2 fundas. Disponibles en color Verde Agua, Rosa Dior y Blancas.',
     features: [],
@@ -37,6 +45,7 @@ const PRODUCTS = [
   {
     id: 13,
     cat: 'cama',
+    subcat: 'sabanas',
     name: 'Sabanas ajustables hoteleras. 2 plazas y 2 1/2 plazas',
     desc: '100% algodón. Varios colores disponibles.',
     features: [],
@@ -55,6 +64,7 @@ const PRODUCTS = [
   {
     id: 14,
     cat: 'cama',
+    subcat: 'frazadas',
     name: 'Frazadas Goldsun de piel',
     desc: 'Frazadas de piel de 2 1/2 plazas, super abrigadas, ideales para el invierno. Varios colores disponibles.',
     features: [],
@@ -89,6 +99,7 @@ const PRODUCTS = [
   {
     id: 3,
     cat: 'cama',
+    subcat: 'sabanas',
     name: 'Sabanas ajustables de algodón con elástico',
     desc: 'Estuche x4 unidades. 100% algodón.',
     features: [],
@@ -106,6 +117,7 @@ const PRODUCTS = [
   {
     id: 15,
     cat: 'cama',
+    subcat: 'acolchados',
     name: 'Cover de verano 2 1/2 plazas',
     desc: 'Cubrecama de verano Goldsun, 2 1/2 plazas, liviano y fresco. Varios colores disponibles.',
     features: [],
@@ -125,6 +137,7 @@ const PRODUCTS = [
   {
     id: 4,
     cat: 'cama',
+    subcat: 'sabanas',
     name: 'Sabanas hoteleras bordadas',
     desc: 'Sabanas hoteleras bordadas, 100% algodón premium. Varios colores disponibles.',
     features: [],
@@ -174,6 +187,7 @@ const PRODUCTS = [
   {
     id: 7,
     cat: 'cama',
+    subcat: 'almohadas',
     name: 'Funda de almohada rayada de 600 hilos',
     desc: 'Fundas de algodón rayadas, varios colores disponibles.',
     features: [],
@@ -191,6 +205,7 @@ const PRODUCTS = [
   {
     id: 17,
     cat: 'cama',
+    subcat: 'sabanas',
     name: 'Sabanas hoteleras bordado Inglés 2 1/2 plazas',
     desc: 'Sabanas bordadas con diseño inglés de algodón, 3800 hilos, varios colores disponibles.',
     features: [],
@@ -225,6 +240,7 @@ const PRODUCTS = [
   {
     id: 18,
     cat: 'cama',
+    subcat: 'sabanas',
     name: 'Sábanas Super King - 3800 hilos',
     desc: 'Sábanas Super King de algodón premium, 3800 hilos. Suavidad y durabilidad excepcional.',
     features: [
@@ -245,6 +261,7 @@ const PRODUCTS = [
   {
     id: 19,
     cat: 'cama',
+    subcat: 'sabanas',
     name: 'Juego de Sábanas Hoteleras - Tamaño Queen',
     desc: 'Sabanas Hoteleras de algodón premium, 2500 hilos. Suavidad y durabilidad excepcional.',
     features: [

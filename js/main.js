@@ -194,7 +194,7 @@ function filterProducts(cat) {
     const txt = btn.textContent.toLowerCase();
     if (
       (cat === 'todos'         && txt === 'todos')       ||
-      (cat === 'cama'          && txt.includes('cama'))  ||
+      (cat === 'cama'          && (txt.includes('cama') || txt.includes('dormitorio')))  ||
       (cat === 'baño'          && txt.includes('baño'))  ||
       (cat === 'almohadas'     && txt.includes('almo'))  ||
       (cat === 'accesorios'    && txt.includes('acce'))  ||
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       const txt = btn.textContent.toLowerCase().trim();
       if      (txt === 'todos')        filterProducts('todos');
-      else if (txt.includes('cama'))   filterProducts('cama');
+      else if (txt.includes('cama') || txt.includes('dormitorio')) filterProducts('cama');
       else if (txt.includes('baño'))   filterProducts('baño');
       else if (txt.includes('almo'))   filterProducts('almohadas');
       else if (txt.includes('acce'))   filterProducts('accesorios');

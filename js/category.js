@@ -74,12 +74,22 @@ function cardHTML(product) {
 }
 
 // ---------- Estado ----------
-let currentCat   = '';
-let searchQuery  = '';
+let currentCat    = '';
+let currentSubcat = '';
+let searchQuery   = '';
 
 // ---------- Render grilla ----------
 function renderGrid(cat) {
-  currentCat = cat;
+  currentCat    = cat;
+  currentSubcat = '';
+  applyGridFilters();
+}
+
+function filterSubcat(subcat, btn) {
+  currentSubcat = subcat;
+  // Resaltar botón activo
+  document.querySelectorAll('.subcat-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
   applyGridFilters();
 }
 
@@ -107,12 +117,13 @@ function applyGridFilters() {
   }
 
   const filtered = PRODUCTS.filter(p => {
-    const matchCat   = !currentCat || p.cat === currentCat;
-    const matchQuery = !q ||
+    const matchCat    = !currentCat || p.cat === currentCat;
+    const matchSubcat = !currentSubcat || p.subcat === currentSubcat;
+    const matchQuery  = !q ||
       p.name.toLowerCase().includes(q) ||
       p.desc.toLowerCase().includes(q) ||
       (CAT_LABELS[p.cat] || '').toLowerCase().includes(q);
-    return matchCat && matchQuery && !p.hidden;
+    return matchCat && matchSubcat && matchQuery && !p.hidden;
   });
 
   if (count) {
