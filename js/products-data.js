@@ -312,10 +312,11 @@ const PRODUCTS = [
     emoji: '🛏️',
     badge: 'promo',
     indications: '',
-    colors: ["Marron", "Marron Chocolate", "Rojo", "Azul", "Gris"],
+    colors: ["Marron", "Rojo", "Azul", "Gris", "Blanco", "Beige"],
     images: [
       'assets/products/alfombras-shaggy.jpg',
       'assets/products/alfombras-shaggy-2.jpg',
+      'assets/products/alfombras-shaggy-3.jpg',
     ],
     hidden: false,
   },
