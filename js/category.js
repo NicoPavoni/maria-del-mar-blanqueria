@@ -1,6 +1,6 @@
 /* =============================================
    María del Mar Blanquería — Lógica de página de categoría
-   Depende de: products-data.js (cargado antes)
+   Fuente de datos: Supabase (via window.ProductsAPI)
    ============================================= */
 
 // ---------- Favoritos ----------
@@ -21,6 +21,7 @@ function toggleFav(id, btn) {
 // ---------- Toast ----------
 function showToast(msg) {
   const toast = document.getElementById('toast');
+  if (!toast) return;
   toast.textContent = msg;
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 2000);
@@ -32,9 +33,15 @@ function goWA(name, price) {
   window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
 }
 
+// ---------- Helpers ----------
+function formatPrice(n) {
+  if (n === null || n === undefined) return '';
+  return Number(n).toLocaleString('es-AR');
+}
+
 // ---------- Card HTML ----------
 function cardHTML(product) {
-  const { id, cat, name, desc, price, emoji, badge, images } = product;
+  const { id, cat, name, desc, price, emoji, badge, images, stock } = product;
   const isFav      = favorites.has(id);
   const firstImage = images && images.length > 0 ? images[0] : null;
 
@@ -48,14 +55,32 @@ function cardHTML(product) {
     ? `<img src="${firstImage}" alt="${name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">`
     : `<span>${emoji}</span>`;
 
-  const isConsultar = price === 'Consultar';
+  // ---- Stock label ----
+  let stockLabel = '';
+  let outOfStock = false;
+  if (stock === 0) {
+    stockLabel = '<span class="stock-label stock-out">Sin stock</span>';
+    outOfStock = true;
+  } else if (stock > 0 && stock <= 3) {
+    stockLabel = `<span class="stock-label stock-low">¡Solo quedan ${stock}!</span>`;
+  }
+
+  // ---- Precio ----
+  const isConsultar = price === null || price === undefined || price === 'Consultar';
   const priceHTML   = isConsultar
     ? `<span class="cprice cprice-consultar">Consultar precio</span>`
-    : `<span class="cprice"><sup>$</sup>${price}</span>`;
-  const actionHTML  = `<button class="bconsultar" onclick="event.stopPropagation(); openModal(${id})">Ver producto</button>`;
+    : `<span class="cprice"><sup>$</sup>${formatPrice(price)}</span>`;
+
+  // ---- Botón ----
+  const actionHTML = outOfStock
+    ? `<button class="bconsultar bconsultar-disabled" disabled>Sin stock</button>`
+    : `<button class="bconsultar" onclick="event.stopPropagation(); openModal(${id})">Ver producto</button>`;
+
+  const cardClass = outOfStock ? 'pcard pcard-out' : 'pcard';
+  const onClick   = outOfStock ? '' : `onclick="openModal(${id})"`;
 
   return `
-    <div class="pcard" onclick="openModal(${id})" style="cursor:pointer">
+    <div class="${cardClass}" ${onClick} style="cursor:${outOfStock ? 'default' : 'pointer'}">
       <div class="cimg">
         <div class="cimg-inner">${mediaHTML}</div>
         ${badgeHTML}
@@ -64,7 +89,8 @@ function cardHTML(product) {
       <div class="cbody">
         <span class="ccat">${CAT_LABELS[cat] || cat}</span>
         <h3 class="cname">${name}</h3>
-        <p class="cdesc">${desc}</p>
+        <p class="cdesc">${desc || ''}</p>
+        ${stockLabel}
         <div class="cfoot">
           ${priceHTML}
           ${actionHTML}
@@ -74,6 +100,7 @@ function cardHTML(product) {
 }
 
 // ---------- Estado ----------
+let PRODUCTS      = [];        // se carga async desde Supabase
 let currentCat    = '';
 let currentSubcat = '';
 let searchQuery   = '';
@@ -82,19 +109,12 @@ let currentSort   = 'default';
 // ---------- Ordenar ----------
 function sortProducts(products) {
   const arr = [...products];
+  // Ahora los precios son números (integer) en lugar de strings
   if (currentSort === 'price-asc') {
-    return arr.sort((a, b) => {
-      const pa = parseFloat(a.price.replace(/\./g, '')) || Infinity;
-      const pb = parseFloat(b.price.replace(/\./g, '')) || Infinity;
-      return pa - pb;
-    });
+    return arr.sort((a, b) => (a.price ?? Infinity) - (b.price ?? Infinity));
   }
   if (currentSort === 'price-desc') {
-    return arr.sort((a, b) => {
-      const pa = parseFloat(a.price.replace(/\./g, '')) || 0;
-      const pb = parseFloat(b.price.replace(/\./g, '')) || 0;
-      return pb - pa;
-    });
+    return arr.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
   }
   if (currentSort === 'alpha-asc') {
     return arr.sort((a, b) => a.name.localeCompare(b.name, 'es'));
@@ -127,14 +147,36 @@ function applySort(val) {
   applyGridFilters();
 }
 
+// ---------- Loading state ----------
+function renderLoading() {
+  const grid = document.getElementById('productsGrid');
+  if (!grid) return;
+  grid.innerHTML = `
+    <div class="grid-loading" style="grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem;gap:1rem;">
+      <div class="spinner"></div>
+      <p style="color:var(--text-soft, #8a7060);font-size:13px;">Cargando productos...</p>
+    </div>`;
+}
+
 // ---------- Render grilla ----------
-function renderGrid(cat) {
+async function renderGrid(cat) {
   currentCat    = cat;
   currentSubcat = '';
   currentSort   = 'default';
+
+  renderLoading();
+
+  // Cargar productos de Supabase según la categoría
+  try {
+    PRODUCTS = await window.ProductsAPI.getByCategory(cat);
+    console.log(`✓ ${PRODUCTS.length} productos en categoría "${cat}"`);
+  } catch (e) {
+    console.error('Error cargando productos:', e);
+    PRODUCTS = [];
+  }
+
+  injectSortSelect();
   applyGridFilters();
-  document.addEventListener('DOMContentLoaded', injectSortSelect);
-  if (document.readyState !== 'loading') injectSortSelect();
 }
 
 function filterSubcat(subcat, btn) {
@@ -149,11 +191,12 @@ function filterSubcat(subcat, btn) {
 const COMING_SOON_CATS = [];
 
 function applyGridFilters() {
-  const q      = searchQuery.trim().toLowerCase();
-  const grid   = document.getElementById('productsGrid');
-  const count  = document.getElementById('gridCount');
+  const q     = searchQuery.trim().toLowerCase();
+  const grid  = document.getElementById('productsGrid');
+  const count = document.getElementById('gridCount');
+  if (!grid) return;
 
-  // Si la categoría está en modo próximamente, mostrar mensaje especial
+  // Si la categoría está en modo próximamente
   if (COMING_SOON_CATS.includes(currentCat)) {
     if (count) count.textContent = '';
     grid.innerHTML = `
@@ -169,13 +212,13 @@ function applyGridFilters() {
   }
 
   const filtered = PRODUCTS.filter(p => {
-    const matchCat    = !currentCat || p.cat === currentCat;
+    // currentCat ya fue aplicado en la query de Supabase, pero filtramos por si acaso
     const matchSubcat = !currentSubcat || p.subcat === currentSubcat;
     const matchQuery  = !q ||
       p.name.toLowerCase().includes(q) ||
-      p.desc.toLowerCase().includes(q) ||
+      (p.desc || '').toLowerCase().includes(q) ||
       (CAT_LABELS[p.cat] || '').toLowerCase().includes(q);
-    return matchCat && matchSubcat && matchQuery && !p.hidden;
+    return matchSubcat && matchQuery && !p.hidden;
   });
 
   if (count) {
@@ -222,3 +265,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// Expuesto globalmente para refrescar después de un checkout
+window.refreshProducts = async function() {
+  if (!currentCat) return;
+  try {
+    PRODUCTS = await window.ProductsAPI.getByCategory(currentCat);
+    applyGridFilters();
+  } catch (e) {
+    console.error('Error refrescando productos:', e);
+  }
+};
