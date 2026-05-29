@@ -177,6 +177,13 @@ async function renderGrid(cat) {
 
   injectSortSelect();
   applyGridFilters();
+
+  // Auto-abrir modal si hay ?product=ID en la URL (viene del admin → "Ver en sitio")
+  const urlParams = new URLSearchParams(window.location.search);
+  const productIdToOpen = urlParams.get('product');
+  if (productIdToOpen && typeof openModal === 'function') {
+    setTimeout(() => openModal(parseInt(productIdToOpen, 10)), 200);
+  }
 }
 
 function filterSubcat(subcat, btn) {

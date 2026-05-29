@@ -107,35 +107,207 @@
        DASHBOARD
        ============================================================ */
     #dashboard { display: none; min-height: 100vh; }
-    #dashboard.show { display: block; }
+    #dashboard.show { display: flex; }
 
+    /* ============================================================
+       SIDEBAR
+       ============================================================ */
+    .sidebar {
+      width: 220px;
+      background: #fff;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      z-index: 60;
+      transition: transform 0.3s;
+    }
+
+    .sidebar-brand {
+      padding: 1.4rem 1.2rem 1.2rem;
+      display: flex; align-items: center; gap: 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-brand-icon { font-size: 24px; }
+    .sidebar-brand h1 {
+      font-size: 1.2rem;
+      color: var(--terra-dk);
+      line-height: 1.1;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .sidebar-brand p {
+      font-size: 9px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-soft);
+      margin-top: 2px;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 1rem 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      overflow-y: auto;
+    }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: var(--text-soft);
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+      transition: all 0.15s;
+    }
+    .nav-item:hover {
+      background: var(--cream2);
+      color: var(--text);
+    }
+    .nav-item.active {
+      background: var(--terra-dk);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(122, 80, 48, 0.20);
+    }
+    .nav-item-icon {
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+    }
+    .nav-item-badge {
+      margin-left: auto;
+      background: var(--warn);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+      min-width: 20px;
+      text-align: center;
+    }
+    .nav-item.active .nav-item-badge {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .sidebar-footer {
+      padding: 0.7rem;
+      border-top: 1px solid var(--border);
+    }
+    .nav-item-logout {
+      color: var(--warn);
+    }
+    .nav-item-logout:hover {
+      background: var(--warn-bg);
+      color: var(--warn);
+    }
+
+    /* ============================================================
+       TOPBAR (sólo botón "Ir al sitio")
+       ============================================================ */
     .topbar {
-      background: #fff; border-bottom: 1px solid var(--border);
-      padding: 1rem 1.5rem; position: sticky; top: 0; z-index: 50;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 0.8rem 1.5rem;
+      position: sticky;
+      top: 0; z-index: 50;
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     }
-    .topbar-brand { display: flex; align-items: center; gap: 0.7rem; min-width: 0; }
-    .topbar-brand-icon { font-size: 22px; }
-    .topbar-brand h1 { font-size: 1.2rem; color: var(--terra-dk); line-height: 1.1; }
-    .topbar-brand p {
-      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--text-soft);
+
+    .topbar-mobile {
+      display: none;
+      align-items: center;
+      gap: 0.6rem;
     }
-    .topbar-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+    .hamburger-btn {
+      display: none;
+      width: 36px; height: 36px;
+      background: transparent;
+      border: 1.5px solid var(--cream3);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      align-items: center; justify-content: center;
+    }
+
+    .topbar-mobile-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--terra-dk);
+      font-weight: 600;
+    }
+
+    .topbar-actions {
+      display: flex; align-items: center; gap: 0.7rem;
+      margin-left: auto;
+    }
     .user-chip {
       background: var(--cream2); padding: 6px 12px; border-radius: 16px;
       font-size: 12px; color: var(--text-soft);
-      max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
-    .btn-logout {
-      background: transparent; border: 1.5px solid var(--cream3);
-      color: var(--text-soft); padding: 7px 14px; border-radius: 16px;
-      cursor: pointer; font-size: 12px; font-weight: 500;
-      transition: border-color 0.2s, color 0.2s; font-family: inherit;
+    .btn-go-site {
+      background: var(--terra-dk);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
     }
-    .btn-logout:hover { border-color: var(--terra); color: var(--terra-dk); }
+    .btn-go-site:hover {
+      background: var(--terra);
+      transform: translateY(-1px);
+    }
 
-    .main { max-width: 1240px; margin: 0 auto; padding: 1.5rem; }
+    /* ============================================================
+       CONTENT AREA
+       ============================================================ */
+    .content-area {
+      flex: 1;
+      margin-left: 220px;
+      min-height: 100vh;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main { max-width: 1240px; margin: 0 auto; padding: 1.5rem; width: 100%; }
+
+    /* Vistas (se muestran/ocultan según la nav) */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* Overlay para sidebar mobile */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(58, 42, 26, 0.55);
+      backdrop-filter: blur(4px);
+      z-index: 59;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .sidebar-overlay.show {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
 
     /* Header */
     .main-header {
@@ -210,7 +382,7 @@
     }
     .table-header {
       display: grid;
-      grid-template-columns: 60px 2fr 1fr 130px 130px 90px 70px;
+      grid-template-columns: 40px 60px 2fr 1fr 130px 130px 90px 70px;
       gap: 1rem; padding: 14px 1.2rem; background: var(--cream2);
       font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
       color: var(--text-soft); font-weight: 600;
@@ -218,7 +390,7 @@
     }
     .product-row {
       display: grid;
-      grid-template-columns: 60px 2fr 1fr 130px 130px 90px 70px;
+      grid-template-columns: 40px 60px 2fr 1fr 130px 130px 90px 70px;
       gap: 1rem; padding: 14px 1.2rem;
       border-bottom: 1px solid var(--border);
       align-items: center; transition: background 0.15s;
@@ -229,6 +401,8 @@
     .product-row.saving { background: var(--info-bg); }
     .product-row.row-hidden { opacity: 0.6; background: rgba(0,0,0,0.015); }
     .product-row.row-hidden:hover { opacity: 0.9; }
+    .product-row.row-selected { background: rgba(212, 168, 112, 0.12); }
+    .product-row.row-selected:hover { background: rgba(212, 168, 112, 0.18); }
 
     .product-row .stock-control,
     .product-row .visibility-toggle,
@@ -349,6 +523,174 @@
     }
     .mini-badge-new   { background: rgba(74, 117, 48, 0.15); color: var(--success); }
     .mini-badge-promo { background: rgba(208, 100, 60, 0.15); color: #b04020; }
+
+    /* ============================================================
+       SKELETON SCREENS (loading state)
+       ============================================================ */
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg,
+        var(--cream2) 0%,
+        var(--cream3) 50%,
+        var(--cream2) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 6px;
+    }
+    .skeleton-row {
+      display: grid;
+      grid-template-columns: 40px 60px 2fr 1fr 130px 130px 90px 70px;
+      gap: 1rem; padding: 14px 1.2rem;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    .skeleton-checkbox { width: 18px; height: 18px; }
+    .skeleton-thumb { width: 48px; height: 48px; border-radius: 8px; }
+    .skeleton-line { height: 12px; }
+    .skeleton-line-short { width: 60%; }
+    .skeleton-line-meta { width: 40%; height: 10px; margin-top: 4px; }
+    .skeleton-pill { height: 22px; width: 80px; border-radius: 10px; }
+
+    @media (max-width: 800px) {
+      .skeleton-row {
+        grid-template-columns: 40px 60px 1fr;
+        gap: 6px 12px;
+      }
+      .skeleton-row > div:nth-child(n+4) { display: none; }
+    }
+
+    /* ============================================================
+       CHECKBOXES + BULK ACTIONS
+       ============================================================ */
+    .row-checkbox {
+      width: 18px; height: 18px;
+      cursor: pointer;
+      accent-color: var(--terra-dk);
+      border-radius: 4px;
+    }
+    .header-checkbox {
+      width: 18px; height: 18px;
+      cursor: pointer;
+      accent-color: var(--terra-dk);
+    }
+
+    /* Bulk actions bar (flotante abajo) */
+    .bulk-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: var(--text);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 14px;
+      box-shadow: 0 12px 40px rgba(58, 42, 26, 0.35);
+      display: flex; align-items: center; gap: 0.8rem;
+      z-index: 80;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+      max-width: calc(100vw - 32px);
+      flex-wrap: wrap;
+    }
+    .bulk-bar.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .bulk-bar-count {
+      background: var(--terra);
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 12px; font-weight: 600;
+      white-space: nowrap;
+    }
+    .bulk-bar-actions {
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .bulk-btn {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 7px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px; font-weight: 500;
+      font-family: inherit;
+      display: inline-flex; align-items: center; gap: 4px;
+      transition: background 0.15s;
+    }
+    .bulk-btn:hover { background: rgba(255,255,255,0.22); }
+    .bulk-btn-danger:hover { background: rgba(220, 80, 80, 0.4); }
+    .bulk-btn-close {
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 4px 8px;
+      transition: color 0.15s;
+    }
+    .bulk-btn-close:hover { color: #fff; }
+
+    @media (max-width: 600px) {
+      .bulk-bar { font-size: 11px; padding: 8px 12px; }
+      .bulk-btn { padding: 6px 9px; font-size: 11px; }
+    }
+
+    /* ============================================================
+       MODAL DE STOCK MASIVO
+       ============================================================ */
+    .stock-input-wrap {
+      margin-top: 1.4rem;
+      text-align: left;
+    }
+    .stock-input-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .stock-input-big {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid var(--cream3);
+      border-radius: 12px;
+      background: var(--cream);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--terra-dk);
+      font-family: 'Cormorant Garamond', serif;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -moz-appearance: textfield;
+    }
+    .stock-input-big::-webkit-outer-spin-button,
+    .stock-input-big::-webkit-inner-spin-button {
+      -webkit-appearance: none; margin: 0;
+    }
+    .stock-input-big:focus {
+      border-color: var(--terra-lt);
+      box-shadow: 0 0 0 4px rgba(212, 168, 112, 0.18);
+      background: #fff;
+    }
+    .stock-preview {
+      margin-top: 0.8rem;
+      padding: 10px 14px;
+      background: var(--info-bg);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--info);
+      text-align: center;
+      line-height: 1.5;
+    }
 
     /* TOAST */
     .toast {
@@ -561,6 +903,31 @@
       color: var(--text-soft); font-size: 12px;
     }
 
+    /* Aviso en modo "crear producto" (las imágenes se suben después) */
+    .img-create-notice {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, #fff8eb 0%, #fdf2dc 100%);
+      border: 1.5px solid #e8d5a8;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(212, 168, 112, 0.12);
+    }
+    .img-create-notice-icon {
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+    .img-create-notice-text {
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .img-create-notice-text strong {
+      font-size: 13px; color: var(--text);
+      font-weight: 600;
+    }
+    .img-create-notice-text span {
+      font-size: 12px; color: var(--text-soft);
+      line-height: 1.4;
+    }
+
     /* Chips */
     .chips {
       display: flex; flex-wrap: wrap; gap: 6px;
@@ -753,11 +1120,24 @@
        RESPONSIVE
        ============================================================ */
     @media (max-width: 800px) {
-      .main { padding: 1rem; }
-      .topbar { padding: 0.8rem 1rem; }
-      .topbar-brand h1 { font-size: 1.05rem; }
+      /* Sidebar: oculto por default en mobile, se abre con hamburguesa */
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      }
+
+      .content-area { margin-left: 0; }
+
+      .topbar-mobile { display: flex; }
+      .hamburger-btn { display: flex; }
+
+      /* User chip: ocultar en mobile, queda solo en el sidebar */
       .user-chip { display: none; }
 
+      .main { padding: 1rem; }
       .main-header { flex-direction: column; align-items: stretch; gap: 0.7rem; }
       .btn-create { justify-content: center; }
 
@@ -771,15 +1151,16 @@
       .table-header { display: none; }
       .product-row {
         display: grid;
-        grid-template-columns: 60px 1fr auto;
+        grid-template-columns: 40px 60px 1fr auto;
         grid-template-areas:
-          "thumb name actions"
-          "thumb meta meta"
-          "thumb controls controls";
+          "check thumb name actions"
+          "check thumb meta meta"
+          "check thumb controls controls";
         gap: 6px 12px;
         padding: 14px 1rem;
         align-items: start;
       }
+      .product-row .col-checkbox { grid-area: check; padding-top: 14px; }
       .product-row .col-thumb { grid-area: thumb; }
       .product-row .col-name { grid-area: name; }
       .product-row .col-cat { grid-area: meta; }
@@ -806,6 +1187,237 @@
     @media (min-width: 801px) {
       .col-controls { display: contents; }
       .mobile-price { display: none !important; }
+    }
+
+    /* ============================================================
+       VENTAS / PEDIDOS
+       ============================================================ */
+    .order-row {
+      display: grid;
+      grid-template-columns: 100px 1.5fr 1fr 110px 120px 60px;
+      gap: 1rem; padding: 14px 1.2rem;
+      border-bottom: 1px solid var(--border);
+      align-items: center; transition: background 0.15s;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .order-row:hover { background: var(--cream); }
+    .order-row:last-child { border-bottom: none; }
+
+    .order-date {
+      color: var(--text-soft);
+      font-size: 11px;
+      line-height: 1.3;
+    }
+    .order-date-day {
+      color: var(--text);
+      font-weight: 600;
+      font-size: 12px;
+      display: block;
+    }
+    .order-customer {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .order-customer-name {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 13px;
+    }
+    .order-customer-phone {
+      color: var(--text-soft);
+      font-size: 11px;
+    }
+    .order-items-preview {
+      color: var(--text-soft);
+      font-size: 11px;
+      line-height: 1.3;
+    }
+    .order-total {
+      font-weight: 600;
+      color: var(--terra-dk);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+    }
+    .order-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .order-status-pending {
+      background: rgba(218, 165, 32, 0.15);
+      color: #8a6500;
+    }
+    .order-status-confirmed {
+      background: rgba(74, 117, 48, 0.15);
+      color: var(--success);
+    }
+    .order-status-cancelled {
+      background: rgba(160, 64, 64, 0.12);
+      color: var(--warn);
+    }
+
+    @media (max-width: 800px) {
+      .order-row {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "customer total"
+          "items items"
+          "date status";
+        gap: 6px 12px;
+        padding: 14px 1rem;
+      }
+      .order-row > div:nth-child(1) { grid-area: date; }
+      .order-row > div:nth-child(2) { grid-area: customer; }
+      .order-row > div:nth-child(3) { grid-area: items; }
+      .order-row > div:nth-child(4) { grid-area: total; text-align: right; }
+      .order-row > div:nth-child(5) { grid-area: status; justify-self: end; }
+      .order-row > div:nth-child(6) { display: none; }
+    }
+
+    /* Modal de detalle del pedido */
+    .order-detail-section {
+      margin-bottom: 1.4rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .order-detail-section:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .order-detail-title {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .order-detail-row {
+      display: flex; gap: 10px;
+      font-size: 13px;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .order-detail-row strong {
+      font-weight: 500;
+      color: var(--text-soft);
+      min-width: 90px;
+    }
+    .order-items-list {
+      background: var(--cream);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .order-item-line {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      padding: 6px 0;
+      font-size: 13px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .order-item-line:last-child { border-bottom: none; }
+    .order-item-line-subtotal {
+      font-weight: 600;
+      color: var(--terra-dk);
+      white-space: nowrap;
+    }
+    .order-detail-total {
+      display: flex; justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 2px solid var(--border);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--terra-dk);
+    }
+
+    .order-status-actions {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-top: 0.8rem;
+    }
+    .btn-status {
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      border: 1.5px solid;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-status-confirm {
+      background: var(--success-bg);
+      border-color: var(--success);
+      color: var(--success);
+    }
+    .btn-status-confirm:hover { background: var(--success); color: #fff; }
+    .btn-status-cancel {
+      background: var(--warn-bg);
+      border-color: var(--warn);
+      color: var(--warn);
+    }
+    .btn-status-cancel:hover { background: var(--warn); color: #fff; }
+    .btn-status-revert {
+      background: var(--cream2);
+      border-color: var(--cream3);
+      color: var(--text-soft);
+    }
+    .btn-status-revert:hover {
+      background: var(--cream3);
+      color: var(--text);
+    }
+
+    .skeleton-order-row {
+      display: grid;
+      grid-template-columns: 100px 1.5fr 1fr 110px 120px 60px;
+      gap: 1rem; padding: 14px 1.2rem;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    @media (max-width: 800px) {
+      .skeleton-order-row { grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+      .skeleton-order-row > div:nth-child(n+3) { display: none; }
+    }
+
+    /* Rango personalizado de fechas */
+    .date-range-row {
+      display: flex;
+      gap: 0.7rem;
+      align-items: end;
+      margin-top: 0.7rem;
+      padding: 0.8rem;
+      background: var(--cream2);
+      border-radius: 10px;
+      flex-wrap: wrap;
+    }
+    .date-range-label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+    .date-range-label input[type="date"] {
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text);
+    }
+    @media (max-width: 600px) {
+      .date-range-row { flex-direction: column; align-items: stretch; }
+      .date-range-label { width: 100%; }
     }
   </style>
 </head>
@@ -836,21 +1448,64 @@
 
   <!-- DASHBOARD -->
   <div id="dashboard">
-    <header class="topbar">
-      <div class="topbar-brand">
-        <span class="topbar-brand-icon">🌿</span>
-        <div class="topbar-brand-text">
+
+    <!-- Overlay mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <span class="sidebar-brand-icon">🌿</span>
+        <div>
           <h1>María del Mar</h1>
           <p>Admin</p>
         </div>
       </div>
-      <div class="topbar-actions">
-        <span class="user-chip" id="userChip">cargando...</span>
-        <button class="btn-logout" onclick="doLogout()">Salir</button>
-      </div>
-    </header>
 
-    <main class="main">
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="products" onclick="switchView('products')">
+          <span class="nav-item-icon">📦</span>
+          <span>Productos</span>
+        </button>
+        <button class="nav-item" data-view="orders" onclick="switchView('orders')">
+          <span class="nav-item-icon">💰</span>
+          <span>Ventas</span>
+          <span class="nav-item-badge" id="navOrdersBadge" style="display:none">0</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="nav-item nav-item-logout" onclick="doLogout()">
+          <span class="nav-item-icon">🚪</span>
+          <span>Salir</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- CONTENT AREA -->
+    <div class="content-area">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar-mobile">
+          <button class="hamburger-btn" onclick="openSidebar()" aria-label="Abrir menú">☰</button>
+          <span class="topbar-mobile-title" id="topbarMobileTitle">Productos</span>
+        </div>
+
+        <div class="topbar-actions">
+          <span class="user-chip" id="userChip">cargando...</span>
+          <a href="index.html" target="_blank" class="btn-go-site" title="Ver el sitio en una nueva pestaña">
+            🔗 Ir al sitio
+          </a>
+        </div>
+      </header>
+
+      <main class="main">
+
+      <!-- ============================================================
+           VIEW: PRODUCTOS
+           ============================================================ -->
+      <section class="view active" id="view-products">
 
       <div class="main-header">
         <div>
@@ -894,7 +1549,8 @@
           <option value="infantil">Línea Infantil</option>
         </select>
         <select class="filter-select" id="sortSelect">
-          <option value="id-asc">Orden de creación</option>
+          <option value="id-desc">Más recientes primero</option>
+          <option value="id-asc">Más antiguos primero</option>
           <option value="name-asc">Nombre: A → Z</option>
           <option value="name-desc">Nombre: Z → A</option>
           <option value="price-asc">Precio: menor a mayor</option>
@@ -912,6 +1568,7 @@
 
       <div class="products-wrap">
         <div class="table-header">
+          <div><input type="checkbox" class="header-checkbox" id="headerCheckbox" onclick="toggleAllSelection()" title="Seleccionar todos"></div>
           <div></div>
           <div>Producto</div>
           <div>Categoría</div>
@@ -928,7 +1585,103 @@
         </div>
       </div>
 
+      </section>
+      <!-- /VIEW: PRODUCTOS -->
+
+      <!-- ============================================================
+           VIEW: VENTAS
+           ============================================================ -->
+      <section class="view" id="view-orders">
+
+      <div class="main-header">
+        <div>
+          <h2 style="font-size:1.5rem;color:var(--terra-dk);">Ventas</h2>
+          <p style="font-size:12px;color:var(--text-soft);margin-top:4px;">
+            Gestioná los pedidos que llegaron desde el sitio.
+          </p>
+        </div>
+      </div>
+
+      <!-- Stats de ventas -->
+      <div class="stats" id="ordersStats">
+        <div class="stat-card">
+          <div class="stat-label">Total pedidos</div>
+          <div class="stat-value" id="statOrdersTotal">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">🟡 Pendientes</div>
+          <div class="stat-value" id="statOrdersPending">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">🟢 Confirmados</div>
+          <div class="stat-value" id="statOrdersConfirmed">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">💰 Total facturado</div>
+          <div class="stat-value" id="statOrdersRevenue" style="font-size:1.4rem;">—</div>
+        </div>
+      </div>
+
+      <!-- Filtros de pedidos -->
+      <div class="filters" style="margin-top: 1rem;">
+        <div class="search-box-wrap" style="flex: 1; min-width: 200px;">
+          <input type="text" id="orderSearchInput" class="search-input" placeholder="Buscar por cliente o teléfono..." autocomplete="off">
+        </div>
+        <select class="filter-select" id="orderStatusFilter">
+          <option value="">Todos los estados</option>
+          <option value="pending">🟡 Pendientes</option>
+          <option value="confirmed">🟢 Confirmados</option>
+          <option value="cancelled">🔴 Cancelados</option>
+        </select>
+        <select class="filter-select" id="orderDateFilter">
+          <option value="">Cualquier fecha</option>
+          <option value="today">Hoy</option>
+          <option value="yesterday">Ayer</option>
+          <option value="week">Última semana</option>
+          <option value="month">Último mes</option>
+          <option value="custom">Rango personalizado…</option>
+        </select>
+      </div>
+
+      <!-- Rango personalizado de fechas (oculto por default) -->
+      <div class="date-range-row" id="dateRangeRow" style="display:none;">
+        <label class="date-range-label">
+          <span>Desde</span>
+          <input type="date" id="orderDateFrom" class="filter-select">
+        </label>
+        <label class="date-range-label">
+          <span>Hasta</span>
+          <input type="date" id="orderDateTo" class="filter-select">
+        </label>
+        <button class="bulk-btn" onclick="clearDateRange()" style="background:var(--cream2);color:var(--text-soft);border-color:var(--cream3);">
+          ✕ Limpiar fechas
+        </button>
+      </div>
+
+      <!-- Tabla de pedidos -->
+      <div class="products-wrap" style="margin-top: 1rem;">
+        <div class="table-header" style="grid-template-columns: 100px 1.5fr 1fr 110px 120px 60px;">
+          <div>Fecha</div>
+          <div>Cliente</div>
+          <div>Items</div>
+          <div>Total</div>
+          <div>Estado</div>
+          <div></div>
+        </div>
+        <div id="ordersList">
+          <div class="loading-row">
+            <div class="spinner"></div>
+            Cargando pedidos...
+          </div>
+        </div>
+      </div>
+
+      </section>
+      <!-- /VIEW: VENTAS -->
+
     </main>
+    </div>
+    <!-- /content-area -->
   </div>
 
   <!-- MODAL DE EDICIÓN -->
@@ -972,11 +1725,73 @@
     </div>
   </div>
 
+  <!-- MODAL DE CAMBIO DE STOCK MASIVO -->
+  <div class="confirm-modal" id="bulkStockModal" onclick="closeBulkStockModal()">
+    <div class="confirm-card" style="max-width: 460px;" onclick="event.stopPropagation()">
+      <div class="confirm-icon">📦</div>
+      <h3 class="confirm-title">Cambiar stock</h3>
+      <p class="confirm-text" id="bulkStockSubtitle">¿Qué stock querés establecer para los productos seleccionados?</p>
+
+      <div class="stock-input-wrap">
+        <label for="bulkStockValue" class="stock-input-label">Nuevo stock</label>
+        <input type="number" id="bulkStockValue" class="stock-input-big" placeholder="0" min="0" autocomplete="off"
+               onkeydown="if(event.key==='Enter'){event.preventDefault();confirmBulkStock();}">
+      </div>
+
+      <div class="stock-preview" id="bulkStockPreview" style="display:none"></div>
+
+      <div class="confirm-actions" style="margin-top: 1.4rem;">
+        <button class="btn-cancel" onclick="closeBulkStockModal()">Cancelar</button>
+        <button class="btn-save" onclick="confirmBulkStock()">
+          ✅ Aplicar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DETALLE DEL PEDIDO -->
+  <div class="modal-overlay" id="orderModalOverlay" onclick="closeOrderModal()"></div>
+  <div class="modal" id="orderModal">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <h2 id="orderModalTitle" style="font-size:1.4rem;color:var(--terra-dk);">Pedido #—</h2>
+          <p id="orderModalSubtitle" style="font-size:11px;color:var(--text-soft);margin-top:3px;">—</p>
+        </div>
+        <button class="modal-close" onclick="closeOrderModal()">✕</button>
+      </div>
+      <div class="modal-body" id="orderModalBody">
+        <!-- Se rellena dinámicamente -->
+      </div>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div class="toast" id="toast"></div>
 
+  <!-- Bulk actions bar -->
+  <div class="bulk-bar" id="bulkBar">
+    <span class="bulk-bar-count" id="bulkBarCount">0 seleccionados</span>
+    <div class="bulk-bar-actions">
+      <button class="bulk-btn" onclick="bulkToggleHidden(false)" title="Hacer visibles">
+        👁️ Mostrar
+      </button>
+      <button class="bulk-btn" onclick="bulkToggleHidden(true)" title="Ocultar del público">
+        🙈 Ocultar
+      </button>
+      <button class="bulk-btn" onclick="bulkChangeStock()" title="Cambiar stock">
+        📦 Stock
+      </button>
+      <button class="bulk-btn bulk-btn-danger" onclick="bulkDelete()" title="Eliminar seleccionados">
+        🗑️ Eliminar
+      </button>
+    </div>
+    <button class="bulk-btn-close" onclick="clearSelection()" title="Cancelar selección">✕</button>
+  </div>
+
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
   <script src="js/config.js"></script>
   <script src="js/supabase-client.js"></script>
 
@@ -988,10 +1803,13 @@
     let filters = {
       search: '',
       cat: '',
-      sort: 'id-asc',
+      sort: 'id-desc',  // por defecto: más nuevos arriba
       onlyVisible: false,   // por defecto se muestran TODOS
       lowStock: false,
     };
+
+    // Estado de selección masiva
+    const selectedIds = new Set();
 
     let editingProduct = null;
     let editingMode    = 'edit';
@@ -1073,7 +1891,22 @@
     // ============================================================
     async function loadProducts() {
       const listEl = document.getElementById('productsList');
-      listEl.innerHTML = `<div class="loading-row"><div class="spinner"></div>Cargando productos...</div>`;
+      // Skeleton screens en lugar del spinner
+      listEl.innerHTML = Array(8).fill(0).map(() => `
+        <div class="skeleton-row">
+          <div class="skeleton skeleton-checkbox"></div>
+          <div class="skeleton skeleton-thumb"></div>
+          <div>
+            <div class="skeleton skeleton-line skeleton-line-short"></div>
+            <div class="skeleton skeleton-line skeleton-line-meta"></div>
+          </div>
+          <div><div class="skeleton skeleton-pill"></div></div>
+          <div><div class="skeleton skeleton-line" style="width:60px"></div></div>
+          <div><div class="skeleton skeleton-line" style="width:80px"></div></div>
+          <div><div class="skeleton skeleton-pill" style="width:70px"></div></div>
+          <div><div class="skeleton" style="width:30px;height:30px;border-radius:8px"></div></div>
+        </div>
+      `).join('');
 
       const { data, error } = await window.sb
         .from('products')
@@ -1120,10 +1953,11 @@
       }
 
       // Ordenamiento
-      const sort = filters.sort || 'id-asc';
+      const sort = filters.sort || 'id-desc';
       list.sort((a, b) => {
         switch (sort) {
           case 'id-asc':     return a.id - b.id;
+          case 'id-desc':    return b.id - a.id;
           case 'name-asc':   return (a.name || '').localeCompare(b.name || '', 'es');
           case 'name-desc':  return (b.name || '').localeCompare(a.name || '', 'es');
           case 'price-asc':  return (a.price || 0) - (b.price || 0);
@@ -1142,9 +1976,11 @@
       const list   = applyFilters();
       if (list.length === 0) {
         listEl.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔍</div><p>No hay productos con esos filtros.</p></div>`;
+        updateHeaderCheckbox();
         return;
       }
       listEl.innerHTML = list.map(p => productRowHTML(p)).join('');
+      updateHeaderCheckbox();
     }
 
     function productRowHTML(p) {
@@ -1168,6 +2004,8 @@
       const subcat   = p.subcat ? ` › ${p.subcat}` : '';
       const priceFormatted = `$${Number(p.price).toLocaleString('es-AR')}`;
 
+      const isSelected = selectedIds.has(p.id);
+
       const stockControlHTML = `
         <div class="stock-control" data-id="${p.id}" onclick="event.stopPropagation()">
           <button class="stock-btn" onclick="changeStock(${p.id}, -1)" ${p.stock === 0 ? 'disabled' : ''}>−</button>
@@ -1190,8 +2028,18 @@
           ${priceFormatted}
         </span>`;
 
+      // URL para "Ver en sitio": navega a la categoría correcta y abre el modal del producto
+      const catUrlMap = {
+        cama: 'ropa-de-cama.html', bano: 'bano.html', cocina: 'cocina.html',
+        deco: 'deco.html', infantil: 'linea-infantil.html'
+      };
+      const viewUrl = `${catUrlMap[p.cat] || 'index.html'}?product=${p.id}`;
+
       return `
-        <div class="product-row ${p.hidden ? 'row-hidden' : ''}" data-id="${p.id}" onclick="openEditModal(${p.id})">
+        <div class="product-row ${p.hidden ? 'row-hidden' : ''} ${isSelected ? 'row-selected' : ''}" data-id="${p.id}" onclick="openEditModal(${p.id})">
+          <div class="col-checkbox" onclick="event.stopPropagation()">
+            <input type="checkbox" class="row-checkbox" data-id="${p.id}" ${isSelected ? 'checked' : ''} onclick="toggleSelection(${p.id})">
+          </div>
           <div class="col-thumb product-thumb">${thumbHTML}</div>
 
           <div class="col-name">
@@ -1205,6 +2053,7 @@
           <div class="col-stock">${stockControlHTML}</div>
           <div class="col-status">${visibilityToggleHTML}</div>
           <div class="col-actions row-actions" onclick="event.stopPropagation()">
+            <a href="${viewUrl}" target="_blank" class="btn-icon" title="Ver en el sitio" style="text-decoration:none;color:inherit;display:flex;align-items:center;justify-content:center;">🔗</a>
             <button class="btn-icon" title="Editar" onclick="openEditModal(${p.id})">✏️</button>
           </div>
         </div>`;
@@ -1217,6 +2066,253 @@
     function escapeAttr(str) {
       if (!str) return '';
       return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+    }
+
+    // ============================================================
+    // SELECCIÓN MASIVA
+    // ============================================================
+    function toggleSelection(productId) {
+      if (selectedIds.has(productId)) {
+        selectedIds.delete(productId);
+      } else {
+        selectedIds.add(productId);
+      }
+      updateBulkBar();
+      // Toggle visual de la row sin re-render completo
+      const row = document.querySelector(`.product-row[data-id="${productId}"]`);
+      if (row) row.classList.toggle('row-selected', selectedIds.has(productId));
+      updateHeaderCheckbox();
+    }
+
+    function toggleAllSelection() {
+      const headerCb = document.getElementById('headerCheckbox');
+      const visibleProducts = applyFilters();
+      const allSelected = visibleProducts.every(p => selectedIds.has(p.id));
+
+      if (allSelected) {
+        // Deseleccionar todos los visibles
+        visibleProducts.forEach(p => selectedIds.delete(p.id));
+      } else {
+        // Seleccionar todos los visibles
+        visibleProducts.forEach(p => selectedIds.add(p.id));
+      }
+      render();
+      updateBulkBar();
+    }
+
+    function updateHeaderCheckbox() {
+      const headerCb = document.getElementById('headerCheckbox');
+      if (!headerCb) return;
+      const visibleProducts = applyFilters();
+      if (visibleProducts.length === 0) {
+        headerCb.checked = false;
+        headerCb.indeterminate = false;
+        return;
+      }
+      const selectedVisible = visibleProducts.filter(p => selectedIds.has(p.id)).length;
+      headerCb.checked = selectedVisible === visibleProducts.length;
+      headerCb.indeterminate = selectedVisible > 0 && selectedVisible < visibleProducts.length;
+    }
+
+    function clearSelection() {
+      selectedIds.clear();
+      updateBulkBar();
+      render();
+    }
+
+    function updateBulkBar() {
+      const bar = document.getElementById('bulkBar');
+      const count = selectedIds.size;
+      if (count === 0) {
+        bar.classList.remove('show');
+      } else {
+        document.getElementById('bulkBarCount').textContent =
+          `${count} ${count === 1 ? 'seleccionado' : 'seleccionados'}`;
+        bar.classList.add('show');
+      }
+    }
+
+    // ---------- Bulk: ocultar/mostrar ----------
+    async function bulkToggleHidden(hidden) {
+      const ids = Array.from(selectedIds);
+      if (ids.length === 0) return;
+
+      const action = hidden ? 'ocultar' : 'mostrar';
+      toast(`⏳ ${hidden ? 'Ocultando' : 'Mostrando'} ${ids.length} producto${ids.length > 1 ? 's' : ''}...`);
+
+      const { error } = await window.sb
+        .from('products')
+        .update({ hidden })
+        .in('id', ids);
+
+      if (error) {
+        toast(`Error: ${error.message}`, 'error');
+        return;
+      }
+
+      // Actualizar estado local
+      ALL_PRODUCTS.forEach(p => {
+        if (selectedIds.has(p.id)) p.hidden = hidden;
+      });
+
+      toast(`✅ ${ids.length} producto${ids.length > 1 ? 's' : ''} ${hidden ? 'ocultado' + (ids.length > 1 ? 's' : '') : 'visible' + (ids.length > 1 ? 's' : '')}`, 'success');
+      clearSelection();
+      updateStats();
+    }
+
+    // ---------- Bulk: cambiar stock (modal custom) ----------
+    function bulkChangeStock() {
+      const ids = Array.from(selectedIds);
+      if (ids.length === 0) return;
+
+      // Reset
+      document.getElementById('bulkStockValue').value = '';
+      document.getElementById('bulkStockPreview').style.display = 'none';
+
+      // Texto contextual
+      document.getElementById('bulkStockSubtitle').textContent =
+        `Vas a establecer el stock de ${ids.length} producto${ids.length > 1 ? 's' : ''}.`;
+
+      // Mostrar modal
+      document.getElementById('bulkStockModal').classList.add('show');
+
+      // Focus en input
+      setTimeout(() => document.getElementById('bulkStockValue').focus(), 100);
+
+      // Actualizar preview en vivo
+      document.getElementById('bulkStockValue').oninput = updateStockPreview;
+    }
+
+    function closeBulkStockModal() {
+      document.getElementById('bulkStockModal').classList.remove('show');
+    }
+
+    function updateStockPreview() {
+      const value = parseInt(document.getElementById('bulkStockValue').value, 10);
+      const preview = document.getElementById('bulkStockPreview');
+
+      if (isNaN(value) || value < 0) {
+        preview.style.display = 'none';
+        return;
+      }
+
+      const count = selectedIds.size;
+      preview.innerHTML = `${count === 1 ? 'El producto seleccionado pasará' : `Los ${count} productos seleccionados pasarán`} a tener stock <strong>${value}</strong>.`;
+      preview.style.display = 'block';
+    }
+
+    async function confirmBulkStock() {
+      const ids = Array.from(selectedIds);
+      if (ids.length === 0) return;
+
+      const value = parseInt(document.getElementById('bulkStockValue').value, 10);
+      if (isNaN(value) || value < 0) {
+        toast('Ingresá un número válido', 'error');
+        return;
+      }
+
+      closeBulkStockModal();
+      toast(`⏳ Actualizando stock...`);
+
+      let failed = 0;
+      for (const id of ids) {
+        const product = ALL_PRODUCTS.find(p => p.id === id);
+        if (!product) { failed++; continue; }
+
+        const { error } = await window.sb
+          .from('products')
+          .update({ stock: value })
+          .eq('id', id);
+
+        if (error) { failed++; continue; }
+        product.stock = value;
+      }
+
+      if (failed === 0) {
+        toast(`✅ Stock actualizado en ${ids.length} producto${ids.length > 1 ? 's' : ''}`, 'success');
+      } else {
+        toast(`⚠️ ${ids.length - failed} OK, ${failed} fallaron`, 'error');
+      }
+      clearSelection();
+      updateStats();
+      render();
+    }
+
+    // ---------- Bulk: eliminar ----------
+    function bulkDelete() {
+      const ids = Array.from(selectedIds);
+      if (ids.length === 0) return;
+
+      // Obtener los productos seleccionados
+      const selectedProducts = ALL_PRODUCTS.filter(p => selectedIds.has(p.id));
+
+      let title, text, btnText;
+
+      if (ids.length === 1) {
+        // 1 solo producto: mostrar nombre completo
+        const productName = selectedProducts[0]?.name || 'este producto';
+        title = `¿Eliminar "${productName}"?`;
+        text = `Esta acción borrará permanentemente el producto y todas sus imágenes asociadas. No se puede deshacer.`;
+        btnText = `Sí, eliminar`;
+      } else {
+        // Múltiples: mostrar conteo + lista breve de nombres
+        const names = selectedProducts.map(p => p.name);
+        const preview = names.length <= 3
+          ? names.join(', ')
+          : `${names.slice(0, 2).join(', ')} y ${names.length - 2} más`;
+        title = `¿Eliminar ${ids.length} productos?`;
+        text = `${preview}.\n\nEsta acción borrará permanentemente ${ids.length} productos y todas sus imágenes asociadas. No se puede deshacer.`;
+        btnText = `Sí, eliminar los ${ids.length}`;
+      }
+
+      showConfirm({
+        icon: '🗑️',
+        title,
+        text,
+        btnText,
+        onConfirm: doBulkDelete
+      });
+    }
+
+    async function doBulkDelete() {
+      const ids = Array.from(selectedIds);
+      const isMultiple = ids.length > 1;
+      toast(`⏳ Eliminando ${isMultiple ? `${ids.length} productos` : 'producto'}...`);
+
+      // Recolectar storage paths para borrar después
+      const allPaths = [];
+      for (const id of ids) {
+        const product = ALL_PRODUCTS.find(p => p.id === id);
+        if (product) {
+          product.imagesData.forEach(img => {
+            if (img.storage_path) allPaths.push(img.storage_path);
+          });
+        }
+      }
+
+      // Borrar productos (cascade en DB borra colores/features/images en tabla)
+      const { error } = await window.sb
+        .from('products')
+        .delete()
+        .in('id', ids);
+
+      if (error) {
+        toast(`Error: ${error.message}`, 'error');
+        return;
+      }
+
+      // Borrar archivos del Storage
+      if (allPaths.length > 0) {
+        const { error: stErr } = await window.sb.storage.from('products').remove(allPaths);
+        if (stErr) console.warn('Algunas imágenes no se pudieron borrar:', stErr.message);
+      }
+
+      // Actualizar estado local
+      ALL_PRODUCTS = ALL_PRODUCTS.filter(p => !selectedIds.has(p.id));
+      clearSelection();
+      updateStats();
+      render();
+      toast(isMultiple ? `✅ ${ids.length} productos eliminados` : `✅ Producto eliminado`, 'success');
     }
 
     // ============================================================
@@ -1382,12 +2478,16 @@
             Elegir archivos
           </button>
           <div class="img-dropzone-hint">
-            JPG, PNG o WEBP · Máx 2MB cada una
+            JPG, PNG o WEBP · Las optimizamos automáticamente ✨
           </div>
         </div>
       ` : `
-        <div style="font-size:11px;color:var(--text-soft);background:var(--info-bg);padding:10px 14px;border-radius:8px;border-left:3px solid var(--terra-lt);">
-          💡 Primero creá el producto. Después vas a poder subir imágenes editándolo.
+        <div class="img-create-notice">
+          <div class="img-create-notice-icon">💡</div>
+          <div class="img-create-notice-text">
+            <strong>Primero creá el producto</strong>
+            <span>Una vez guardado, vas a poder subirle imágenes editándolo.</span>
+          </div>
         </div>
       `;
 
@@ -1503,8 +2603,12 @@
     // IMÁGENES: render + reordenar + borrar + subir
     // ============================================================
     function renderImagesGrid() {
+      // En modo create no mostramos este mensaje porque ya hay un aviso arriba
+      if (editingMode === 'create') {
+        return '';
+      }
       if (!editingProduct.imagesData || editingProduct.imagesData.length === 0) {
-        return `<div class="img-empty-state">📭 Sin imágenes todavía. ${editingMode === 'edit' ? 'Subí algunas arriba.' : 'Podrás agregar después de crear el producto.'}</div>`;
+        return `<div class="img-empty-state">📭 Sin imágenes todavía. Subí algunas arriba.</div>`;
       }
       const total = editingProduct.imagesData.length;
       return editingProduct.imagesData.map((img, idx) => `
@@ -1630,17 +2734,12 @@
         return;
       }
 
-      // Filtrar solo imágenes válidas
+      // Filtrar solo imágenes válidas (sin validar tamaño — vamos a comprimir)
       const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
-      const maxSize = 2 * 1024 * 1024; // 2MB
       const validFiles = [];
       for (const file of files) {
         if (!validTypes.includes(file.type)) {
           toast(`${file.name}: solo JPG, PNG o WEBP`, 'error');
-          continue;
-        }
-        if (file.size > maxSize) {
-          toast(`${file.name}: pesa más de 2MB`, 'error');
           continue;
         }
         validFiles.push(file);
@@ -1648,7 +2747,7 @@
 
       if (validFiles.length === 0) return;
 
-      toast(`📤 Subiendo ${validFiles.length} imagen${validFiles.length > 1 ? 'es' : ''}...`);
+      toast(`📤 Procesando ${validFiles.length} imagen${validFiles.length > 1 ? 'es' : ''}...`);
 
       let uploaded = 0;
       let failed   = 0;
@@ -1659,7 +2758,7 @@
       }
 
       if (failed === 0) {
-        toast(`✅ ${uploaded} imagen${uploaded > 1 ? 'es' : ''} subida${uploaded > 1 ? 's' : ''}`);
+        toast(`✅ ${uploaded} imagen${uploaded > 1 ? 'es' : ''} subida${uploaded > 1 ? 's' : ''}`, 'success');
       } else if (uploaded > 0) {
         toast(`⚠️ ${uploaded} OK, ${failed} fallaron`, 'error');
       } else {
@@ -1667,11 +2766,69 @@
       }
     }
 
-    async function uploadSingleFile(file) {
+    /**
+     * Comprime una imagen si pesa más de un umbral.
+     * Usa browser-image-compression (cargado desde CDN).
+     */
+    async function compressImageIfNeeded(file) {
+      const SKIP_COMPRESSION_BELOW = 500 * 1024; // < 500KB: no comprimir
+
+      if (file.size < SKIP_COMPRESSION_BELOW) {
+        return { file, compressed: false };
+      }
+
       try {
-        // Generar nombre único (timestamp + nombre limpio)
+        // Verificar que la librería esté disponible
+        if (typeof imageCompression === 'undefined') {
+          console.warn('imageCompression no disponible, usando original');
+          return { file, compressed: false };
+        }
+
+        const options = {
+          maxSizeMB: 0.5,              // target: 500KB
+          maxWidthOrHeight: 1200,      // max 1200px lado más largo
+          useWebWorker: true,
+          fileType: 'image/webp',
+          initialQuality: 0.85,
+        };
+
+        const compressedBlob = await imageCompression(file, options);
+
+        // Renombrar con extensión .webp
+        const newName = file.name.replace(/\.[^.]+$/, '.webp');
+        const compressedFile = new File([compressedBlob], newName, {
+          type: 'image/webp',
+          lastModified: Date.now(),
+        });
+
+        return { file: compressedFile, compressed: true, originalSize: file.size };
+      } catch (err) {
+        console.warn('Compresión falló, usando original:', err);
+        return { file, compressed: false };
+      }
+    }
+
+    async function uploadSingleFile(originalFile) {
+      try {
+        // 1. Comprimir si hace falta
+        const { file, compressed, originalSize } = await compressImageIfNeeded(originalFile);
+
+        // 2. Safety check: después de comprimir, no debería pasar 2MB
+        if (file.size > 2 * 1024 * 1024) {
+          toast(`${originalFile.name}: demasiado grande aún después de comprimir`, 'error');
+          return false;
+        }
+
+        // 3. Log de compresión (consola, no toast para no abrumar)
+        if (compressed) {
+          const origMB = (originalSize / 1024 / 1024).toFixed(1);
+          const newKB = Math.round(file.size / 1024);
+          console.log(`📦 ${originalFile.name}: ${origMB}MB → ${newKB}KB`);
+        }
+
+        // 4. Generar nombre único
         const ext = file.name.split('.').pop().toLowerCase();
-        const cleanName = file.name
+        const cleanName = originalFile.name
           .replace(/\.[^.]+$/, '')               // sin extensión
           .toLowerCase()
           .normalize('NFD').replace(/[\u0300-\u036f]/g, '')  // sin acentos
@@ -1681,26 +2838,27 @@
         const timestamp = Date.now();
         const storagePath = `${editingProduct.id}-${timestamp}-${cleanName}.${ext}`;
 
-        // 1. Subir al Storage
+        // 5. Subir al Storage
         const { error: uploadError } = await window.sb
           .storage
           .from('products')
           .upload(storagePath, file, {
             cacheControl: '3600',
             upsert: false,
+            contentType: file.type,
           });
 
         if (uploadError) {
           console.error('Storage upload:', uploadError);
-          toast(`Error subiendo ${file.name}: ${uploadError.message}`, 'error');
+          toast(`Error subiendo ${originalFile.name}: ${uploadError.message}`, 'error');
           return false;
         }
 
-        // 2. Obtener URL pública
+        // 6. Obtener URL pública
         const { data: pub } = window.sb.storage.from('products').getPublicUrl(storagePath);
         const publicUrl = pub.publicUrl;
 
-        // 3. Insertar en product_images
+        // 7. Insertar en product_images
         const newSortOrder = editingProduct.imagesData.length;
         const { data: newImg, error: insertError } = await window.sb
           .from('product_images')
@@ -1716,17 +2874,16 @@
 
         if (insertError || !newImg) {
           console.error('DB insert:', insertError);
-          toast(`Error guardando imagen ${file.name}: ${insertError?.message || 'sin respuesta'}`, 'error');
-          // Borrar el archivo subido para no dejar huérfanos
+          toast(`Error guardando imagen ${originalFile.name}: ${insertError?.message || 'sin respuesta'}`, 'error');
           await window.sb.storage.from('products').remove([storagePath]);
           return false;
         }
 
-        // 4. Actualizar estado local
+        // 8. Actualizar estado local
         editingProduct.imagesData.push(newImg);
         document.getElementById('imgGrid').innerHTML = renderImagesGrid();
 
-        // 5. Reflejar en ALL_PRODUCTS
+        // 9. Reflejar en ALL_PRODUCTS
         const realProduct = ALL_PRODUCTS.find(p => p.id === editingProduct.id);
         if (realProduct) {
           realProduct.imagesData = editingProduct.imagesData.map(i => ({ ...i }));
@@ -2039,12 +3196,571 @@
     // ESC para cerrar modales
     document.addEventListener('keydown', e => {
       if (e.key !== 'Escape') return;
-      if (document.getElementById('confirmModal').classList.contains('show')) {
+      if (document.getElementById('bulkStockModal').classList.contains('show')) {
+        closeBulkStockModal();
+      } else if (document.getElementById('confirmModal').classList.contains('show')) {
         closeConfirm();
+      } else if (document.getElementById('orderModal').classList.contains('show')) {
+        closeOrderModal();
       } else if (document.getElementById('editModal').classList.contains('show')) {
         closeEditModal();
       }
     });
+
+    // ============================================================
+    // NAVEGACIÓN ENTRE VIEWS (Productos / Ventas)
+    // ============================================================
+    let currentView = 'products';
+    let ordersLoadedOnce = false;
+
+    function switchView(viewName) {
+      currentView = viewName;
+
+      // Cambiar la view activa
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById(`view-${viewName}`).classList.add('active');
+
+      // Cambiar nav-item activo
+      document.querySelectorAll('.nav-item').forEach(n => {
+        n.classList.toggle('active', n.dataset.view === viewName);
+      });
+
+      // Actualizar título mobile
+      const titleMap = { products: 'Productos', orders: 'Ventas' };
+      document.getElementById('topbarMobileTitle').textContent = titleMap[viewName] || '';
+
+      // Cerrar sidebar en mobile si está abierto
+      closeSidebar();
+
+      // Si es la primera vez que entra a ventas, cargar
+      if (viewName === 'orders' && !ordersLoadedOnce) {
+        loadOrders();
+        ordersLoadedOnce = true;
+        // Defensa: si por algún motivo no se setupearon los filtros, setupearlos ahora
+        setupOrderFilters();
+      }
+    }
+
+    function openSidebar() {
+      document.getElementById('sidebar').classList.add('open');
+      document.getElementById('sidebarOverlay').classList.add('show');
+    }
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('show');
+    }
+
+    // ============================================================
+    // VENTAS / PEDIDOS
+    // ============================================================
+    let ALL_ORDERS = [];
+    let orderFilters = {
+      search: '',
+      status: '',
+      datePreset: '',    // 'today' | 'yesterday' | 'week' | 'month' | 'custom' | ''
+      dateFrom: null,    // Date object
+      dateTo:   null,    // Date object
+    };
+
+    async function loadOrders() {
+      const listEl = document.getElementById('ordersList');
+      // Skeleton screens
+      listEl.innerHTML = Array(5).fill(0).map(() => `
+        <div class="skeleton-order-row">
+          <div><div class="skeleton skeleton-line" style="width:70px"></div></div>
+          <div>
+            <div class="skeleton skeleton-line skeleton-line-short"></div>
+            <div class="skeleton skeleton-line skeleton-line-meta"></div>
+          </div>
+          <div><div class="skeleton skeleton-line"></div></div>
+          <div><div class="skeleton skeleton-line" style="width:60px"></div></div>
+          <div><div class="skeleton skeleton-pill"></div></div>
+          <div></div>
+        </div>
+      `).join('');
+
+      try {
+        const { data: orders, error } = await window.sb
+          .from('orders')
+          .select('*, order_items(*)')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        ALL_ORDERS = orders || [];
+        updateOrdersStats();
+        updateOrdersBadge();
+        renderOrders();
+      } catch (e) {
+        console.error('Error cargando pedidos:', e);
+        listEl.innerHTML = `<div class="empty-state"><div class="empty-state-icon">⚠️</div><p>Error cargando pedidos: ${e.message}</p></div>`;
+      }
+    }
+
+    function updateOrdersStats() {
+      const total     = ALL_ORDERS.length;
+      const pending   = ALL_ORDERS.filter(o => o.status === 'pending').length;
+      const confirmed = ALL_ORDERS.filter(o => o.status === 'confirmed').length;
+      const revenue   = ALL_ORDERS
+        .filter(o => o.status === 'confirmed')
+        .reduce((acc, o) => acc + (o.total || 0), 0);
+
+      document.getElementById('statOrdersTotal').textContent     = total;
+      document.getElementById('statOrdersPending').textContent   = pending;
+      document.getElementById('statOrdersConfirmed').textContent = confirmed;
+      document.getElementById('statOrdersRevenue').textContent   = `$${Number(revenue).toLocaleString('es-AR')}`;
+    }
+
+    function updateOrdersBadge() {
+      const pending = ALL_ORDERS.filter(o => o.status === 'pending').length;
+      const badge = document.getElementById('navOrdersBadge');
+      if (pending > 0) {
+        badge.textContent = pending;
+        badge.style.display = 'inline-flex';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    function applyOrderFilters() {
+      let list = [...ALL_ORDERS];
+
+      // Filtro por búsqueda
+      if (orderFilters.search) {
+        const q = orderFilters.search.toLowerCase();
+        list = list.filter(o =>
+          (o.customer_name || '').toLowerCase().includes(q) ||
+          (o.customer_phone || '').toLowerCase().includes(q)
+        );
+      }
+
+      // Filtro por estado
+      if (orderFilters.status) {
+        list = list.filter(o => o.status === orderFilters.status);
+      }
+
+      // Filtro por fecha
+      if (orderFilters.dateFrom || orderFilters.dateTo) {
+        list = list.filter(o => {
+          const orderDate = new Date(o.created_at);
+          if (orderFilters.dateFrom && orderDate < orderFilters.dateFrom) return false;
+          if (orderFilters.dateTo   && orderDate > orderFilters.dateTo)   return false;
+          return true;
+        });
+      }
+
+      return list;
+    }
+
+    function renderOrders() {
+      const listEl = document.getElementById('ordersList');
+      const list = applyOrderFilters();
+
+      if (list.length === 0) {
+        const isEmpty = ALL_ORDERS.length === 0;
+        listEl.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">${isEmpty ? '📭' : '🔍'}</div>
+            <p>${isEmpty ? 'Todavía no hay pedidos registrados.' : 'No hay pedidos con esos filtros.'}</p>
+          </div>`;
+        return;
+      }
+
+      listEl.innerHTML = list.map(o => orderRowHTML(o)).join('');
+    }
+
+    function orderRowHTML(o) {
+      const date = new Date(o.created_at);
+      const dayStr = date.toLocaleDateString('es-AR', { day: '2-digit', month: 'short' });
+      const timeStr = date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+
+      const statusMap = {
+        pending:   { label: '🟡 Pendiente',   cls: 'order-status-pending' },
+        confirmed: { label: '🟢 Confirmado',  cls: 'order-status-confirmed' },
+        cancelled: { label: '🔴 Cancelado',   cls: 'order-status-cancelled' },
+      };
+      const st = statusMap[o.status] || statusMap.pending;
+
+      // Preview de items
+      const items = o.order_items || [];
+      const itemsPreview = items.length === 0
+        ? '—'
+        : items.length === 1
+          ? `${items[0].product_name} x${items[0].quantity}`
+          : `${items[0].product_name} y ${items.length - 1} más`;
+
+      return `
+        <div class="order-row" onclick="openOrderModal(${o.id})">
+          <div class="order-date">
+            <span class="order-date-day">${dayStr}</span>
+            ${timeStr} hs
+          </div>
+          <div class="order-customer">
+            <span class="order-customer-name">${escapeHtml(o.customer_name)}</span>
+            <span class="order-customer-phone">📞 ${escapeHtml(o.customer_phone)}</span>
+          </div>
+          <div class="order-items-preview">
+            ${o.items_count} ${o.items_count === 1 ? 'producto' : 'productos'}<br>
+            <small>${escapeHtml(itemsPreview)}</small>
+          </div>
+          <div class="order-total">$${Number(o.total).toLocaleString('es-AR')}</div>
+          <div><span class="order-status-badge ${st.cls}">${st.label}</span></div>
+          <div style="text-align:center;">→</div>
+        </div>`;
+    }
+
+    function openOrderModal(orderId) {
+      const order = ALL_ORDERS.find(o => o.id === orderId);
+      if (!order) return;
+
+      const date = new Date(order.created_at);
+      const dateStr = date.toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' });
+      const timeStr = date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+
+      document.getElementById('orderModalTitle').textContent = `Pedido #${order.id}`;
+      document.getElementById('orderModalSubtitle').textContent = `${dateStr} a las ${timeStr} hs`;
+
+      const statusMap = {
+        pending:   { label: '🟡 Pendiente',   cls: 'order-status-pending' },
+        confirmed: { label: '🟢 Confirmado',  cls: 'order-status-confirmed' },
+        cancelled: { label: '🔴 Cancelado',   cls: 'order-status-cancelled' },
+      };
+      const st = statusMap[order.status] || statusMap.pending;
+
+      // Acciones según el estado actual
+      let actionsHTML = '';
+      if (order.status === 'pending') {
+        actionsHTML = `
+          <button class="btn-status btn-status-confirm" onclick="changeOrderStatus(${order.id}, 'confirmed')">✓ Marcar como confirmado</button>
+          <button class="btn-status btn-status-cancel" onclick="changeOrderStatus(${order.id}, 'cancelled')">✕ Cancelar pedido</button>`;
+      } else if (order.status === 'confirmed') {
+        actionsHTML = `
+          <button class="btn-status btn-status-cancel" onclick="changeOrderStatus(${order.id}, 'cancelled')">✕ Cancelar pedido</button>
+          <button class="btn-status btn-status-revert" onclick="changeOrderStatus(${order.id}, 'pending')">↩ Volver a pendiente</button>`;
+      } else if (order.status === 'cancelled') {
+        actionsHTML = `
+          <button class="btn-status btn-status-confirm" onclick="changeOrderStatus(${order.id}, 'confirmed')">✓ Reactivar como confirmado</button>
+          <button class="btn-status btn-status-revert" onclick="changeOrderStatus(${order.id}, 'pending')">↩ Volver a pendiente</button>`;
+      }
+
+      const items = order.order_items || [];
+      const itemsHTML = items.map(item => `
+        <div class="order-item-line">
+          <div>
+            <strong>${escapeHtml(item.product_name)}</strong>
+            ${item.color ? `— ${escapeHtml(item.color)}` : ''}
+            <span style="color:var(--text-soft);font-size:11px;">x${item.quantity}</span>
+          </div>
+          <div class="order-item-line-subtotal">$${Number(item.subtotal).toLocaleString('es-AR')}</div>
+        </div>
+      `).join('');
+
+      const body = `
+        <!-- Estado actual + acciones -->
+        <div class="order-detail-section">
+          <div class="order-detail-title">Estado actual</div>
+          <span class="order-status-badge ${st.cls}" style="font-size:13px;padding:6px 14px;">${st.label}</span>
+          ${order.stock_restored ? '<div style="margin-top:8px;font-size:11px;color:var(--text-soft);">📦 Stock restituido</div>' : ''}
+          <div class="order-status-actions">${actionsHTML}</div>
+        </div>
+
+        <!-- Datos del cliente -->
+        <div class="order-detail-section">
+          <div class="order-detail-title">Cliente</div>
+          <div class="order-detail-row"><strong>Nombre:</strong> ${escapeHtml(order.customer_name)}</div>
+          <div class="order-detail-row"><strong>Teléfono:</strong> ${escapeHtml(order.customer_phone)}</div>
+          ${order.customer_address ? `<div class="order-detail-row"><strong>Dirección:</strong> ${escapeHtml(order.customer_address)}</div>` : ''}
+          ${order.customer_notes ? `<div class="order-detail-row"><strong>Notas:</strong> ${escapeHtml(order.customer_notes)}</div>` : ''}
+        </div>
+
+        <!-- Items del pedido -->
+        <div class="order-detail-section">
+          <div class="order-detail-title">Items del pedido</div>
+          <div class="order-items-list">
+            ${itemsHTML}
+            <div class="order-detail-total">
+              <span>Total</span>
+              <span>$${Number(order.total).toLocaleString('es-AR')}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zona de peligro -->
+        <div class="order-detail-section">
+          <div class="danger-zone">
+            <div class="danger-zone-title">🗑️ Zona de peligro</div>
+            <div class="danger-zone-text">
+              Eliminar este pedido lo borra permanentemente de la base de datos. <strong>Esta acción no se puede deshacer y NO restituye el stock al inventario.</strong>
+            </div>
+            <button class="btn-delete" onclick="confirmDeleteOrder(${order.id})">
+              🗑️ Eliminar este pedido
+            </button>
+          </div>
+        </div>`;
+
+      document.getElementById('orderModalBody').innerHTML = body;
+      document.getElementById('orderModalOverlay').classList.add('show');
+      document.getElementById('orderModal').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeOrderModal() {
+      document.getElementById('orderModalOverlay').classList.remove('show');
+      document.getElementById('orderModal').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    async function changeOrderStatus(orderId, newStatus) {
+      const order = ALL_ORDERS.find(o => o.id === orderId);
+      if (!order) return;
+
+      // Si se cancela un pedido que NO tenía el stock restituido, preguntar
+      if (newStatus === 'cancelled' && !order.stock_restored && order.status !== 'cancelled') {
+        showConfirm({
+          icon: '📦',
+          title: '¿Restituir el stock?',
+          text: `Vas a cancelar el pedido. Como antes se decrementó el stock al hacer el checkout, ¿querés devolver el stock al inventario?\n\nElegí Sí si el cliente NO se llevó el producto.\nElegí No si decidís manejar el stock manualmente.`,
+          btnText: 'Sí, restituir stock',
+          onConfirm: () => doChangeOrderStatus(orderId, newStatus, true),
+        });
+
+        // Hack: además del botón de confirmar, agregar un botón "cancelar status" temporal
+        // Mejor solución simple: ofrecer 2 botones secundarios. Vamos con dos showConfirm encadenados:
+        // En esta versión simple, si NO restituye, solo cambia el status:
+        // Para implementarlo bien, agregamos un botón extra "No, mantener stock":
+        const confirmBtn = document.getElementById('confirmBtn');
+        // Insertar botón "No, mantener stock" antes del confirm:
+        let altBtn = document.getElementById('confirmAltBtn');
+        if (!altBtn) {
+          altBtn = document.createElement('button');
+          altBtn.id = 'confirmAltBtn';
+          altBtn.className = 'btn-cancel';
+          altBtn.style.marginRight = '6px';
+          confirmBtn.parentNode.insertBefore(altBtn, confirmBtn);
+        }
+        altBtn.textContent = 'No, solo cancelar';
+        altBtn.onclick = () => {
+          altBtn.remove();
+          closeConfirm();
+          doChangeOrderStatus(orderId, newStatus, false);
+        };
+        // Cuando se cierre el modal (Cancelar o confirmar), borrar el alt
+        const origConfirm = confirmBtn.onclick;
+        confirmBtn.onclick = function() {
+          altBtn.remove();
+          if (origConfirm) origConfirm.call(this);
+        };
+        return;
+      }
+
+      // Resto de casos: cambio simple
+      doChangeOrderStatus(orderId, newStatus, false);
+    }
+
+    async function doChangeOrderStatus(orderId, newStatus, restoreStock) {
+      toast(`⏳ Actualizando pedido...`);
+
+      const { error } = await window.sb
+        .from('orders')
+        .update({ status: newStatus })
+        .eq('id', orderId);
+
+      if (error) {
+        toast(`Error: ${error.message}`, 'error');
+        return;
+      }
+
+      // Restituir stock si corresponde
+      if (restoreStock) {
+        const { data: rpcData, error: rpcError } = await window.sb
+          .rpc('restore_order_stock', { order_id_param: orderId });
+
+        if (rpcError) {
+          console.error('Error restituyendo stock:', rpcError);
+          toast(`Pedido cancelado, pero falló restituir stock: ${rpcError.message}`, 'error');
+        } else {
+          toast(`✅ Pedido cancelado y stock restituido`, 'success');
+        }
+      } else {
+        const labels = { pending: 'pendiente', confirmed: 'confirmado', cancelled: 'cancelado' };
+        toast(`✅ Pedido marcado como ${labels[newStatus]}`, 'success');
+      }
+
+      // Recargar pedidos
+      await loadOrders();
+      closeOrderModal();
+    }
+
+    function confirmDeleteOrder(orderId) {
+      const order = ALL_ORDERS.find(o => o.id === orderId);
+      if (!order) return;
+
+      showConfirm({
+        icon: '🗑️',
+        title: `¿Eliminar pedido #${orderId}?`,
+        text: `Vas a borrar permanentemente el pedido de ${order.customer_name}. Esta acción no se puede deshacer y NO restituye el stock.`,
+        btnText: 'Sí, eliminar',
+        onConfirm: () => doDeleteOrder(orderId),
+      });
+    }
+
+    async function doDeleteOrder(orderId) {
+      toast(`⏳ Eliminando pedido...`);
+
+      const { error } = await window.sb
+        .from('orders')
+        .delete()
+        .eq('id', orderId);
+
+      if (error) {
+        toast(`Error: ${error.message}`, 'error');
+        return;
+      }
+
+      toast(`✅ Pedido eliminado`, 'success');
+      closeOrderModal();
+      await loadOrders();
+    }
+
+    // Setup de filtros de pedidos
+    let orderFiltersSetup = false;
+
+    function setupOrderFilters() {
+      // Idempotente: no enganchar listeners dos veces
+      if (orderFiltersSetup) return;
+
+      const searchInput  = document.getElementById('orderSearchInput');
+      const statusSelect = document.getElementById('orderStatusFilter');
+      const dateSelect   = document.getElementById('orderDateFilter');
+      const dateFromInp  = document.getElementById('orderDateFrom');
+      const dateToInp    = document.getElementById('orderDateTo');
+
+      if (!searchInput || !statusSelect) {
+        console.warn('setupOrderFilters: elementos no encontrados todavía');
+        return;
+      }
+
+      console.log('✓ setupOrderFilters: enganchando listeners');
+
+      searchInput.addEventListener('input', e => {
+        orderFilters.search = e.target.value;
+        renderOrders();
+      });
+      statusSelect.addEventListener('change', e => {
+        orderFilters.status = e.target.value;
+        renderOrders();
+      });
+
+      // Preset de fecha
+      if (dateSelect) {
+        dateSelect.addEventListener('change', e => {
+          const preset = e.target.value;
+          orderFilters.datePreset = preset;
+          applyDatePreset(preset);
+        });
+      }
+
+      // Fechas custom
+      if (dateFromInp) {
+        dateFromInp.addEventListener('change', e => {
+          orderFilters.dateFrom = e.target.value ? startOfDay(new Date(e.target.value)) : null;
+          renderOrders();
+        });
+      }
+      if (dateToInp) {
+        dateToInp.addEventListener('change', e => {
+          orderFilters.dateTo = e.target.value ? endOfDay(new Date(e.target.value)) : null;
+          renderOrders();
+        });
+      }
+
+      orderFiltersSetup = true;
+    }
+
+    // Helpers de fecha
+    function startOfDay(d) {
+      const x = new Date(d);
+      x.setHours(0, 0, 0, 0);
+      return x;
+    }
+    function endOfDay(d) {
+      const x = new Date(d);
+      x.setHours(23, 59, 59, 999);
+      return x;
+    }
+    function toInputDate(d) {
+      // YYYY-MM-DD en hora local
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
+
+    function applyDatePreset(preset) {
+      const rangeRow = document.getElementById('dateRangeRow');
+      const dateFromInp = document.getElementById('orderDateFrom');
+      const dateToInp = document.getElementById('orderDateTo');
+
+      const now = new Date();
+      let from = null, to = null;
+
+      switch (preset) {
+        case 'today':
+          from = startOfDay(now);
+          to   = endOfDay(now);
+          break;
+        case 'yesterday':
+          const yest = new Date(now);
+          yest.setDate(yest.getDate() - 1);
+          from = startOfDay(yest);
+          to   = endOfDay(yest);
+          break;
+        case 'week':
+          const weekAgo = new Date(now);
+          weekAgo.setDate(weekAgo.getDate() - 7);
+          from = startOfDay(weekAgo);
+          to   = endOfDay(now);
+          break;
+        case 'month':
+          const monthAgo = new Date(now);
+          monthAgo.setMonth(monthAgo.getMonth() - 1);
+          from = startOfDay(monthAgo);
+          to   = endOfDay(now);
+          break;
+        case 'custom':
+          // Mostrar la fila de fechas custom y mantener las que ya estén
+          rangeRow.style.display = 'flex';
+          renderOrders();
+          return;
+        default: // '' = cualquier fecha
+          rangeRow.style.display = 'none';
+          dateFromInp.value = '';
+          dateToInp.value = '';
+          orderFilters.dateFrom = null;
+          orderFilters.dateTo = null;
+          renderOrders();
+          return;
+      }
+
+      // Reflejar en los inputs visibles (por si después quiere ajustar)
+      rangeRow.style.display = 'flex';
+      dateFromInp.value = from ? toInputDate(from) : '';
+      dateToInp.value   = to   ? toInputDate(to)   : '';
+      orderFilters.dateFrom = from;
+      orderFilters.dateTo   = to;
+      renderOrders();
+    }
+
+    function clearDateRange() {
+      document.getElementById('orderDateFrom').value = '';
+      document.getElementById('orderDateTo').value = '';
+      document.getElementById('orderDateFilter').value = '';
+      document.getElementById('dateRangeRow').style.display = 'none';
+      orderFilters.dateFrom = null;
+      orderFilters.dateTo = null;
+      orderFilters.datePreset = '';
+      renderOrders();
+    }
 
     // ============================================================
     // INIT
@@ -2058,6 +3774,7 @@
       const { data } = await window.sb.auth.getSession();
       if (data.session) enterDashboard(data.session.user);
       setupFilters();
+      setupOrderFilters();
     });
   </script>
 </body>

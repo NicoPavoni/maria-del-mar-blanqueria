@@ -330,6 +330,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Primera renderización con datos
   applyFilters();
+
+  // Auto-abrir modal si hay ?product=ID en la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const productIdToOpen = urlParams.get('product');
+  if (productIdToOpen && typeof openModal === 'function') {
+    setTimeout(() => openModal(parseInt(productIdToOpen, 10)), 200);
+  }
 });
 
 // Expuesto globalmente para usarse desde cart.js (refresca después de un checkout)

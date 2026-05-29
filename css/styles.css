@@ -1002,7 +1002,7 @@ footer p { font-size: 12px; font-weight: 300; letter-spacing: 0.06em; }
   color: var(--terra-dk);
 }
 
-.cart-note {
+. {
   font-size: 11px;
   font-weight: 300;
   color: var(--text-soft);
@@ -2385,4 +2385,480 @@ nav > a {
   border-radius: 6px;
   margin-top: 4px;
   display: inline-block;
+}
+
+/* ---------- Loading spinner ---------- */
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--cream3, #ede0cc);
+  border-top-color: var(--terra, #b07848);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Stock labels (en las cards) ---------- */
+.stock-label {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin: 6px 0;
+}
+
+.stock-low {
+  background: rgba(212, 168, 112, 0.20);
+  color: var(--terra-dk, #7a5030);
+  font-weight: 600;
+}
+
+.stock-out {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-soft, #8a7060);
+}
+
+/* ---------- Card sin stock (opacidad) ---------- */
+.pcard.pcard-out {
+  opacity: 0.65;
+  filter: grayscale(0.3);
+  transition: opacity 0.2s, filter 0.2s;
+}
+
+.pcard.pcard-out:hover {
+  opacity: 0.85;
+}
+
+/* ---------- Botón deshabilitado en cards ---------- */
+.bconsultar.bconsultar-disabled {
+  background: var(--cream3, #ede0cc) !important;
+  color: var(--text-soft, #8a7060) !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+.bconsultar.bconsultar-disabled:hover {
+  transform: none !important;
+  background: var(--cream3, #ede0cc) !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Stock info en el modal ---------- */
+.modal-stock {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin: 0.5rem 0 1rem;
+}
+
+.modal-stock-ok {
+  background: rgba(176, 120, 72, 0.12);
+  color: var(--terra-dk, #7a5030);
+}
+
+.modal-stock-low {
+  background: rgba(212, 168, 112, 0.20);
+  color: var(--terra-dk, #7a5030);
+  font-weight: 600;
+}
+
+.modal-stock-out {
+  background: rgba(180, 60, 60, 0.10);
+  color: #a04040;
+}
+
+/* ---------- Botón "Agregar al carrito" deshabilitado en modal ---------- */
+.modal-add-btn.modal-add-btn-disabled {
+  background: var(--cream3, #ede0cc) !important;
+  color: var(--text-soft, #8a7060) !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+  box-shadow: none !important;
+}
+
+.modal-add-btn.modal-add-btn-disabled:hover {
+  transform: none !important;
+  background: var(--cream3, #ede0cc) !important;
+}
+
+/* ---------- Warning de stock dentro del carrito ---------- */
+.cart-item-warning {
+  font-size: 11px;
+  color: #a04040;
+  background: rgba(180, 60, 60, 0.08);
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+/* ---------- Loading spinner ---------- */
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--cream3, #ede0cc);
+  border-top-color: var(--terra, #b07848);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Stock labels (en las cards) ---------- */
+.stock-label {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin: 6px 0;
+}
+
+.stock-low {
+  background: rgba(212, 168, 112, 0.20);
+  color: var(--terra-dk, #7a5030);
+  font-weight: 600;
+}
+
+.stock-out {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-soft, #8a7060);
+}
+
+/* ---------- Card sin stock (opacidad) ---------- */
+.pcard.pcard-out {
+  opacity: 0.65;
+  filter: grayscale(0.3);
+  transition: opacity 0.2s, filter 0.2s;
+}
+
+.pcard.pcard-out:hover {
+  opacity: 0.85;
+}
+
+/* ---------- Botón deshabilitado en cards ---------- */
+.bconsultar.bconsultar-disabled {
+  background: var(--cream3, #ede0cc) !important;
+  color: var(--text-soft, #8a7060) !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+.bconsultar.bconsultar-disabled:hover {
+  transform: none !important;
+  background: var(--cream3, #ede0cc) !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Stock info en el modal ---------- */
+.modal-stock {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin: 0.5rem 0 1rem;
+}
+
+.modal-stock-ok {
+  background: rgba(176, 120, 72, 0.12);
+  color: var(--terra-dk, #7a5030);
+}
+
+.modal-stock-low {
+  background: rgba(212, 168, 112, 0.20);
+  color: var(--terra-dk, #7a5030);
+  font-weight: 600;
+}
+
+.modal-stock-out {
+  background: rgba(180, 60, 60, 0.10);
+  color: #a04040;
+}
+
+/* ---------- Botón "Agregar al carrito" deshabilitado en modal ---------- */
+.modal-add-btn.modal-add-btn-disabled {
+  background: var(--cream3, #ede0cc) !important;
+  color: var(--text-soft, #8a7060) !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+  box-shadow: none !important;
+}
+
+.modal-add-btn.modal-add-btn-disabled:hover {
+  transform: none !important;
+  background: var(--cream3, #ede0cc) !important;
+}
+
+/* ---------- Warning de stock dentro del carrito ---------- */
+.cart-item-warning {
+  font-size: 11px;
+  color: #a04040;
+  background: rgba(180, 60, 60, 0.08);
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+/* ============================================================
+   CHECKOUT MODAL (form de datos del cliente)
+   ============================================================ */
+.checkout-overlay {
+  position: fixed; inset: 0;
+  background: rgba(58, 42, 26, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s;
+  z-index: 600;
+}
+.checkout-overlay.show { opacity: 1; pointer-events: auto; }
+
+.checkout-modal {
+  position: fixed; inset: 0;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 2rem 1rem;
+  z-index: 601;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s;
+  overflow-y: auto;
+}
+.checkout-modal.show { opacity: 1; pointer-events: auto; }
+
+.checkout-card {
+  background: #fff;
+  border-radius: 18px;
+  max-width: 540px; width: 100%;
+  box-shadow: 0 20px 60px rgba(122, 80, 48, 0.18);
+  display: flex; flex-direction: column;
+  max-height: calc(100vh - 4rem);
+  transform: translateY(20px);
+  transition: transform 0.25s;
+  font-family: 'Lato', sans-serif;
+}
+.checkout-modal.show .checkout-card { transform: translateY(0); }
+
+/* Header */
+.checkout-header {
+  padding: 1.4rem 1.6rem 1rem;
+  border-bottom: 1px solid #ede0cc;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 1rem; flex-shrink: 0;
+}
+.checkout-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #7a5030;
+  line-height: 1.1;
+}
+.checkout-subtitle {
+  font-size: 12px;
+  color: #8a7060;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+.checkout-close {
+  width: 32px; height: 32px; border: none;
+  background: #f5ede0; color: #8a7060;
+  border-radius: 50%; cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+.checkout-close:hover { background: #ede0cc; color: #3a2a1a; }
+
+/* Body */
+.checkout-body {
+  padding: 1.2rem 1.6rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.checkout-section { margin-bottom: 1.8rem; }
+.checkout-section:last-child { margin-bottom: 0; }
+.checkout-section-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #b07848;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+/* Resumen del pedido */
+.checkout-summary-list {
+  background: #fdf8f2;
+  border-radius: 10px;
+  padding: 12px 14px;
+  border: 1px solid #ede0cc;
+}
+.checkout-summary-item {
+  display: flex; justify-content: space-between; gap: 10px;
+  padding: 6px 0;
+  font-size: 13px;
+  color: #3a2a1a;
+  border-bottom: 1px dashed #ede0cc;
+}
+.checkout-summary-item:last-child { border-bottom: none; }
+.checkout-summary-name {
+  flex: 1;
+  line-height: 1.4;
+}
+.checkout-summary-qty {
+  color: #8a7060;
+  font-size: 11px;
+  margin-left: 4px;
+}
+.checkout-summary-price {
+  font-weight: 600;
+  color: #7a5030;
+  white-space: nowrap;
+}
+.checkout-summary-total {
+  display: flex; justify-content: space-between;
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 2px solid #ede0cc;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #7a5030;
+}
+
+/* Form */
+.checkout-field {
+  margin-bottom: 0.9rem;
+}
+.checkout-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a7060;
+  margin-bottom: 6px;
+}
+.checkout-field input,
+.checkout-field textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #ede0cc;
+  border-radius: 10px;
+  background: #fdf8f2;
+  font-size: 14px;
+  color: #3a2a1a;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.checkout-field input:focus,
+.checkout-field textarea:focus {
+  outline: none;
+  border-color: #d4a870;
+  box-shadow: 0 0 0 3px rgba(212, 168, 112, 0.18);
+}
+.checkout-field textarea {
+  resize: vertical;
+  min-height: 50px;
+  font-family: inherit;
+}
+
+.checkout-error {
+  background: #f5d4d4;
+  color: #a04040;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-bottom: 0.8rem;
+  display: none;
+}
+.checkout-error.show { display: block; }
+
+/* Footer */
+.checkout-footer {
+  padding: 1rem 1.6rem 1.4rem;
+  border-top: 1px solid #ede0cc;
+  display: flex; gap: 0.6rem;
+  flex-shrink: 0;
+  background: #fdf8f2;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  position: sticky; bottom: 0;
+}
+.checkout-cancel-btn {
+  padding: 11px 18px;
+  background: transparent;
+  color: #8a7060;
+  border: 1.5px solid #ede0cc;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.checkout-cancel-btn:hover {
+  border-color: #8a7060;
+  color: #3a2a1a;
+}
+.checkout-confirm-btn {
+  flex: 1;
+  padding: 11px 18px;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  font-family: inherit;
+  transition: background 0.15s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+}
+.checkout-confirm-btn:hover:not(:disabled) {
+  background: #1eb858;
+  transform: translateY(-1px);
+}
+.checkout-confirm-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .checkout-modal { padding: 0; }
+  .checkout-card {
+    max-height: 100vh;
+    height: 100%;
+    border-radius: 0;
+  }
+  .checkout-footer {
+    border-radius: 0;
+    flex-direction: column-reverse;
+  }
+  .checkout-cancel-btn {
+    width: 100%;
+  }
 }

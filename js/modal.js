@@ -64,15 +64,14 @@ async function openModal(productId) {
       </div>`
     : '';
 
-  // ---- Stock info en el modal ----
+  // ---- Stock info en el modal (solo si es bajo o sin stock) ----
   let stockInfoHTML = '';
   if (stock === 0) {
     stockInfoHTML = '<div class="modal-stock modal-stock-out">⚠️ Producto sin stock actualmente</div>';
   } else if (stock > 0 && stock <= 3) {
     stockInfoHTML = `<div class="modal-stock modal-stock-low">⏰ ¡Solo quedan ${stock} unidades!</div>`;
-  } else if (stock > 3) {
-    stockInfoHTML = `<div class="modal-stock modal-stock-ok">✓ Disponible</div>`;
   }
+  // Si stock > 3, no mostramos nada (asumimos disponibilidad normal)
 
   // ---- Precio ----
   const isConsultar  = price === null || price === undefined || price === 'Consultar';
