@@ -1419,6 +1419,212 @@
       .date-range-row { flex-direction: column; align-items: stretch; }
       .date-range-label { width: 100%; }
     }
+
+    /* ============================================================
+       AYUDA / GUÍA
+       ============================================================ */
+    .help-welcome {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      background: linear-gradient(135deg, #fdf8f2 0%, #f5ede0 100%);
+      border: 1.5px solid var(--cream3);
+      border-radius: 14px;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1.4rem;
+    }
+    .help-welcome-icon {
+      font-size: 38px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .help-welcome h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--terra-dk);
+      margin-bottom: 6px;
+    }
+    .help-welcome p {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .help-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .help-item {
+      background: #fff;
+      border: 1.5px solid var(--cream3);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .help-item[open] {
+      box-shadow: 0 4px 18px rgba(122, 80, 48, 0.10);
+      border-color: var(--terra-lt);
+    }
+    .help-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      transition: background 0.15s;
+    }
+    .help-summary::-webkit-details-marker { display: none; }
+    .help-summary:hover { background: var(--cream); }
+    .help-item[open] .help-summary {
+      background: var(--cream);
+      border-bottom: 1px solid var(--cream3);
+    }
+    .help-summary-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .help-summary-title {
+      flex: 1;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--terra-dk);
+      font-weight: 600;
+    }
+    .help-chevron {
+      color: var(--text-soft);
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+    .help-item[open] .help-chevron { transform: rotate(180deg); }
+
+    .help-content {
+      padding: 1.2rem 1.5rem 1.4rem;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .help-diagram {
+      background: var(--cream);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .help-intro {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .help-h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: var(--terra-dk);
+      font-weight: 600;
+      margin-top: 1.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .help-steps {
+      padding-left: 1.4rem;
+      margin: 0.8rem 0;
+    }
+    .help-steps li {
+      margin-bottom: 0.7rem;
+      line-height: 1.6;
+    }
+    .help-steps li ul {
+      margin-top: 0.5rem;
+      padding-left: 1.2rem;
+    }
+    .help-steps li ul li {
+      margin-bottom: 0.3rem;
+      font-size: 12.5px;
+      color: var(--text-soft);
+    }
+    .help-steps li ul li strong { color: var(--text); }
+
+    .help-list {
+      padding-left: 1.4rem;
+      margin: 0.5rem 0;
+    }
+    .help-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .help-tip {
+      background: #fff8eb;
+      border-left: 3px solid #daa520;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      margin-top: 1.2rem;
+      line-height: 1.6;
+      color: #5e4500;
+    }
+
+    .help-warning {
+      background: var(--warn-bg);
+      border-left: 3px solid var(--warn);
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      margin-top: 1.2rem;
+      line-height: 1.6;
+      color: #6b2828;
+    }
+
+    .help-footer {
+      margin-top: 1.5rem;
+      background: var(--terra-dk);
+      color: #fff;
+      border-radius: 14px;
+      padding: 1.3rem 1.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .help-footer h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+    .help-footer p {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+    .help-footer-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .help-welcome {
+        flex-direction: column;
+        padding: 1.2rem;
+      }
+      .help-welcome-icon { font-size: 32px; }
+      .help-summary {
+        padding: 0.85rem 1rem;
+        gap: 10px;
+      }
+      .help-summary-title { font-size: 1.05rem; }
+      .help-content { padding: 1rem 1.1rem 1.2rem; }
+      .help-diagram { padding: 0.6rem; }
+      .help-footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1471,6 +1677,10 @@
           <span class="nav-item-icon">💰</span>
           <span>Ventas</span>
           <span class="nav-item-badge" id="navOrdersBadge" style="display:none">0</span>
+        </button>
+        <button class="nav-item" data-view="help" onclick="switchView('help')">
+          <span class="nav-item-icon">📖</span>
+          <span>Ayuda</span>
         </button>
       </nav>
 
@@ -1678,6 +1888,345 @@
 
       </section>
       <!-- /VIEW: VENTAS -->
+
+      <!-- ============================================================
+           VIEW: AYUDA
+           ============================================================ -->
+      <section class="view" id="view-help">
+
+        <div class="main-header">
+          <div>
+            <h2 style="font-size:1.5rem;color:var(--terra-dk);">📖 Guía de uso</h2>
+            <p style="font-size:12px;color:var(--text-soft);margin-top:4px;">
+              Todo lo que necesitás saber para manejar el panel. Click en cada tema para abrirlo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tarjeta de bienvenida -->
+        <div class="help-welcome">
+          <div class="help-welcome-icon">🌿</div>
+          <div>
+            <h3>¡Hola!</h3>
+            <p>Este panel es para que puedas administrar tu negocio sin depender de nadie. Armado para que sea simple, pero acá tenés una guía con paso a paso por si te trabás. <strong>Nunca tengas miedo de tocar:</strong> casi todo se puede deshacer o avisarme.</p>
+          </div>
+        </div>
+
+        <!-- Acordeones -->
+        <div class="help-accordion">
+
+          <!-- 1. AGREGAR PRODUCTO -->
+          <details class="help-item" open>
+            <summary class="help-summary">
+              <span class="help-summary-icon">➕</span>
+              <span class="help-summary-title">Cómo agregar un producto nuevo</span>
+              <span class="help-chevron">▼</span>
+            </summary>
+            <div class="help-content">
+
+              <!-- Diagrama SVG: flujo de crear producto -->
+              <div class="help-diagram">
+                <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+                  <!-- Paso 1: botón nuevo producto -->
+                  <rect x="20" y="80" width="140" height="80" rx="12" fill="#b07848" stroke="#7a5030" stroke-width="2"/>
+                  <text x="90" y="115" text-anchor="middle" fill="#fff" font-size="22" font-weight="600">+</text>
+                  <text x="90" y="138" text-anchor="middle" fill="#fff" font-size="11" font-family="Inter,sans-serif">Nuevo producto</text>
+                  <text x="90" y="190" text-anchor="middle" fill="#7a5030" font-size="11" font-weight="600" font-family="Inter,sans-serif">1. Click acá</text>
+
+                  <!-- Flecha 1 -->
+                  <path d="M 165 120 L 220 120" stroke="#b07848" stroke-width="2" fill="none" marker-end="url(#arrow1)"/>
+
+                  <!-- Paso 2: formulario -->
+                  <rect x="225" y="45" width="180" height="155" rx="12" fill="#fff" stroke="#ede0cc" stroke-width="2"/>
+                  <text x="315" y="68" text-anchor="middle" fill="#7a5030" font-size="11" font-weight="600" font-family="Cormorant Garamond,serif">Nuevo producto</text>
+                  <line x1="245" y1="80" x2="385" y2="80" stroke="#ede0cc" stroke-width="1"/>
+                  <rect x="245" y="90" width="140" height="15" rx="4" fill="#fdf8f2"/>
+                  <text x="250" y="101" fill="#8a7060" font-size="9" font-family="Inter,sans-serif">Nombre del producto *</text>
+                  <rect x="245" y="115" width="65" height="15" rx="4" fill="#fdf8f2"/>
+                  <text x="250" y="126" fill="#8a7060" font-size="9" font-family="Inter,sans-serif">Precio *</text>
+                  <rect x="320" y="115" width="65" height="15" rx="4" fill="#fdf8f2"/>
+                  <text x="325" y="126" fill="#8a7060" font-size="9" font-family="Inter,sans-serif">Stock</text>
+                  <rect x="245" y="140" width="140" height="30" rx="4" fill="#fdf8f2"/>
+                  <text x="250" y="151" fill="#8a7060" font-size="9" font-family="Inter,sans-serif">Descripción</text>
+                  <rect x="280" y="178" width="100" height="18" rx="9" fill="#b07848"/>
+                  <text x="330" y="191" text-anchor="middle" fill="#fff" font-size="9" font-weight="600" font-family="Inter,sans-serif">Guardar producto</text>
+
+                  <!-- Flecha 2 -->
+                  <path d="M 410 120 L 465 120" stroke="#b07848" stroke-width="2" fill="none" marker-end="url(#arrow1)"/>
+
+                  <!-- Paso 3: producto creado -->
+                  <rect x="470" y="80" width="180" height="80" rx="12" fill="#d4f5d4" stroke="#4a7530" stroke-width="2"/>
+                  <text x="560" y="115" text-anchor="middle" fill="#4a7530" font-size="22">✓</text>
+                  <text x="560" y="138" text-anchor="middle" fill="#4a7530" font-size="11" font-weight="600" font-family="Inter,sans-serif">¡Producto creado!</text>
+                  <text x="560" y="190" text-anchor="middle" fill="#7a5030" font-size="11" font-weight="600" font-family="Inter,sans-serif">2. Listo</text>
+
+                  <!-- Definición de flecha -->
+                  <defs>
+                    <marker id="arrow1" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                      <path d="M0,0 L0,6 L9,3 z" fill="#b07848"/>
+                    </marker>
+                  </defs>
+                </svg>
+              </div>
+
+              <ol class="help-steps">
+                <li>En la sección <strong>Productos</strong>, hacé click en el botón <strong>+ Nuevo producto</strong> que está arriba a la derecha.</li>
+                <li>Se abre un formulario. Completá los campos:
+                  <ul>
+                    <li><strong>Nombre *</strong>: ej: "Sábanas 2 plazas matrimoniales"</li>
+                    <li><strong>Categoría *</strong>: Elegí entre Dormitorio, Baño, Cocina, Deco, Línea Infantil</li>
+                    <li><strong>Precio *</strong>: En pesos sin puntos (ej: 33000)</li>
+                    <li><strong>Stock</strong>: Cantidad disponible. Si dejás en 0, va a aparecer "sin stock" en la web.</li>
+                    <li><strong>Descripción</strong>: Lo que el cliente va a ver al abrir el producto.</li>
+                    <li><strong>Colores</strong>: Colores disponibles. Aca agregás los colores que tiene el producto uno por uno.</li>
+                    <li><strong>Subcategoría</strong> (opcional): Solo si la categoría tiene sub-secciones (ej. en Cocina: "delantales", "manteles", "repasadores"). <strong>Importante que lo pongas en minúsculas y sin tildes.</strong></li>
+                  </ul>
+                </li>
+                <li>Hacé click en <strong>Guardar producto</strong>.</li>
+                <li>Una vez guardado, el producto aparece <strong>arriba de todo</strong> en la lista. Ahora sí podés agregarle <strong>fotos, colores y características</strong> (mirá la siguiente sección).</li>
+              </ol>
+
+              <div class="help-tip">
+                💡 <strong>Tip:</strong> No te preocupes si te equivocás. Podés volver a editar el producto en cualquier momento haciendo click sobre la fila.
+              </div>
+            </div>
+          </details>
+
+          <!-- 2. ELIMINAR PRODUCTO -->
+          <details class="help-item">
+            <summary class="help-summary">
+              <span class="help-summary-icon">🗑️</span>
+              <span class="help-summary-title">Cómo eliminar un producto</span>
+              <span class="help-chevron">▼</span>
+            </summary>
+            <div class="help-content">
+
+              <div class="help-diagram">
+                <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+                  <!-- Fila de producto -->
+                  <rect x="20" y="40" width="280" height="60" rx="8" fill="#fff" stroke="#ede0cc" stroke-width="1.5"/>
+                  <rect x="35" y="55" width="30" height="30" rx="6" fill="#ede0cc"/>
+                  <text x="80" y="65" fill="#3a2a1a" font-size="11" font-weight="600" font-family="Inter,sans-serif">Mantel antimanchas</text>
+                  <text x="80" y="80" fill="#8a7060" font-size="9" font-family="Inter,sans-serif">Cocina · 1 foto</text>
+                  <circle cx="265" cy="70" r="14" fill="#fdf8f2" stroke="#b07848" stroke-width="1.5"/>
+                  <text x="265" y="75" text-anchor="middle" fill="#7a5030" font-size="12">✏️</text>
+                  <text x="160" y="130" text-anchor="middle" fill="#7a5030" font-size="11" font-weight="600" font-family="Inter,sans-serif">1. Click en el producto</text>
+
+                  <!-- Flecha -->
+                  <path d="M 310 70 L 370 70" stroke="#b07848" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+
+                  <!-- Modal con zona peligro -->
+                  <rect x="380" y="20" width="290" height="170" rx="12" fill="#fff" stroke="#ede0cc" stroke-width="2"/>
+                  <text x="525" y="42" text-anchor="middle" fill="#7a5030" font-size="11" font-weight="600" font-family="Cormorant Garamond,serif">Editar producto</text>
+                  <line x1="395" y1="52" x2="655" y2="52" stroke="#ede0cc"/>
+                  <rect x="400" y="65" width="250" height="14" rx="3" fill="#fdf8f2"/>
+                  <rect x="400" y="85" width="125" height="14" rx="3" fill="#fdf8f2"/>
+                  <rect x="535" y="85" width="115" height="14" rx="3" fill="#fdf8f2"/>
+
+                  <!-- Zona de peligro -->
+                  <rect x="395" y="115" width="260" height="65" rx="8" fill="#f5d4d4" stroke="#a04040" stroke-width="1.5"/>
+                  <text x="403" y="130" fill="#a04040" font-size="9" font-weight="600" font-family="Inter,sans-serif">🗑️ ZONA DE PELIGRO</text>
+                  <text x="403" y="145" fill="#a04040" font-size="8" font-family="Inter,sans-serif">Eliminar borra el producto para siempre.</text>
+                  <rect x="490" y="155" width="155" height="18" rx="6" fill="#a04040"/>
+                  <text x="567" y="167" text-anchor="middle" fill="#fff" font-size="9" font-weight="600" font-family="Inter,sans-serif">🗑️ Eliminar producto</text>
+                  <text x="525" y="208" text-anchor="middle" fill="#7a5030" font-size="11" font-weight="600" font-family="Inter,sans-serif">2. Bajá hasta abajo y clickeá</text>
+
+                  <defs>
+                    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                      <path d="M0,0 L0,6 L9,3 z" fill="#b07848"/>
+                    </marker>
+                  </defs>
+                </svg>
+              </div>
+
+              <ol class="help-steps">
+                <li>En la lista de productos, hacé click en la <strong>fila del producto</strong> que querés borrar (en cualquier parte que no sea un botón o el stock).</li>
+                <li>Se abre el formulario de edición. <strong>Hacé scroll hasta el final</strong>.</li>
+                <li>Vas a ver una zona roja que dice <strong>"🗑️ Zona de peligro"</strong>.</li>
+                <li>Hacé click en el botón rojo <strong>"🗑️ Eliminar este producto"</strong>.</li>
+                <li>Aparece una ventana de confirmación con el nombre del producto. Si estás segura, click en <strong>"Sí, eliminar"</strong>.</li>
+              </ol>
+
+              <div class="help-warning">
+                ⚠️ <strong>Atención:</strong> eliminar un producto borra <strong>también todas sus fotos</strong> de la base de datos. Esta acción <strong>no se puede deshacer</strong>. Si solo querés que el producto no aparezca por ahora pero conservarlo, usá la opción <strong>"Ocultar"</strong> (el ícono del ojo 👁️) en la fila del producto.
+              </div>
+            </div>
+          </details>
+
+          <!-- 3. ACCIONES MASIVAS -->
+          <details class="help-item">
+            <summary class="help-summary">
+              <span class="help-summary-icon">☑️</span>
+              <span class="help-summary-title">Acciones masivas (seleccionar varios a la vez)</span>
+              <span class="help-chevron">▼</span>
+            </summary>
+            <div class="help-content">
+
+              <p class="help-intro">Cuando necesitás hacer la <strong>misma acción en muchos productos</strong> (ej. ocultar varios, cambiar stock a varios), no hace falta hacerlo uno por uno. Hay una forma rápida:</p>
+
+              <div class="help-diagram">
+                <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+                  <!-- 3 filas de productos -->
+                  <rect x="20" y="40" width="660" height="40" rx="6" fill="#fff" stroke="#ede0cc"/>
+                  <rect x="30" y="52" width="14" height="14" rx="3" fill="#fff" stroke="#b07848" stroke-width="2"/>
+                  <path d="M 33 60 L 37 64 L 41 56" stroke="#b07848" stroke-width="2" fill="none"/>
+                  <rect x="55" y="50" width="20" height="20" rx="4" fill="#ede0cc"/>
+                  <text x="90" y="64" fill="#3a2a1a" font-size="11" font-family="Inter,sans-serif">Producto A — Cocina</text>
+
+                  <rect x="20" y="90" width="660" height="40" rx="6" fill="#f5ede0" stroke="#ede0cc"/>
+                  <rect x="30" y="102" width="14" height="14" rx="3" fill="#fff" stroke="#b07848" stroke-width="2"/>
+                  <path d="M 33 110 L 37 114 L 41 106" stroke="#b07848" stroke-width="2" fill="none"/>
+                  <rect x="55" y="100" width="20" height="20" rx="4" fill="#ede0cc"/>
+                  <text x="90" y="114" fill="#3a2a1a" font-size="11" font-family="Inter,sans-serif">Producto B — Baño</text>
+
+                  <rect x="20" y="140" width="660" height="40" rx="6" fill="#fff" stroke="#ede0cc"/>
+                  <rect x="30" y="152" width="14" height="14" rx="3" fill="#fff" stroke="#8a7060"/>
+                  <rect x="55" y="150" width="20" height="20" rx="4" fill="#ede0cc"/>
+                  <text x="90" y="164" fill="#3a2a1a" font-size="11" font-family="Inter,sans-serif">Producto C — Deco</text>
+
+                  <text x="350" y="205" text-anchor="middle" fill="#7a5030" font-size="11" font-weight="600" font-family="Inter,sans-serif">1. Tildá los productos que querés modificar</text>
+
+                  <!-- Barra flotante de bulk actions -->
+                  <rect x="120" y="225" width="460" height="40" rx="14" fill="#3a2a1a"/>
+                  <rect x="135" y="237" width="80" height="18" rx="9" fill="#b07848"/>
+                  <text x="175" y="249" text-anchor="middle" fill="#fff" font-size="9" font-weight="600" font-family="Inter,sans-serif">2 seleccionados</text>
+                  <text x="240" y="250" fill="#fff" font-size="10" font-family="Inter,sans-serif">👁️ Mostrar</text>
+                  <text x="320" y="250" fill="#fff" font-size="10" font-family="Inter,sans-serif">🙈 Ocultar</text>
+                  <text x="400" y="250" fill="#fff" font-size="10" font-family="Inter,sans-serif">📦 Stock</text>
+                  <text x="475" y="250" fill="#fff" font-size="10" font-family="Inter,sans-serif">🗑️ Eliminar</text>
+                  <text x="560" y="250" fill="#a04040" font-size="10" font-family="Inter,sans-serif">✕</text>
+                </svg>
+              </div>
+
+              <ol class="help-steps">
+                <li>En la lista de productos, vas a ver un <strong>cuadradito (checkbox)</strong> a la izquierda de cada fila.</li>
+                <li><strong>Tildá los productos</strong> que querés modificar (uno o muchos). Si querés seleccionar todos, tildá el checkbox del <strong>encabezado</strong> de la tabla.</li>
+                <li>Apenas tildás al menos uno, aparece una <strong>barra negra flotante abajo</strong> con varias opciones:
+                  <ul>
+                    <li><strong>👁️ Mostrar</strong>: hace visibles los seleccionados</li>
+                    <li><strong>🙈 Ocultar</strong>: los oculta del público</li>
+                    <li><strong>📦 Stock</strong>: cambia el stock de todos a un mismo valor</li>
+                    <li><strong>🗑️ Eliminar</strong>: borra todos los seleccionados (con confirmación)</li>
+                    <li><strong>✕</strong>: cancela la selección</li>
+                  </ul>
+                </li>
+                <li>Hacé click en la acción que querés aplicar.</li>
+              </ol>
+
+              <div class="help-tip">
+                💡 <strong>Ejemplo práctico:</strong> "Quiero ocultar todos los productos sin stock". → Filtrá por "Solo sin stock" arriba, tildá el checkbox del encabezado para seleccionar todos, click en <strong>🙈 Ocultar</strong>. ¡Listo en 3 clicks!
+              </div>
+            </div>
+          </details>
+
+          <!-- 4. PEDIDOS / VENTAS -->
+          <details class="help-item">
+            <summary class="help-summary">
+              <span class="help-summary-icon">💰</span>
+              <span class="help-summary-title">Cómo manejar los pedidos (sección Ventas)</span>
+              <span class="help-chevron">▼</span>
+            </summary>
+            <div class="help-content">
+
+              <p class="help-intro">Cada vez que un cliente confirma un pedido desde la web, queda registrado acá. Tu trabajo es <strong>marcarlo como confirmado o cancelado</strong> después de hablar con el cliente por WhatsApp.</p>
+
+              <div class="help-diagram">
+                <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+                  <!-- Estados del pedido -->
+                  <text x="350" y="25" text-anchor="middle" fill="#7a5030" font-size="13" font-weight="600" font-family="Cormorant Garamond,serif">Ciclo de vida de un pedido</text>
+
+                  <!-- Pendiente -->
+                  <rect x="40" y="80" width="150" height="70" rx="12" fill="#fff8eb" stroke="#daa520" stroke-width="2"/>
+                  <text x="115" y="105" text-anchor="middle" font-size="22">🟡</text>
+                  <text x="115" y="130" text-anchor="middle" fill="#8a6500" font-size="12" font-weight="600" font-family="Inter,sans-serif">PENDIENTE</text>
+                  <text x="115" y="170" text-anchor="middle" fill="#8a7060" font-size="9" font-family="Inter,sans-serif">El cliente apretó</text>
+                  <text x="115" y="183" text-anchor="middle" fill="#8a7060" font-size="9" font-family="Inter,sans-serif">"Finalizar pedido"</text>
+
+                  <!-- Flecha hacia confirmado -->
+                  <path d="M 195 110 L 270 100" stroke="#4a7530" stroke-width="2" fill="none" marker-end="url(#arrow3g)"/>
+                  <text x="232" y="93" text-anchor="middle" fill="#4a7530" font-size="9" font-family="Inter,sans-serif">Habla con vos</text>
+                  <text x="232" y="103" text-anchor="middle" fill="#4a7530" font-size="9" font-family="Inter,sans-serif">→ Confirmás</text>
+
+                  <!-- Flecha hacia cancelado -->
+                  <path d="M 195 130 L 270 145" stroke="#a04040" stroke-width="2" fill="none" marker-end="url(#arrow3r)"/>
+                  <text x="232" y="160" text-anchor="middle" fill="#a04040" font-size="9" font-family="Inter,sans-serif">No respondió</text>
+                  <text x="232" y="171" text-anchor="middle" fill="#a04040" font-size="9" font-family="Inter,sans-serif">→ Cancelás</text>
+
+                  <!-- Confirmado -->
+                  <rect x="290" y="65" width="150" height="60" rx="12" fill="#d4f5d4" stroke="#4a7530" stroke-width="2"/>
+                  <text x="365" y="87" text-anchor="middle" font-size="20">🟢</text>
+                  <text x="365" y="110" text-anchor="middle" fill="#4a7530" font-size="11" font-weight="600" font-family="Inter,sans-serif">CONFIRMADO</text>
+
+                  <!-- Cancelado -->
+                  <rect x="290" y="135" width="150" height="60" rx="12" fill="#f5d4d4" stroke="#a04040" stroke-width="2"/>
+                  <text x="365" y="157" text-anchor="middle" font-size="20">🔴</text>
+                  <text x="365" y="180" text-anchor="middle" fill="#a04040" font-size="11" font-weight="600" font-family="Inter,sans-serif">CANCELADO</text>
+
+                  <!-- Restituir stock -->
+                  <path d="M 445 165 L 510 165" stroke="#7a5030" stroke-width="2" stroke-dasharray="4 3" fill="none" marker-end="url(#arrow3b)"/>
+                  <text x="475" y="158" text-anchor="middle" fill="#7a5030" font-size="9" font-family="Inter,sans-serif">¿Restituir</text>
+                  <text x="475" y="180" text-anchor="middle" fill="#7a5030" font-size="9" font-family="Inter,sans-serif">stock?</text>
+                  <rect x="520" y="135" width="150" height="60" rx="12" fill="#fdf8f2" stroke="#b07848" stroke-width="2"/>
+                  <text x="595" y="160" text-anchor="middle" font-size="18">📦</text>
+                  <text x="595" y="180" text-anchor="middle" fill="#7a5030" font-size="10" font-weight="600" font-family="Inter,sans-serif">Stock devuelto</text>
+
+                  <defs>
+                    <marker id="arrow3g" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                      <path d="M0,0 L0,6 L9,3 z" fill="#4a7530"/>
+                    </marker>
+                    <marker id="arrow3r" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                      <path d="M0,0 L0,6 L9,3 z" fill="#a04040"/>
+                    </marker>
+                    <marker id="arrow3b" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                      <path d="M0,0 L0,6 L9,3 z" fill="#7a5030"/>
+                    </marker>
+                  </defs>
+                </svg>
+              </div>
+
+              <h4 class="help-h4">Ver y procesar un pedido</h4>
+              <ol class="help-steps">
+                <li>Andá a la sección <strong>💰 Ventas</strong> del panel lateral.</li>
+                <li>Vas a ver una tabla con todos los pedidos. Los nuevos aparecen <strong>arriba</strong>. Si hay alguno pendiente, en el sidebar vas a ver un <strong>círculo rojo con un número</strong> al lado de "Ventas" — es la cantidad de pedidos esperando que los proceses.</li>
+                <li>Hacé click en cualquier fila para abrir el <strong>detalle del pedido</strong>: vas a ver los datos del cliente, los productos pedidos, los colores, las cantidades y el total.</li>
+              </ol>
+
+              <h4 class="help-h4">Confirmar un pedido</h4>
+              <ol class="help-steps">
+                <li>Después de coordinar con el cliente por WhatsApp (cobro, envío, etc.), abrí el pedido en el admin.</li>
+                <li>Hacé click en <strong>"✓ Marcar como confirmado"</strong>.</li>
+                <li>El estado cambia a <strong>🟢 Confirmado</strong> y se suma al total facturado (lo ves en las estadisticas de arriba).</li>
+              </ol>
+
+              <h4 class="help-h4">Cancelar un pedido</h4>
+              <ol class="help-steps">
+                <li>Si el cliente no respondió o canceló, abrí el pedido.</li>
+                <li>Hacé click en <strong>"✕ Cancelar pedido"</strong>.</li>
+                <li>Te va a aparecer una <strong>pregunta importante</strong>: <em>"¿Restituir el stock?"</em>
+                  <ul>
+                    <li><strong>Sí, restituir</strong>: si el cliente NO se llevó el producto (lo más común). Devuelve el stock al inventario.</li>
+                    <li><strong>No, solo cancelar</strong>: si por algún motivo el stock ya lo ajustaste a mano o el producto sí se vendió por otro lado.</li>
+                  </ul>
+                </li>
+              </ol>
+
+              <div class="help-tip">
+                💡 <strong>¿Por qué la pregunta del stock?</strong> Cuando el cliente apreta "Finalizar pedido" en la web, el sistema <strong>automáticamente baja el stock</strong>. Si después se cancela, hay que decidir si devolverlo o no. <strong>Lo más seguro es decir "Sí, restituir"</strong> a menos que sepas que el producto se vendió igual.
+              </div>
+
+              <h4 class="help-h4">Filtros útiles</h4>
+              <ul class="help-list">
+                <li><strong>Buscador</strong>: por nombre o teléfono del cliente.</li>
+                <li><strong>Estado</strong>: ver solo pendientes, confirmados o cancelados.</li>
+                <li><strong>Fecha</strong>: ver pedidos de hoy, ayer, la última semana o un rango personalizado.</li>
+              </ul>
+            </div>
+          </details>
+
+        </div>
+
+      </section>
+      <!-- /VIEW: AYUDA -->
 
     </main>
     </div>
@@ -3226,7 +3775,7 @@
       });
 
       // Actualizar título mobile
-      const titleMap = { products: 'Productos', orders: 'Ventas' };
+      const titleMap = { products: 'Productos', orders: 'Ventas', help: 'Ayuda' };
       document.getElementById('topbarMobileTitle').textContent = titleMap[viewName] || '';
 
       // Cerrar sidebar en mobile si está abierto
