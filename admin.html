@@ -1908,7 +1908,7 @@
           <div class="help-welcome-icon">🌿</div>
           <div>
             <h3>¡Hola!</h3>
-            <p>Este panel es para que puedas administrar tu negocio sin depender de nadie. Armado para que sea simple, pero acá tenés una guía con paso a paso por si te trabás. <strong>Nunca tengas miedo de tocar:</strong> casi todo se puede deshacer o avisarme.</p>
+            <p>Este panel es para que puedas administrar tu negocio sin depender de nadie. Lo armamos para que sea simple, pero acá tenés una guía con paso a paso por si te trabás. <strong>Nunca tengas miedo de tocar:</strong> casi todo se puede deshacer o avisarme.</p>
           </div>
         </div>
 
@@ -1974,12 +1974,11 @@
                 <li>Se abre un formulario. Completá los campos:
                   <ul>
                     <li><strong>Nombre *</strong>: ej: "Sábanas 2 plazas matrimoniales"</li>
-                    <li><strong>Categoría *</strong>: Elegí entre Dormitorio, Baño, Cocina, Deco, Línea Infantil</li>
-                    <li><strong>Precio *</strong>: En pesos sin puntos (ej: 33000)</li>
-                    <li><strong>Stock</strong>: Cantidad disponible. Si dejás en 0, va a aparecer "sin stock" en la web.</li>
-                    <li><strong>Descripción</strong>: Lo que el cliente va a ver al abrir el producto.</li>
-                    <li><strong>Colores</strong>: Colores disponibles. Aca agregás los colores que tiene el producto uno por uno.</li>
-                    <li><strong>Subcategoría</strong> (opcional): Solo si la categoría tiene sub-secciones (ej. en Cocina: "delantales", "manteles", "repasadores"). <strong>Importante que lo pongas en minúsculas y sin tildes.</strong></li>
+                    <li><strong>Categoría *</strong>: elegí entre Dormitorio, Baño, Cocina, Deco, Línea Infantil</li>
+                    <li><strong>Precio *</strong>: en pesos sin puntos (ej: 33000)</li>
+                    <li><strong>Stock</strong>: cantidad disponible. Si dejás en 0, va a aparecer "sin stock" en la web.</li>
+                    <li><strong>Descripción</strong>: lo que el cliente va a ver al abrir el producto.</li>
+                    <li><strong>Subcategoría</strong> (opcional): solo si la categoría tiene sub-secciones (ej. en Cocina: "delantales", "manteles", "repasadores").</li>
                   </ul>
                 </li>
                 <li>Hacé click en <strong>Guardar producto</strong>.</li>
@@ -2186,7 +2185,7 @@
 
               <h4 class="help-h4">Ver y procesar un pedido</h4>
               <ol class="help-steps">
-                <li>Andá a la sección <strong>💰 Ventas</strong> del panel lateral.</li>
+                <li>Andá a la sección <strong>💰 Ventas</strong> del sidebar.</li>
                 <li>Vas a ver una tabla con todos los pedidos. Los nuevos aparecen <strong>arriba</strong>. Si hay alguno pendiente, en el sidebar vas a ver un <strong>círculo rojo con un número</strong> al lado de "Ventas" — es la cantidad de pedidos esperando que los proceses.</li>
                 <li>Hacé click en cualquier fila para abrir el <strong>detalle del pedido</strong>: vas a ver los datos del cliente, los productos pedidos, los colores, las cantidades y el total.</li>
               </ol>
@@ -2195,7 +2194,7 @@
               <ol class="help-steps">
                 <li>Después de coordinar con el cliente por WhatsApp (cobro, envío, etc.), abrí el pedido en el admin.</li>
                 <li>Hacé click en <strong>"✓ Marcar como confirmado"</strong>.</li>
-                <li>El estado cambia a <strong>🟢 Confirmado</strong> y se suma al total facturado (lo ves en las estadisticas de arriba).</li>
+                <li>El estado cambia a <strong>🟢 Confirmado</strong> y se suma al total facturado (lo ves en las stats arriba).</li>
               </ol>
 
               <h4 class="help-h4">Cancelar un pedido</h4>
@@ -2606,6 +2605,26 @@
             <button class="btn-icon" title="Editar" onclick="openEditModal(${p.id})">✏️</button>
           </div>
         </div>`;
+    }
+
+    /**
+     * Normaliza una subcategoría para guardar en la DB:
+     * - Lowercase
+     * - Sin acentos (sábanas → sabanas)
+     * - Sin espacios al inicio/final
+     * - Sin caracteres especiales (solo letras y números)
+     * Devuelve null si el resultado es string vacío
+     */
+    function normalizeSubcat(raw) {
+      if (!raw) return null;
+      const normalized = String(raw)
+        .toLowerCase()
+        .trim()
+        .normalize('NFD')                    // separa acentos
+        .replace(/[\u0300-\u036f]/g, '')     // borra acentos
+        .replace(/[^a-z0-9]+/g, '-')         // espacios y especiales → guion
+        .replace(/^-+|-+$/g, '');            // trim guiones
+      return normalized || null;
     }
 
     function escapeHtml(str) {
@@ -3091,8 +3110,8 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="f-subcat">Subcategoría</label>
-              <input type="text" id="f-subcat" value="${escapeAttr(p.subcat || '')}" placeholder="Ej: sabanas, frazadas...">
+              <label for="f-subcat">Subcategoría <span style="color:var(--text-soft);font-weight:normal;font-size:11px;"></span></label>
+              <input type="text" id="f-subcat" value="${escapeAttr(p.subcat || '')}" placeholder="Ej: sabanas, frazadas, repasadores...">
             </div>
           </div>
 
@@ -3595,7 +3614,7 @@
       const stock       = parseInt(document.getElementById('f-stock').value, 10);
       const emoji       = document.getElementById('f-emoji').value.trim() || null;
       const cat         = document.getElementById('f-cat').value;
-      const subcat      = document.getElementById('f-subcat').value.trim() || null;
+      const subcat      = normalizeSubcat(document.getElementById('f-subcat').value);
       const badge       = document.getElementById('f-badge').value || null;
       const indications = document.getElementById('f-indications').value.trim() || null;
       const hidden      = document.getElementById('f-hidden').checked;

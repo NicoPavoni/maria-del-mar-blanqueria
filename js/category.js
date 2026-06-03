@@ -218,9 +218,20 @@ function applyGridFilters() {
     return;
   }
 
+  // Función para normalizar (debe coincidir con la del admin)
+  const normalizeSubcat = (raw) => {
+    if (!raw) return '';
+    return String(raw).toLowerCase().trim()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  };
+
+  const normalizedCurrentSubcat = normalizeSubcat(currentSubcat);
+
   const filtered = PRODUCTS.filter(p => {
     // currentCat ya fue aplicado en la query de Supabase, pero filtramos por si acaso
-    const matchSubcat = !currentSubcat || p.subcat === currentSubcat;
+    const matchSubcat = !normalizedCurrentSubcat || normalizeSubcat(p.subcat) === normalizedCurrentSubcat;
     const matchQuery  = !q ||
       p.name.toLowerCase().includes(q) ||
       (p.desc || '').toLowerCase().includes(q) ||
