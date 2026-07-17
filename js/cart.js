@@ -308,7 +308,7 @@ function renderCheckoutSummary() {
 // ============================================================
 // Configuración de la integración con MercadoPago
 // ============================================================
-const MP_USE_SANDBOX = true;  // 🧪 modo prueba (cambiar a false para producción)
+const MP_USE_SANDBOX = false;  // 🧪 modo prueba (cambiar a false para producción)
 const MP_CREATE_PAYMENT_URL = 'https://lknbohjtsdxulhxonyru.supabase.co/functions/v1/create-payment';
 
 // Esta clave es la "anon key" pública de Supabase (segura para frontend)
