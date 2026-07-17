@@ -305,77 +305,28 @@ function renderCheckoutSummary() {
 }
 
 // Paso 2: validar form, registrar pedido, decrementar stock, abrir WhatsApp
-async function confirmCheckout() {
-  const items = Object.values(cart);
-  if (items.length === 0) return;
+// ============================================================
+// Configuración de la integración con MercadoPago
+// ============================================================
+const MP_USE_SANDBOX = true;  // 🧪 modo prueba (cambiar a false para producción)
+const MP_CREATE_PAYMENT_URL = 'https://lknbohjtsdxulhxonyru.supabase.co/functions/v1/create-payment';
 
-  // 1. Validar form
-  const name    = document.getElementById('checkoutName').value.trim();
-  const phone   = document.getElementById('checkoutPhone').value.trim();
-  const address = document.getElementById('checkoutAddress').value.trim();
-  const notes   = document.getElementById('checkoutNotes').value.trim();
+// Esta clave es la "anon key" pública de Supabase (segura para frontend)
+// La leemos del cliente de Supabase que ya está cargado
+function getSupabaseAnonKey() {
+  // window.sb.supabaseKey existe en el cliente moderno
+  return window.sb?.supabaseKey || window.SUPABASE_ANON_KEY || '';
+}
 
-  if (!name) {
-    showCheckoutError('Por favor, ingresá tu nombre');
-    document.getElementById('checkoutName').focus();
-    return;
-  }
-  if (!phone) {
-    showCheckoutError('Por favor, ingresá tu teléfono');
-    document.getElementById('checkoutPhone').focus();
-    return;
-  }
-
-  clearCheckoutError();
-
-  // 2. Deshabilitar botón
-  const btn = document.getElementById('checkoutConfirmBtn');
-  if (btn) {
-    btn.disabled = true;
-    btn.innerHTML = '⏳ Procesando...';
-  }
-
-  // 3. Decrementar stock (atómico por ítem)
-  const itemsForDecrement = Object.entries(cart).map(([key, val]) => ({
-    id:   val.product.id,
-    qty:  val.quantity,
-    name: val.product.name,
-  }));
-
-  const result = await window.ProductsAPI.decrementMultiple(
-    itemsForDecrement.map(i => ({ id: i.id, qty: i.qty }))
-  );
-
-  // 4. Si algo falló, NO continuar
-  if (!result.ok) {
-    const failedList = result.failed.map(f => {
-      const item = itemsForDecrement.find(i => i.id === f.id);
-      return `• ${item?.name || 'Producto'}: ${f.reason}`;
-    }).join('\n');
-
-    alert(
-      `No pudimos procesar tu pedido completo:\n\n${failedList}\n\n` +
-      `Probá ajustar las cantidades o consultanos por WhatsApp.`
-    );
-
-    await refreshCartProducts();
-    renderCart();
-    renderCheckoutSummary();
-
-    if (btn) {
-      btn.disabled = false;
-      btn.innerHTML = 'Confirmar pedido y abrir WhatsApp';
-    }
-    return;
-  }
-
-  // 5. Registrar el pedido en la DB
-  const total = getCartTotal();
+/**
+ * Paso 1 del checkout: crear el pedido en la DB (común a ambos métodos)
+ * Retorna el order_id si fue exitoso, null si falló
+ */
+async function createOrderInDB({ name, phone, address, notes, items, total, paymentMethod }) {
   const itemsCount = items.reduce((acc, i) => acc + i.quantity, 0);
 
-  let orderId = null;
   try {
-    // Insertar la cabecera del pedido
+    // Insertar cabecera del pedido
     const { data: newOrder, error: orderError } = await window.sb
       .from('orders')
       .insert({
@@ -384,8 +335,12 @@ async function confirmCheckout() {
         customer_address: address || null,
         customer_notes:   notes || null,
         total:            total,
+        subtotal:         total,    // Por ahora subtotal == total (envío $0)
+        shipping_cost:    0,
         items_count:      itemsCount,
         status:           'pending',
+        payment_method:   paymentMethod,
+        payment_status:   paymentMethod === 'mercadopago' ? 'pending' : null,
       })
       .select()
       .single();
@@ -394,11 +349,9 @@ async function confirmCheckout() {
       throw new Error(orderError?.message || 'No se pudo crear el pedido');
     }
 
-    orderId = newOrder.id;
-
     // Insertar los ítems
     const orderItems = items.map(({ product, quantity, color }) => ({
-      order_id:      orderId,
+      order_id:      newOrder.id,
       product_id:    product.id,
       product_name:  product.name,
       product_emoji: product.emoji || null,
@@ -414,33 +367,158 @@ async function confirmCheckout() {
 
     if (itemsError) {
       console.warn('Error registrando items del pedido:', itemsError.message);
-      // Continuamos igual, el pedido cabecera ya quedó registrado
     }
+
+    return newOrder.id;
   } catch (e) {
     console.warn('No se pudo registrar el pedido en la DB:', e.message);
-    // Continuamos igual: aunque falle el registro, no bloqueamos al cliente
-    // (el stock ya se decrementó y queremos que pueda hacer el pedido por WhatsApp)
+    return null;
+  }
+}
+
+/**
+ * Validación del form de checkout (común a ambos métodos)
+ */
+function validateCheckoutForm() {
+  const name    = document.getElementById('checkoutName').value.trim();
+  const phone   = document.getElementById('checkoutPhone').value.trim();
+  const address = document.getElementById('checkoutAddress').value.trim();
+  const notes   = document.getElementById('checkoutNotes').value.trim();
+
+  if (!name) {
+    showCheckoutError('Por favor, ingresá tu nombre');
+    document.getElementById('checkoutName').focus();
+    return null;
+  }
+  if (!phone) {
+    showCheckoutError('Por favor, ingresá tu teléfono');
+    document.getElementById('checkoutPhone').focus();
+    return null;
   }
 
-  // 6. Analytics
+  clearCheckoutError();
+  return { name, phone, address, notes };
+}
+
+/**
+ * Helper: deshabilitar/habilitar ambos botones de pago
+ */
+function setCheckoutButtonsState(disabled, message = null) {
+  const btnWA = document.getElementById('checkoutWABtn');
+  const btnMP = document.getElementById('checkoutMPBtn');
+
+  if (btnWA) {
+    btnWA.disabled = disabled;
+    if (disabled && message) btnWA.dataset.originalHTML = btnWA.dataset.originalHTML || btnWA.innerHTML;
+    if (!disabled && btnWA.dataset.originalHTML) {
+      btnWA.innerHTML = btnWA.dataset.originalHTML;
+      delete btnWA.dataset.originalHTML;
+    }
+  }
+  if (btnMP) {
+    btnMP.disabled = disabled;
+    if (disabled && message) btnMP.dataset.originalHTML = btnMP.dataset.originalHTML || btnMP.innerHTML;
+    if (!disabled && btnMP.dataset.originalHTML) {
+      btnMP.innerHTML = btnMP.dataset.originalHTML;
+      delete btnMP.dataset.originalHTML;
+    }
+  }
+}
+
+/**
+ * Resetea el form y cierra el modal después de un checkout exitoso
+ */
+function resetCheckoutForm() {
+  document.getElementById('checkoutName').value = '';
+  document.getElementById('checkoutPhone').value = '';
+  document.getElementById('checkoutAddress').value = '';
+  document.getElementById('checkoutNotes').value = '';
+}
+
+/**
+ * Limpia el carrito y cierra todo
+ */
+function clearCartAndClose() {
+  Object.keys(cart).forEach(k => delete cart[k]);
+  saveCart();
+  updateFabCount();
+  renderCart();
+  closeCart();
+  closeCheckoutModal();
+  resetCheckoutForm();
+  setCheckoutButtonsState(false);
+}
+
+// ============================================================
+// FLUJO 1: CONFIRMAR POR WHATSAPP (decrementa stock al toque)
+// ============================================================
+async function confirmCheckoutWA() {
+  const items = Object.values(cart);
+  if (items.length === 0) return;
+
+  const formData = validateCheckoutForm();
+  if (!formData) return;
+
+  const { name, phone, address, notes } = formData;
+  const btn = document.getElementById('checkoutWABtn');
+  if (btn) {
+    btn.dataset.originalHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Procesando...';
+  }
+
+  // 1. Decrementar stock (atómico)
+  const itemsForDecrement = Object.entries(cart).map(([key, val]) => ({
+    id:   val.product.id,
+    qty:  val.quantity,
+    name: val.product.name,
+  }));
+
+  const result = await window.ProductsAPI.decrementMultiple(
+    itemsForDecrement.map(i => ({ id: i.id, qty: i.qty }))
+  );
+
+  if (!result.ok) {
+    const failedList = result.failed.map(f => {
+      const item = itemsForDecrement.find(i => i.id === f.id);
+      return `• ${item?.name || 'Producto'}: ${f.reason}`;
+    }).join('\n');
+
+    alert(
+      `No pudimos procesar tu pedido completo:\n\n${failedList}\n\n` +
+      `Probá ajustar las cantidades o consultanos por WhatsApp.`
+    );
+
+    await refreshCartProducts();
+    renderCart();
+    renderCheckoutSummary();
+    setCheckoutButtonsState(false);
+    return;
+  }
+
+  // 2. Registrar pedido en DB
+  const total = getCartTotal();
+  const orderId = await createOrderInDB({
+    name, phone, address, notes, items, total,
+    paymentMethod: 'whatsapp',
+  });
+
+  // 3. Analytics
   if (typeof gtag !== 'undefined') {
     gtag('event', 'begin_checkout_whatsapp', {
-      total:    total,
+      total, order_id: orderId,
       products: items.map(i => i.product.name).join(', '),
-      quantity: itemsCount,
-      order_id: orderId,
+      quantity: items.reduce((acc, i) => acc + i.quantity, 0),
     });
   }
 
-  // 7. Armar mensaje de WhatsApp con datos del cliente
+  // 4. Armar mensaje de WhatsApp
   let msg = '¡Hola! Quisiera hacer el siguiente pedido:\n\n';
-
-  // Datos del cliente
   msg += `*Mis datos:*\n`;
-  msg += `Nombre: ${name}\n`;
-  msg += `Telefono: ${phone}\n`;
-  if (address) msg += `Dirección: ${address}\n`;
-  if (notes)   msg += `Notas: ${notes}\n`;
+  msg += `👤 ${name}\n`;
+  msg += `📞 ${phone}\n`;
+  if (address) msg += `📍 ${address}\n`;
+  if (notes)   msg += `📝 ${notes}\n`;
   msg += `\n*Pedido:*\n`;
 
   items.forEach(({ product, quantity, color }) => {
@@ -453,35 +531,138 @@ async function confirmCheckout() {
   if (total > 0) {
     msg += `\n*Total estimado: $${formatPrice(total)}*`;
   }
-  msg += '\n\n¿Cómo arreglamos el pago?';
+  msg += '\n\n¿Cómo arreglamos el pago? 😊';
 
-  // 8. Limpiar carrito y cerrar
-  Object.keys(cart).forEach(k => delete cart[k]);
-  saveCart();
-  updateFabCount();
-  renderCart();
-  closeCart();
-  closeCheckoutModal();
-
-  // Reset form
-  document.getElementById('checkoutName').value = '';
-  document.getElementById('checkoutPhone').value = '';
-  document.getElementById('checkoutAddress').value = '';
-  document.getElementById('checkoutNotes').value = '';
-
-  // Reset botón
-  if (btn) {
-    btn.disabled = false;
-    btn.innerHTML = 'Confirmar pedido y abrir WhatsApp';
-  }
-
-  // 9. Refrescar productos visibles
+  // 5. Limpiar, cerrar y abrir WhatsApp
+  clearCartAndClose();
   if (typeof window.refreshProducts === 'function') {
     window.refreshProducts();
   }
-
-  // 10. Abrir WhatsApp
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ============================================================
+// FLUJO 2: PAGAR CON MERCADOPAGO
+// (no decrementa stock acá: lo hace el webhook cuando MP confirma)
+// ============================================================
+async function confirmCheckoutMP() {
+  const items = Object.values(cart);
+  if (items.length === 0) return;
+
+  const formData = validateCheckoutForm();
+  if (!formData) return;
+
+  const { name, phone, address, notes } = formData;
+  const btn = document.getElementById('checkoutMPBtn');
+  if (btn) {
+    btn.dataset.originalHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Redirigiendo a MercadoPago...';
+  }
+
+  // 1. Verificar stock disponible ANTES de crear el pedido (sin decrementar)
+  // Nota: el decremento real lo hace el webhook cuando MP confirma pago
+  for (const { product, quantity } of items) {
+    if (typeof product.stock === 'number' && product.stock < quantity) {
+      alert(`No hay stock suficiente de "${product.name}" (disponible: ${product.stock}, pedido: ${quantity}).\n\nProbá ajustar la cantidad.`);
+      await refreshCartProducts();
+      renderCart();
+      renderCheckoutSummary();
+      setCheckoutButtonsState(false);
+      return;
+    }
+  }
+
+  // 2. Crear el pedido en la DB con status pending
+  const total = getCartTotal();
+  const orderId = await createOrderInDB({
+    name, phone, address, notes, items, total,
+    paymentMethod: 'mercadopago',
+  });
+
+  if (!orderId) {
+    alert('No pudimos registrar el pedido. Intentá de nuevo o contactanos por WhatsApp.');
+    setCheckoutButtonsState(false);
+    return;
+  }
+
+  // 3. Llamar a la Edge Function para crear la preferencia de pago
+  try {
+    const mpItems = items.map(({ product, quantity, color }) => ({
+      product_id:    product.id,
+      product_name:  product.name,
+      product_emoji: product.emoji || null,
+      color:         color || null,
+      quantity:      quantity,
+      unit_price:    product.price,
+    }));
+
+    // Determinar el site_url: si estamos en localhost, igual usamos prod (MP no acepta localhost)
+    const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    const siteUrl = isLocalhost
+      ? 'https://mariadelmarblanqueria.com.ar'
+      : location.origin;
+
+    const anonKey = getSupabaseAnonKey();
+
+    const response = await fetch(MP_CREATE_PAYMENT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${anonKey}`,
+        'apikey': anonKey,
+      },
+      body: JSON.stringify({
+        order_id: orderId,
+        items: mpItems,
+        customer: { name, phone, address, notes },
+        shipping_cost: 0,
+        site_url: siteUrl,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Error de la Edge Function:', errorText);
+      throw new Error(`Error al crear el pago: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!data.init_point && !data.sandbox_init_point) {
+      throw new Error('MercadoPago no devolvió URL de pago');
+    }
+
+    // Analytics
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'begin_checkout_mercadopago', {
+        total, order_id: orderId,
+        products: items.map(i => i.product.name).join(', '),
+      });
+    }
+
+    // 4. Limpiar carrito antes de redirigir
+    // (si el cliente vuelve sin pagar, el pedido queda 'pending' en la DB)
+    Object.keys(cart).forEach(k => delete cart[k]);
+    saveCart();
+    updateFabCount();
+
+    // 5. Redirigir al checkout de MercadoPago
+    const redirectUrl = MP_USE_SANDBOX ? data.sandbox_init_point : data.init_point;
+    window.location.href = redirectUrl;
+  } catch (e) {
+    console.error('Error en flujo de MercadoPago:', e);
+    alert(`No pudimos iniciar el pago.\n\n${e.message}\n\nPodés intentar de nuevo o pagarlo coordinando por WhatsApp.`);
+    setCheckoutButtonsState(false);
+  }
+}
+
+// ============================================================
+// LEGACY: confirmCheckout (compatibilidad con código viejo)
+// Si algún HTML viejo llama a confirmCheckout(), redirigir a WhatsApp
+// ============================================================
+function confirmCheckout() {
+  return confirmCheckoutWA();
 }
 
 function showCheckoutError(msg) {

@@ -7,5 +7,5 @@
 
 window.SUPABASE_CONFIG = {
   url:     'https://lknbohjtsdxulhxonyru.supabase.co',
-  anonKey: 'sb_publishable_0M0REZcs7mb_GzKMuwlYIA_UU5lhnlM'
-};  
+  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxrbmJvaGp0c2R4dWxoeG9ueXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4MTI5NzAsImV4cCI6MjA5NTM4ODk3MH0.CH_E8H8UJc2cPtee3YC_BMNc1tLG-COg4L_h9zCTbT4'
+};
