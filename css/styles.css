@@ -752,6 +752,12 @@ footer::before {
 
 footer p { font-size: 12px; font-weight: 300; letter-spacing: 0.06em; }
 
+.ft-inner p a:not([style]) {
+  color: var(--terra-lt);
+  text-decoration: underline;
+}
+.ft-inner p a:not([style]):hover { color: #fff; }
+
 /* ---------- Toast ---------- */
 .toast {
   position: fixed;
